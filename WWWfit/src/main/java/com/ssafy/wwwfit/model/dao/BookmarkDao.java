@@ -21,5 +21,6 @@ public interface BookmarkDao {
 	public int delete(int bookmarkId);
 	//북마크 폴더/분류별 --> 매퍼에서 현재 본인 북마크/북마크 폴더모음
 	public List<Bookmark> selectMarks(String userId,String bname);
-
+	
+	public List<String> folders(String userId);
 }

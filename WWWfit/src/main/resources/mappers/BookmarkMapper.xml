@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.wwwfit.model.dao.BookmarkDao">
+<parameterMap type="Map" id="selectMarksMap">
+<parameter property="userId" javaType="string"/>
+<parameter property="bname" javaType="string"/>
+</parameterMap>
+<select id="selectAll" parameterType="string" resultType="Bookmark">
+select * from bookmarks
+</select>
+<select id="selectOne" parameterType="int" resultType="Bookmark">
+select * from bookmarks
+where bookmarkId=#{bookmarkId}
+</select>
+<select id="selecMarks" parameterMap="selectMarksMap">
+select * from bookmarks
+where userId=#{userId} and bname=#{bname}
+</select>
+<select id="folders" parameterType="string" resultType="string">
+select distinct bname from bookmarks
+where userId=#{userId}
+</select>
+<insert id="insert" parameterType="Bookmark">
+insert into bookmarks
+(userId, posterSeq,bname)
+values
+(#{userId},#{posterSeq},#{bname})
+</insert>
+<delete id="delete" parameterType="int">
+delete from bookmarks where bookmarkId=#{bookmarkId}
+</delete>
+
+
+</mapper>

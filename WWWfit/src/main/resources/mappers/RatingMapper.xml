@@ -1,4 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.wwwfit.model.dao.RatingDao">
+<parameterMap type="Map" id="isRatedMap">
+<parameter property="userId" javaType="string"/>
+<parameter property="contentSeq" javaType="int"/>
+</parameterMap>
+<select id="selectAll" parameterType="int" resultType="Rating">
+	select * from rating;
+</select>
+<!--double로 다 바꿀건지 select round (average(score),1) double -->
+<select id="getAVG" parameterType="int" resultType="int">
+
+select CAST(AVERAGE(score) as signed) 
+from rating 
+where contentSeq =#{contentSeq};
+</select>
+
+<select id="selectOne" parameterType="int" resultType="Rating">
+select * from rating
+where ratingId = #{ratingId};
+</select>
+<select id="isRated" parameterMap="isRatedMap" resultType="int">
+select count(ratingId)from rating
+where userId = #{userId} and contentSeq=#{contentSeq};
+</select>
+
+<!-- autoincrement있어야 함 -->
+<insert id="insert" parameterType="Rating">
+insert into rating( userId, contentSeq, score)
+values(#{userId},#{contentSeq},#{score})
+</insert>
+
+<update id="update" parameterType="Rating">
+update rating
+set score = #{score},
+review = #{review},
+set edited = CURRENT_TIMESTAMP
+where ratingId=#{ratingId} 
+</update><!-- datetime 추가할 것 -->
+
+<delete id="delete" parameterType="int">
+delete from rating
+where ratingId = #{ratingId};
+</delete>
 
 </mapper>
