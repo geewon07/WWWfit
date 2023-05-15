@@ -9,7 +9,7 @@ import com.ssafy.wwwfit.model.dao.CalendarDao;
 import com.ssafy.wwwfit.model.dto.Calendar;
 
 @Service
-public class CalendarService implements CalendartServiceImpl {
+public class CalendarServiceImpl implements CalendartService {
     
 	private CalendarDao calendarDao;
 	
@@ -19,8 +19,8 @@ public class CalendarService implements CalendartServiceImpl {
 	}
 	
 	@Override
-	public List<Calendar> getCalendarList() {
-		return calendarDao.getCalendar();
+	public List<Calendar> getCalendarList(String userId) {
+		return calendarDao.getCalendar(userId);
 	}
 
 	@Override

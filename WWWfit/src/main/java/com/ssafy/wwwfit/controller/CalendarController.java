@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.wwwfit.model.dto.Calendar;
-import com.ssafy.wwwfit.model.service.CalendarService;
+import com.ssafy.wwwfit.model.service.CalendartService;
 
 @RestController
 @RequestMapping("/api_calendar")
 public class CalendarController {
 	
 	@Autowired
-	private CalendarService calendarService;
+	private CalendartService calendarService;
 	
 	@GetMapping("/calendar")
-	public ResponseEntity<?> list() {
-		List<Calendar> list = calendarService.getCalendarList();
+	public ResponseEntity<?> list(String userId) {
+		List<Calendar> list = calendarService.getCalendarList(userId);
 		
 		if(list == null || list.size() == 0) {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
@@ -35,7 +35,8 @@ public class CalendarController {
 	// 오늘 꺼를 등록하면 무엇을 반환할지는 미정!
 	@PostMapping("/calendar")
 	public ResponseEntity<Void> write(Calendar calendar) {
-		int wirtedone = calendarService.addCalendartoday(calendar);
+		
+		  int wirtedone = calendarService.addCalendartoday(calendar);
 		
 		if(wirtedone == 1) {
 			return new ResponseEntity<Void>(HttpStatus.OK);

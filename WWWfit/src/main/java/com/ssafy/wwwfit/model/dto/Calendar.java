@@ -1,31 +1,53 @@
 package com.ssafy.wwwfit.model.dto;
 
 public class Calendar {
-	private int CalendarId;
+	private int calendarId;
 	private String userId;
-	private Boolean execisedone;
+	private Boolean challenge;
+	private String fitPartName;
 	private String calendarStart;
 	private String calendarEnd;
 	
-	public Calendar(int calendarId,String userId, Boolean execisedone, String calendarStart, String calendarEnd, String img) {
+	public Calendar(int calendarId,String userId, Boolean challenge, String fitPartName, String calendarStart, String calendarEnd, String img) {
 		super();
-		this.CalendarId = calendarId;
+		this.calendarId = calendarId;
 		this.userId = userId;
-		this.execisedone = execisedone;
+		this.challenge = challenge;
+		this.fitPartName = fitPartName;
 		this.calendarStart = calendarStart;
 		this.calendarEnd = calendarEnd;
 	}
     
+	
+	public Boolean getChallenge() {
+		return challenge;
+	}
+
+
+	public void setChallenge(Boolean challenge) {
+		this.challenge = challenge;
+	}
+
+
+	public String getFitPartName() {
+		return fitPartName;
+	}
+
+
+	public void setFitPartName(String fitPartName) {
+		this.fitPartName = fitPartName;
+	}
+
 	public Calendar() {
 		super();
 	}
     
 	public int getCalendarId() {
-		return CalendarId;
+		return calendarId;
 	}
 
 	public void setCalendarId(int calendarId) {
-		CalendarId = calendarId;
+		calendarId = calendarId;
 	}
 
 	public String getUserId() {
@@ -35,15 +57,7 @@ public class Calendar {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
-	public Boolean getExecisedone() {
-		return execisedone;
-	}
-
-	public void setExecisedone(Boolean execisedone) {
-		this.execisedone = execisedone;
-	}
-
+    
 	public String getCalendarStart() {
 		return calendarStart;
 	}
@@ -58,12 +72,6 @@ public class Calendar {
 
 	public void setCalendarEnd(String calendarEnd) {
 		this.calendarEnd = calendarEnd;
-	}
-
-	@Override
-	public String toString() {
-		return "CalendarDao [userId=" + userId + ", execisedone=" + execisedone + ", calendarStart=" + calendarStart
-				+ ", calendarEnd=" + calendarEnd + "]";
 	}
 	
 	
