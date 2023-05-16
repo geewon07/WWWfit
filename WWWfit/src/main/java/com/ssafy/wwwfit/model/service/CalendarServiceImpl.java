@@ -5,18 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.wwwfit.model.dao.BadgesProgressDao;
 import com.ssafy.wwwfit.model.dao.CalendarDao;
 import com.ssafy.wwwfit.model.dto.Calendar;
 
 @Service
-public class CalendarServiceImpl implements CalendartService {
+public class CalendarServiceImpl implements CalendarService {
     
-	private CalendarDao calendarDao;
-	
 	@Autowired
-	public void setCalendarDao(CalendarDao calendarDao) {
-		this.calendarDao = calendarDao;
-	}
+	private CalendarDao calendarDao;
 	
 	@Override
 	public List<Calendar> getCalendarList(String userId) {
@@ -24,8 +21,8 @@ public class CalendarServiceImpl implements CalendartService {
 	}
 
 	@Override
-	public int addCalendartoday(Calendar calendar) {
-		return calendarDao.createcalendar(calendar);
+	public int addCalendartoday(String userId, String fitPartName) {
+		return calendarDao.createcalendar(userId,fitPartName);
 	}
 
 	@Override

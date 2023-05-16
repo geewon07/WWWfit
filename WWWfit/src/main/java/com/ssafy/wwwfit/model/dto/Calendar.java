@@ -6,16 +6,14 @@ public class Calendar {
 	private Boolean challenge;
 	private String fitPartName;
 	private String calendarStart;
-	private String calendarEnd;
 	
-	public Calendar(int calendarId,String userId, Boolean challenge, String fitPartName, String calendarStart, String calendarEnd, String img) {
+	public Calendar(int calendarId,String userId, Boolean challenge, String fitPartName, String calendarStart) {
 		super();
 		this.calendarId = calendarId;
 		this.userId = userId;
 		this.challenge = challenge;
 		this.fitPartName = fitPartName;
 		this.calendarStart = calendarStart;
-		this.calendarEnd = calendarEnd;
 	}
     
 	
@@ -47,7 +45,7 @@ public class Calendar {
 	}
 
 	public void setCalendarId(int calendarId) {
-		calendarId = calendarId;
+		this.calendarId = calendarId;
 	}
 
 	public String getUserId() {
@@ -66,14 +64,6 @@ public class Calendar {
 		this.calendarStart = calendarStart;
 	}
 
-	public String getCalendarEnd() {
-		return calendarEnd;
-	}
-
-	public void setCalendarEnd(String calendarEnd) {
-		this.calendarEnd = calendarEnd;
-	}
-	
 	
 
 }
