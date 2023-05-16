@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.wwwfit.model.dao.PosterDao">
+<select id="selectAll" resultType="Poster">
+select * from posters;
+</select>
+<select id="searchBy" parameterType="SearchCondition" resultType="Poster">
+Select * from posters
+<if test="key!='none'">
+where #{key} =#{word} 
+</if>
+<!-- groupby fitpartname having word -->
+</select>
+
+<select id="selectOne" parameterType="int" resultType="Poster">
+select * from posters
+where posterId = #{posterId}
+</select>
+
+<insert id="insert" parameterType="Poster">
+insert into posters
+(title, difficulty, fitPartName, postersrc, likeCount)
+values
+(#{title},#{difficulty},#{fitPartName},#{postersrc},#{likeCount})
+</insert>
+<delete id="delete" parameterType="int">
+delete from posters
+where posterId=#{posterId}
+</delete>
+</mapper>

@@ -20,7 +20,7 @@ public interface LikeDao {
 	public int insert(Like like);
 	
 	//unlike
-	//삭제 버튼은 본인과 관리자만 보이게,, 뷰!
+	//삭제 버튼은 본인과 관리자만 보이게,, 뷰!, 서비스에서도 확인
 	public int delete(int likeId);
 	
 	
