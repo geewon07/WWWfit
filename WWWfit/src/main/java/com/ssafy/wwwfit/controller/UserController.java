@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.wwwfit.model.dto.Follow;
 import com.ssafy.wwwfit.model.dto.User;
+import com.ssafy.wwwfit.model.service.BadgesProgressService;
 import com.ssafy.wwwfit.model.service.BookmarkService;
 import com.ssafy.wwwfit.model.service.FollowService;
+import com.ssafy.wwwfit.model.service.HavingBadgeService;
 import com.ssafy.wwwfit.model.service.LikeService;
 import com.ssafy.wwwfit.model.service.UserService;
 
@@ -35,12 +37,18 @@ public class UserController {
 	@Autowired 
 	private FollowService fService;
 	
+	@Autowired
+	private HavingBadgeService hService;
+	
+	@Autowired
+	private BadgesProgressService bpService;
+	
 	//유저가 행하는 모든 일,,, 좋아요,북마크,리뷰,팔로우
 	
 	//일단 기본 cRUD 만 해보자!!
 	
 	
-	//회원가입
+	//회원가입 // 유효성 확인 후 hService와 bpService에서 등록하기!
 	@PostMapping("/user")
 	public ResponseEntity<?> doRegist(User user){
 		uService.regist(user);

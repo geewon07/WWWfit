@@ -3,10 +3,12 @@ package com.ssafy.wwwfit.model.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ssafy.wwwfit.model.dao.FollowDao;
 import com.ssafy.wwwfit.model.dto.Follow;
 
+@Service
 public class FollowServiceImpl implements FollowService {
 
 	@Autowired

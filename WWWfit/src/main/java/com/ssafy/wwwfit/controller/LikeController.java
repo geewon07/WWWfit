@@ -19,6 +19,7 @@ import com.ssafy.wwwfit.model.service.LikeService;
 @RestController
 @RequestMapping("/api-like")
 public class LikeController {
+	
 	@Autowired
 	private LikeService lService;
 	
@@ -42,6 +43,7 @@ public class LikeController {
 		}else
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+	
 	@PostMapping("/like")
 	public ResponseEntity<?> doLike(String loginUser, int posterSeq){
 

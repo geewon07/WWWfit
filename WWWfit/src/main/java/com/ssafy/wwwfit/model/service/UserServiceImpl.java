@@ -3,12 +3,14 @@ package com.ssafy.wwwfit.model.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriBuilder;
 
 import com.ssafy.wwwfit.model.dao.UserDao;
 import com.ssafy.wwwfit.model.dto.SearchCondition;
 import com.ssafy.wwwfit.model.dto.User;
 
+@Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired

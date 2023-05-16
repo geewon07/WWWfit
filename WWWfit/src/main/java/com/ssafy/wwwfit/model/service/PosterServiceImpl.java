@@ -3,11 +3,13 @@ package com.ssafy.wwwfit.model.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ssafy.wwwfit.model.dao.PosterDao;
 import com.ssafy.wwwfit.model.dto.Poster;
 import com.ssafy.wwwfit.model.dto.SearchCondition;
 
+@Service
 public class PosterServiceImpl implements PosterService {
 
 	@Autowired

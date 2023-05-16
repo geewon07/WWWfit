@@ -3,10 +3,12 @@ package com.ssafy.wwwfit.model.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ssafy.wwwfit.model.dao.BookmarkDao;
 import com.ssafy.wwwfit.model.dto.Bookmark;
 
+@Service
 public class BookmarkServiceImpl implements BookmarkService {
 
 	@Autowired
