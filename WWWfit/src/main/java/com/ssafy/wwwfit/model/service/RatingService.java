@@ -10,6 +10,8 @@ public interface RatingService {
 	
 	public Rating selectOne(int ratingId);
 	
+	public double getAVG(int contentSeq);
+	
 	public boolean isRated(String userId, int contentSeq);
 	
 	public int insert(Rating rating);

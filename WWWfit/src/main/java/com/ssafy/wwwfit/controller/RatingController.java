@@ -35,6 +35,14 @@ public class RatingController {
 		return new ResponseEntity<Rating>(rating,HttpStatus.OK);
 	}
 	
+	//굳이 여기서 해줄까 싶기도 한데,,
+	@GetMapping("/rating")
+	public ResponseEntity<?> contentAVG(int contentSeq){
+		double avg = rService.getAVG(contentSeq);
+		return new ResponseEntity<Double>(avg,HttpStatus.OK);
+	}
+	
+	
 	@PostMapping("/rating")
 	public ResponseEntity<?> doRate(Rating rating){
 		int result = rService.insert(rating);

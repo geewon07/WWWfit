@@ -49,4 +49,10 @@ public class RatingServiceImpl implements RatingService {
 		return result;
 	}
 
+	@Override
+	public double getAVG(int contentSeq) {
+		double result = rDao.getAVG(contentSeq);
+		return result;
+	}
+
 }
