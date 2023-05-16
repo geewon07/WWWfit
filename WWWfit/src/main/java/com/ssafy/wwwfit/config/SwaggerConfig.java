@@ -21,6 +21,6 @@ public class SwaggerConfig {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("SSAFY Swaager").description("SSAFY 게시판").version("v1").build();
+		return new ApiInfoBuilder().title("WWWfit Swaager").description("WWWfit ").version("v1").build();
 	}
 }
