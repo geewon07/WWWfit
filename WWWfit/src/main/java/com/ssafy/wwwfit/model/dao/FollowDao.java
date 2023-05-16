@@ -16,11 +16,11 @@ public interface FollowDao {
 	//dao? service?
 	
 	// 위 메소드로 얻은 list.size() 하면 되는 것 아닐까?
-	//select Count(followsWho) from follows where userId=#{userId};
-	public int numFollows(String userId);
-	//select Count(userId) from follows where followsWho=#{userId};
-	public int numFollowers(String userId);
-	
+//	//select Count(followsWho) from follows where userId=#{userId};
+//	public int numFollows(String userId);
+//	//select Count(userId) from follows where followsWho=#{userId};
+//	public int numFollowers(String userId);
+//	
 	//select * from follows where userId=#{userId} and followsWho=#{toFollow};
 	public int isfollowing(String userId, String toFollow);
 	//팔로우 버튼 상태 확인할때도 씀

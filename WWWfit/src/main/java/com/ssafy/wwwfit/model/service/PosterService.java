@@ -18,7 +18,7 @@ public interface PosterService {
 	public List<Poster> searchBy(SearchCondition condition);
 	
 	//포스터 좋아!누르면 실행될 것 1.poster addlike, 2. Like 생성,
-	public int addLike(int posterId);//포스터 전체? 아이디?
+//	public int addLike(int posterId);//포스터 전체? 아이디? likecount 
 	
 	public int edit(Poster poster);
 	

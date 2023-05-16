@@ -13,9 +13,12 @@ public interface UserDao {
 	//회원 조회
 	public List<User> selectAll();
 	
+	public User selectOne(String userId);
+	
 	//회원 검색
 	public List<User> searchBy(SearchCondition condition);
 	
+	//수정하기 위해서 유저정보를 전부 불러와야 함,,,
 	//회원정보 수정, 경험치 증가, 등업, 챌린지 날
 	public int update(User user);
 	

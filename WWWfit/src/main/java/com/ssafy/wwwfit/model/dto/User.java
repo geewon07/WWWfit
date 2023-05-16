@@ -9,6 +9,7 @@ public class User {
 	private String userRank;
 	private int experience;
 	private int challengeDays;
+	private String regDate;
 	private int sub;//kko login token user serial number
 	public User() {
 		super();

@@ -10,6 +10,7 @@ public interface FollowService {
 	
 	public List<Follow> getFollowing(String userId);
 	
+	// selecfollows/ers 활용해서 cnt값 반환
 	public int getFollowerCnt(String userId);
 	
 	public int getFollowingCnt(String userId);

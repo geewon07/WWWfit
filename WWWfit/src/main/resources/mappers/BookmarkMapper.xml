@@ -14,7 +14,7 @@ select * from bookmarks
 select * from bookmarks
 where bookmarkId=#{bookmarkId}
 </select>
-<select id="selecMarks" parameterMap="selectMarksMap">
+<select id="selectMarks" parameterMap="selectMarksMap">
 select * from bookmarks
 where userId=#{userId} and bname=#{bname}
 </select>
@@ -22,6 +22,14 @@ where userId=#{userId} and bname=#{bname}
 select distinct bname from bookmarks
 where userId=#{userId}
 </select>
+
+<update id="update" parameterType="Bookmark">
+update bookmarks
+set bname=#{bname},
+isPublic=#{isPublic}
+where bookmarkId=#{bookmarkId}
+</update>
+
 <insert id="insert" parameterType="Bookmark">
 insert into bookmarks
 (userId, posterSeq,bname)

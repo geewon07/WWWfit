@@ -18,12 +18,22 @@ where #{key} =#{word}
 select * from posters
 where posterId = #{posterId}
 </select>
+<update id="update">
+update posters
+set 
+likeCount=#{likeCount},
+title=#{title},
+difficulty=#{difficulty},
+fitPartName=#{fitPartName},
+postersrc=#{posterSrc}
 
+where posterSeq=#{posterSeq}
+</update>
 <insert id="insert" parameterType="Poster">
 insert into posters
 (title, difficulty, fitPartName, postersrc, likeCount)
 values
-(#{title},#{difficulty},#{fitPartName},#{postersrc},#{likeCount})
+(#{title},#{difficulty},#{fitPartName},#{posterSrc},#{likeCount})
 </insert>
 <delete id="delete" parameterType="int">
 delete from posters
