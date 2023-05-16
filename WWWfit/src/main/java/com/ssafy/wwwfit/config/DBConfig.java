@@ -1,4 +1,4 @@
-       package com.ssafy.wwwfit.config;
+package com.ssafy.wwwfit.config;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
