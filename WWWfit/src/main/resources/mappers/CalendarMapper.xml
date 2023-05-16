@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.ssafy.wwwfit.model.dao.CalendarDao">
+
+<select id="getCalendar" resultType="Calendar" parameterType="String">
+   SELECT calendarId, userId, challenge, fitPartName, date_format(calendarStart, '%y-%m-%d') as calendarStart
+   From calendars;
+</select>
+
+<insert id="createcalendar" parameterType="Calendar">
+   INSERT INTO calendars (userId, challenge, fitPartName,calendarStart) 
+   VALUES (#{userId}, TRUE, #{fitPartName}, NOW());
+</insert>
+
+<delete id="deletecalendar" parameterType="int">
+    DELETE FROM calendars
+    WHERE calendarId = #{calendarId}
+</delete>
+
+
+
+
+
+</mapper>
