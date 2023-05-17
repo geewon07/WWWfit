@@ -71,18 +71,6 @@ public class FollowController {
 	        return ResponseEntity.ok(following);
 	    }
 	}
-	
-	@GetMapping("/Following_count/{userNo}")
-	public ResponseEntity<?> isFollowing(@PathVariable int userNo) {
-		int following = followService.getFollowingCnt(userNo);
-	    
-	    if (following == 0 ) {
-	        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("팔로잉이 없습니다.");
-	    } else {
-	        return ResponseEntity.ok(following);
-	    }
-	}
-	
 	// Map으로 받을까?
 	@GetMapping("/api_follow/is-following/{userNo}/{toFollow}") // 이게 맞는지...?
 	public ResponseEntity<String> isFollowing(@PathVariable int userNo, @PathVariable String toFollow) {
