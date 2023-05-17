@@ -63,5 +63,5 @@ public class PosterController { // 관리자 전용!!!!!
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
 	
-
+	
 }

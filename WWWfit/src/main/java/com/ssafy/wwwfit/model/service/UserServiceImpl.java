@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUser(String userId) {
 		User selectedUser = uDao.selectOne(userId);
-		return null;
+		return selectedUser;
 	}
 
 }
