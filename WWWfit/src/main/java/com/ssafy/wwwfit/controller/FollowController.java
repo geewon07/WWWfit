@@ -26,9 +26,9 @@ public class FollowController {
 	@Autowired
 	private FollowService followService;
 	
-	@GetMapping("/follower/{userId}")
-	public ResponseEntity<?> getFollowers(@PathVariable String userId) {
-	    List<Follow> followers = followService.getFollowers(userId);
+	@GetMapping("/follower/{userNo}")
+	public ResponseEntity<?> getFollowers(@PathVariable int userNo) {
+	    List<Follow> followers = followService.getFollowers(userNo);
 	    
 	    if (followers.isEmpty() | followers == null ) {
 	        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("팔로우가 없습니다.");
@@ -37,9 +37,9 @@ public class FollowController {
 	    }
 	}
 	
-	@GetMapping("/Following/{userId}")
-	public ResponseEntity<?> getFollowing(@PathVariable String userId) {
-	    List<Follow> following = followService.getFollowing(userId);
+	@GetMapping("/Following/{userNo}")
+	public ResponseEntity<?> getFollowing(@PathVariable int userNo) {
+	    List<Follow> following = followService.getFollowing(userNo);
 	    
 	    if (following.isEmpty() | following == null ) {
 	        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("팔로잉이 없습니다.");
@@ -49,9 +49,9 @@ public class FollowController {
 	}
 	
 	//팔로워수 
-	@GetMapping("/follower_count/{userId}")
-	public ResponseEntity<?> Followercount(@PathVariable String userId) {
-	    int followers = followService.getFollowerCnt(userId);
+	@GetMapping("/follower_count/{userNo}")
+	public ResponseEntity<?> Followercount(@PathVariable int userNo) {
+	    int followers = followService.getFollowerCnt(userNo);
 	    
 	    if (followers == 0) {
 	        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("팔로우가 없습니다.");
@@ -61,9 +61,9 @@ public class FollowController {
 	}
 	
 	//팔로잉수
-	@GetMapping("/Following_count/{userId}")
-	public ResponseEntity<?> Following_count(@PathVariable String userId) {
-		int following = followService.getFollowingCnt(userId);
+	@GetMapping("/Following_count/{userNo}")
+	public ResponseEntity<?> Following_count(@PathVariable int userNo) {
+		int following = followService.getFollowingCnt(userNo);
 	    
 	    if (following == 0 ) {
 	        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("팔로잉이 없습니다.");
@@ -71,11 +71,10 @@ public class FollowController {
 	        return ResponseEntity.ok(following);
 	    }
 	}
-	
 	// Map으로 받을까?
-	@GetMapping("/api_follow/is-following/{userId}/{toFollow}") // 이게 맞는지...?
-	public ResponseEntity<String> isFollowing(@PathVariable String userId, @PathVariable String toFollow) {
-	    boolean alreadyFollowed = followService.isFollowing(userId, toFollow);
+	@GetMapping("/api_follow/is-following/{userNo}/{toFollow}") // 이게 맞는지...?
+	public ResponseEntity<String> isFollowing(@PathVariable int userNo, @PathVariable String toFollow) {
+	    boolean alreadyFollowed = followService.isFollowing(userNo, toFollow);
 	    if (alreadyFollowed) {
 	        return new ResponseEntity<>("Already following", HttpStatus.OK);
 	    } else {

@@ -30,14 +30,14 @@ public class LikeController {
 		return new ResponseEntity<List<Like>>(likes, HttpStatus.OK);
 	}
 	//해당 유저의 좋아요 조회
-	@GetMapping("/like/{userId}")
-	public ResponseEntity<?> getUserLikes(@PathVariable String userId){
-		List<Like> likes = lService.selectAll(userId);
+	@GetMapping("/like/{userNo}")
+	public ResponseEntity<?> getUserLikes(@PathVariable int userNo){
+		List<Like> likes = lService.selectAll(userNo);
 		return new ResponseEntity<List<Like>>(likes, HttpStatus.OK);
 	}
 	
 	@GetMapping("/like")
-	public ResponseEntity<?> likeCheck(String loginUser, int posterSeq){
+	public ResponseEntity<?> likeCheck(int loginUser, int posterSeq){
 		if(lService.checkLiked(loginUser, posterSeq)) {
 			return new ResponseEntity<String>("이미 좋아요를 누른 ",HttpStatus.OK);
 		}else
@@ -45,7 +45,7 @@ public class LikeController {
 	}
 	
 	@PostMapping("/like")
-	public ResponseEntity<?> doLike(String loginUser, int posterSeq){
+	public ResponseEntity<?> doLike(int loginUser, int posterSeq){
 
 		int result = lService.doLike(new Like(posterSeq,loginUser));
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);

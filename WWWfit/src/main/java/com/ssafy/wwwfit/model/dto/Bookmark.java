@@ -3,7 +3,7 @@ package com.ssafy.wwwfit.model.dto;
 public class Bookmark {
 	private int bookmarkId;
 	private int posterSeq;
-	private String userId;
+	private int userNo;
 	private String bName ="default";// bookmark folder? default 'default'
 	private boolean isPublic =true; // !!db 추가하기 공개설정
 	//	private String comment;//추가?
@@ -12,10 +12,10 @@ public class Bookmark {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Bookmark(int posterSeq, String userId, String bName) {
+	public Bookmark(int posterSeq, int userNo, String bName) {
 		super();
 		this.posterSeq = posterSeq;
-		this.userId = userId;
+		this.userNo = userNo;
 		this.bName = bName;
 	}
 	
@@ -38,11 +38,11 @@ public class Bookmark {
 	public void setPosterSeq(int posterSeq) {
 		this.posterSeq = posterSeq;
 	}
-	public String getUserId() {
-		return userId;
+	public int getUserId() {
+		return userNo;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserId(int userNo) {
+		this.userNo = userNo;
 	}
 	public String getbName() {
 		return bName;

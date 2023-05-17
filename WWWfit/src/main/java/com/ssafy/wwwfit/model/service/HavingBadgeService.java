@@ -7,9 +7,9 @@ import com.ssafy.wwwfit.model.dto.HavingBadge;
 public interface HavingBadgeService {
 	
 	// 사용자 등록
-	public int registHavingBadge(String userId);
+	public int registHavingBadge(int userNo);
 	
 	// userid에 따른 가지고 있는 뱃지 조회
-	public List<HavingBadge> readHavingBadge(String userId);
+	public List<HavingBadge> readHavingBadge(int userNo);
 	
 }

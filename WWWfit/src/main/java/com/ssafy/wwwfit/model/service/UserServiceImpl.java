@@ -77,8 +77,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int quit(String userId) {
-		int result =uDao.delete(userId);
+	public int quit(int userNo) {
+		int result =uDao.delete(userNo);
 		// 여기서 다른 서비스 전부다 호출해서 update 유저아이디 "탈퇴한 유저"로 바꿔주기,,,,
 		//진짜로?
 		//비밀번호 검증
@@ -88,9 +88,21 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUser(String userId) {
-		User selectedUser = uDao.selectOne(userId);
+	public User getUser(int userNo) {
+		User selectedUser = uDao.selectOne(userNo);
 		return selectedUser;
 	}
+
+	@Override
+	public int login(String userId, String password) {
+		int result = uDao.login(userId, password);
+		return result;//==1?true:false;
+	}
+
+//	@Override
+//	public int loginUser() {
+//		login
+//		return 0;
+//	}
 
 }

@@ -26,8 +26,8 @@ public class RatingServiceImpl implements RatingService {
 	}
 
 	@Override
-	public boolean isRated(String userId, int contentSeq) {
-		boolean exists = rDao.isRated(userId, contentSeq)==0? false: true;
+	public boolean isRated(int userNo, int contentSeq) {
+		boolean exists = rDao.isRated(userNo, contentSeq)==0? false: true;
 		return exists;
 	}
 

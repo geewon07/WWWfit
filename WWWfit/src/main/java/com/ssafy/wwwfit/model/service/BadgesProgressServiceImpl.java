@@ -17,21 +17,21 @@ public class BadgesProgressServiceImpl implements BadgesProgressService {
     private HavingBadgeDao havingBadgeDao;
     
 	@Override
-	public int registBagesProgress(String userId) {
-		return badgesProgressDao.createBadgesprogress(userId);
+	public int registBagesProgress(int userNo) {
+		return badgesProgressDao.createBadgesprogress(userNo);
 	}
 
 	@Override
-	public int updateBagesProgress(String userId, String fitPartName) {
+	public int updateBagesProgress(int userNo, String fitPartName) {
 		
-		int task = badgesProgressDao.fitPartNamecountupdate(userId, fitPartName);
+		int task = badgesProgressDao.fitPartNamecountupdate(userNo, fitPartName);
 		
-		int count = badgesProgressDao.getFitPartNamecount(userId, fitPartName); // count 값 반환 ( 내가 운동을 얼마나 했는지 ) 
+		int count = badgesProgressDao.getFitPartNamecount(userNo, fitPartName); // count 값 반환 ( 내가 운동을 얼마나 했는지 ) 
 		
 		if(count == 5 | count == 10 | count == 20 | count == 50 | count == 100) {
 			HashMap<String, String> params = new HashMap<String, String>();
 			
-			params.put("userId", userId);
+			params.put("userNo", String.valueOf(userNo));
 			params.put("fitPartName", fitPartName);
 			params.put("count",String.valueOf(count));
 			return havingBadgeDao.updateHavingBadge(params);

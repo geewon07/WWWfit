@@ -6,13 +6,13 @@ import com.ssafy.wwwfit.model.dto.Like;
 
 public interface LikeService {
 	
-	public List<Like> selectAll(String userId);
+	public List<Like> selectAll(int userNo);
 	
 	public List<Like> selectOne(int posterSeq);
 	
 	public int numLikes(int posterSeq);
 	
-	public boolean checkLiked(String userId, int posterSeq);
+	public boolean checkLiked(int userNo, int posterSeq);
 	
 	public int doLike(Like like);
 	

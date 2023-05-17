@@ -13,7 +13,7 @@ public interface RatingDao {
 	
 	public Rating selectOne(int ratingId);
 	
-	public int isRated(String userId, int contentSeq);
+	public int isRated(int userNo, int contentSeq);
 	//중복검사
 	public int insert(Rating rating);
 	
