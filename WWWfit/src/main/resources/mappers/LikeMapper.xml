@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.wwwfit.model.dao.LikeDao">
 <parameterMap type="Map" id="alreadylikedMap">
-<parameter property="userId" javaType="string"/>
+<parameter property="userNo" javaType="int"/>
 <parameter property="posterSeq" javaType="int"/>
 </parameterMap>
 <select id="selectAll" resultType="Like">
@@ -15,17 +15,17 @@ select * from likeposters
 where posterSeq=#{posterSeq}
 </select>
 <select id="numLikes" parameterType="int" resultType="int">
-select count(userId) from likeposters
+select count(userNo) from likeposters
 where posterSeq=#{posterSeq}
 </select>
-<select id="alreadyliked" parameterMap="alreadylikedMap" resultType="int">
+<select id="alreadyliked" parameterType="int" resultType="int">
 select count(*) from likeposters
-where userId=#{userId} and posterSeq=#{posterSeq}
+where userNo=#{userNo} and posterSeq=#{posterSeq}
 </select>
 <insert id="insert" parameterType="Like">
 insert into likeposters
-(posterSeq, userId,likeDate)
-values(#{posterSeq},#{userId},CURRENT_TIMESTAMP)
+(posterSeq, userNo,likeDate)
+values(#{posterSeq},#{userNo},CURRENT_TIMESTAMP)
 </insert>
 <delete id="delete" parameterType="int">
 delete from likeposters

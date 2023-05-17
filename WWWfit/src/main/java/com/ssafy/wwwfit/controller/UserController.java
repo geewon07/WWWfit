@@ -56,15 +56,21 @@ public class UserController {
 	public ResponseEntity<?> doLogin(String userId, String password){
 		Map<String,Object> result = new HashMap<String, Object>();
 		int userNo = uService.login(userId, password);
-		
+		System.out.println(userNo);
+		String userName  = uService.getUser(userNo).getName();
 		if(userNo==0) {
+			
 			return new ResponseEntity<String>("Login Failed",HttpStatus.UNAUTHORIZED);
 		}else {
+			String str = String.valueOf(userNo);
+			System.out.println("!!!!!!!!!!!!!!!!"+str);
 			Map<String, String> data = new HashMap<String, String>();
-			data.put("userNo", String.valueOf(userNo));
+			data.put("userNo", str);
 			data.put("userId", userId);
+			data.put("userName",userName);
+			
 			try {
-				result.put("login-token", jwtUtil.createToken("claimMap", data));
+				result.put("login-token", jwtUtil.createToken("login-token", str,userId,userName));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

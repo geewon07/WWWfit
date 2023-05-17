@@ -5,13 +5,13 @@
 <mapper  namespace="com.ssafy.wwwfit.model.dao.CalendarDao">
 
 <select id="getCalendar" resultType="Calendar" parameterType="String">
-   SELECT calendarId, userId, challenge, fitPartName, date_format(calendarStart, '%y-%m-%d') as calendarStart
+   SELECT calendarId, userNo, challenge, fitPartName, date_format(calendarStart, '%y-%m-%d') as calendarStart
    From calendars;
 </select>
 
 <insert id="createcalendar" parameterType="Calendar">
-   INSERT INTO calendars (userId, challenge, fitPartName,calendarStart) 
-   VALUES (#{userId}, TRUE, #{fitPartName}, NOW());
+   INSERT INTO calendars (userNo, challenge, fitPartName,calendarStart) 
+   VALUES (#{userNo}, TRUE, #{fitPartName}, NOW());
 </insert>
 
 <delete id="deletecalendar" parameterType="int">

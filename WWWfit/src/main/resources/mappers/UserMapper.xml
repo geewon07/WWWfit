@@ -3,16 +3,16 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.wwwfit.model.dao.UserDao">
-<insert id="insert" parameterType="User" >
+<insert id="insert" parameterType="User" useGeneratedKeys="true">
 insert into users
-values(#{userId},#{password},#{name},#{email},#{img},#{userRank},#{experience},#{challengedays},#{sub},#{regDate},)
+values(#{userNo},#{userId},#{password},#{name},#{email},#{img},#{userRank},#{experience},#{challengedays},#{token},#{regDate})
 </insert>
 <select id="selectAll" resultType="User">
 select * from users;
 </select>
-<select id="selectOne" parameterType="string" resultType="User">
+<select id="selectOne" parameterType="int" resultType="User">
 select * from users
-where userId = #{userId}
+where userNo = #{userNo}
 </select>
 <select id="searchBy" parameterType="SearchCondition" resultType="User">
 select * from users
@@ -34,10 +34,10 @@ img=#{img},
 userRank=#{userRank},
 experience=#{experience},
 challengedays=#{challengedays}
-where userId=#{userId}
+where userNo=#{userNo}
 </update>
-<delete id="delete" parameterType="string">
+<delete id="delete" parameterType="int">
 delete from users
-where userId=#{userId}
+where userNo=#{userNo}
 </delete>
 </mapper>

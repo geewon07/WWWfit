@@ -15,7 +15,7 @@ public interface FollowService {
 	
 	public int getFollowingCnt(int userNo);
 	
-	public boolean isFollowing(int userNo,String toFollow);
+	public boolean isFollowing(int userNo,int toFollow);
 	
 	public int doFollow(Follow follow);
 	

@@ -40,7 +40,7 @@ public class FollowServiceImpl implements FollowService {
 	}
 
 	@Override
-	public boolean isFollowing(int userNo, String toFollow) {
+	public boolean isFollowing(int userNo, int toFollow) {
 		boolean alreadyFollowed = fDao.isfollowing(userNo, toFollow)==0?false:true;
 		return alreadyFollowed;
 	}

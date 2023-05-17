@@ -9,9 +9,10 @@ public class User {
 	private String img;
 	private String userRank;
 	private int experience;
-	private int challengeDays;
+	private int challengedays;
 	private String regDate;
-	private int sub;//kko login token user serial number
+	private String token="";
+//	private int token;//kko login token user serial number
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -31,14 +32,14 @@ public class User {
 		this.img = img;
 	}
 	
-	public User(String userId, String password, String name, String email, String img, int sub) {
+	public User(String userId, String password, String name, String email, String img, String token) {
 		super();
 		this.userId = userId;
 		this.password = password;
 		this.name = name;
 		this.email = email;
 		this.img = img;
-		this.sub = sub;
+		this.token = token;
 	}
 	public int getUserNo() {
 		return userNo;
@@ -88,17 +89,17 @@ public class User {
 	public void setExperience(int experience) {
 		this.experience = experience;
 	}
-	public int getChallengeDays() {
-		return challengeDays;
+	public int getChallengedays() {
+		return challengedays;
 	}
-	public void setChallengeDays(int challengeDays) {
-		this.challengeDays = challengeDays;
+	public void setChallengeDays(int challengedays) {
+		this.challengedays = challengedays;
 	}
-	public int getSub() {
-		return sub;
+	public String getToken() {
+		return token;
 	}
-	public void setSub(int sub) {
-		this.sub = sub;
+	public void setToken(String token) {
+		this.token = token;
 	}
 	
 	

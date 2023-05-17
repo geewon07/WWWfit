@@ -3,29 +3,26 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.wwwfit.model.dao.FollowDao">
-<parameterMap type="Map" id="isfollowingMap">
-<parameter property="userId" javaType="string"/>
-<parameter property="toFollow" javaType="string"/>
-</parameterMap>
-<select id="selectFollows" parameterType="string" resultType="Follow">
+
+<select id="selectFollows" parameterType="int" resultType="Follow">
 select * from follow
-where userId=#{userId}
+where userNo=#{userNo}
 </select>
-<select id="selectFollowers" parameterType="string" resultType="Follow">
+<select id="selectFollowers" parameterType="int" resultType="Follow">
 select * from follow
-where followsWho=#{userId}
+where followsWho=#{userNo}
 </select>
 
-<select id="isfollowing" parameterMap="isFollowing" resultType="int">
+<select id="isfollowing" parameterType="int" resultType="int">
 select count(followId) from follow
-where userId=#{userId} and followsWho=#{toFollow}
+where userNo=#{userNo} and followsWho=#{toFollow}
 </select>
 
 <insert id="insert" parameterType="Follow">
 insert into follow
-(userId,followsWho)
+(userNo,followsWho)
 values
-(#{userId},#{followsWho})
+(#{userNo},#{followsWho})
 </insert>
 
 <delete id="delete" parameterType="int">

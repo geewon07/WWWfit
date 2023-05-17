@@ -16,7 +16,7 @@
                   "
                 >
                   <form>
-                    <h1 class="h3 mb-3 fw-normal">로그인</h1>
+                    <h1 class="h3 mb-3 fw-normal">로그인 {{loginUser}}</h1>
                     <label for="floatingInput">ID</label>
                     <div class="form-floating">
                       <input
@@ -24,7 +24,7 @@
                         class="form-control"
                         id="floatingInput"
                         placeholder="ID"
-                        v-model="user.id"
+                        v-model="user.userId"
                       />
                     </div>
                     <label for="floatingPassword">Password</label>
@@ -43,7 +43,7 @@
             <input type="checkbox" value="remember-me" /> Remember me
           </label>
         </div> -->
-                    <button class="w-100 btn btn-lg btn-primary" type="submit">
+                    <button class="w-100 btn btn-lg btn-primary" type="submit" @click="login">
                       로그인
                     </button>
                     <p class="mt-5 mb-3 text-body-secondary">©WWWfit</p>
@@ -60,16 +60,29 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
 export default {
   name: "LoginView",
   data() {
     return {
       user: {
-        id: " ",
+        userId: "",
         password: "",
       },
+
     };
   },
+  computed:{
+    ...mapState(['loginUser']),
+    
+  },
+  methods:{
+    login(){
+      console.log("login attempt");
+  this.$store.dispatch("loginUser",this.user);
+    }
+  
+  }
 };
 </script>
 
