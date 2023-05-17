@@ -83,6 +83,7 @@ public class FollowController {
 	    }
 	}
 	
+	// Map으로 받을까?
 	@GetMapping("/api_follow/is-following/{userId}/{toFollow}") // 이게 맞는지...?
 	public ResponseEntity<String> isFollowing(@PathVariable String userId, @PathVariable String toFollow) {
 	    boolean alreadyFollowed = followService.isFollowing(userId, toFollow);
