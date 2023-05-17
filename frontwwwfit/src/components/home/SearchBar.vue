@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>SEARCH RESULT placeholder</h2>
+    <h1>SEARCH BAR placeholder</h1>
   </div>
 </template>
 
