@@ -10,6 +10,9 @@ import com.ssafy.wwwfit.model.dao.UserDao;
 import com.ssafy.wwwfit.model.dto.SearchCondition;
 import com.ssafy.wwwfit.model.dto.User;
 
+//로그인 구현해야함!!
+
+
 @Service
 public class UserServiceImpl implements UserService {
 

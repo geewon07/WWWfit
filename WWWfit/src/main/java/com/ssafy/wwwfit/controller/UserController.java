@@ -1,9 +1,7 @@
 package com.ssafy.wwwfit.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.wwwfit.model.dto.Follow;
+import com.ssafy.wwwfit.model.dto.SearchCondition;
 import com.ssafy.wwwfit.model.dto.User;
 import com.ssafy.wwwfit.model.service.BadgesProgressService;
 import com.ssafy.wwwfit.model.service.BookmarkService;
@@ -51,8 +49,12 @@ public class UserController {
 	//회원가입 // 유효성 확인 후 hService와 bpService에서 등록하기!
 	@PostMapping("/user")
 	public ResponseEntity<?> doRegist(User user){
-		uService.regist(user);
-		return new ResponseEntity<>(HttpStatus.OK);
+		int result = uService.regist(user);
+		if(result!=0) {
+			bpService.registBagesProgress(user.getUserId());
+			hService.registHavingBadge(user.getUserId());
+		}
+		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
 	
 	//회원조회
@@ -72,6 +74,14 @@ public class UserController {
 		return new ResponseEntity<List<User>>(allUsers,HttpStatus.OK);
 	}
 	
+	@GetMapping("/user/search")
+	public ResponseEntity<?> searchUsers(SearchCondition condition){
+		List<User> searchresult= uService.searchUser(condition);
+		
+		return new ResponseEntity<List<User>>(searchresult,HttpStatus.OK);
+	}
+	
+	
 	@PutMapping("/user")
 	public ResponseEntity<?> editUser(User user){
 		///이거 로그인 유저 혹은 관리자여야 가능한 비교를 어디서 하더라??? 교수님 강의중에 admin 적용,, interceptor? prehandle?
@@ -79,6 +89,16 @@ public class UserController {
 		if(result==0) return new ResponseEntity<String>("수정불가",HttpStatus.BAD_REQUEST);
 		
 		return new ResponseEntity<String>("회원 정보 수정 완료",HttpStatus.OK);
+	}
+	
+	//getexp 서비스 파라미터 유저id로 바꾸고, 서비스를 북마크/평점/챌린지 기록 쪽에서 콜하는 방법 고민중, vs 뷰!
+	@PutMapping("/{userId}/exp")
+	public ResponseEntity<?> getExp(String userId, int points){
+		///이거 로그인 유저 혹은 관리자여야 가능한 비교를 어디서 하더라??? 교수님 강의중에 admin 적용,, interceptor? prehandle?
+		int result = uService.getExp(uService.getUser(userId),points);
+		if(result==0) return new ResponseEntity<String>("수정불가",HttpStatus.BAD_REQUEST);
+		
+		return new ResponseEntity<String>("경험치 조정 완료",HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/user/{userId}")
