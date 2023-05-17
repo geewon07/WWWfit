@@ -93,4 +93,16 @@ public class UserServiceImpl implements UserService {
 		return selectedUser;
 	}
 
+	@Override
+	public int login(String userId, String password) {
+		int result = uDao.login(userId, password);
+		return result;//==1?true:false;
+	}
+
+//	@Override
+//	public int loginUser() {
+//		login
+//		return 0;
+//	}
+
 }

@@ -1,6 +1,8 @@
 package com.ssafy.wwwfit.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,24 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.wwwfit.model.dto.SearchCondition;
 import com.ssafy.wwwfit.model.dto.User;
 import com.ssafy.wwwfit.model.service.BadgesProgressService;
-import com.ssafy.wwwfit.model.service.BookmarkService;
-import com.ssafy.wwwfit.model.service.FollowService;
 import com.ssafy.wwwfit.model.service.HavingBadgeService;
-import com.ssafy.wwwfit.model.service.LikeService;
 import com.ssafy.wwwfit.model.service.UserService;
+import com.ssafy.wwwfit.util.JwtUtil;
 
 @RestController
 @RequestMapping("/api-user")
 public class UserController {
-	@Autowired
-	private BookmarkService bService;
-	
-	@Autowired
-	private LikeService lService;
+
 	@Autowired
 	private UserService uService;
-	@Autowired 
-	private FollowService fService;
+	
+	@Autowired
+	private JwtUtil jwtUtil;
 	
 	@Autowired
 	private HavingBadgeService hService;
@@ -41,12 +38,45 @@ public class UserController {
 	@Autowired
 	private BadgesProgressService bpService;
 	
-	//유저가 행하는 모든 일,,, 좋아요,북마크,리뷰,팔로우
-	
+	//유저가 행하는 모든 일,,, 좋아요,북마크,리뷰,팔로우--> 일어나면 유저 서비스를 불러서 엑스피증감 하게
+//	@Autowired
+//	private BookmarkService bService;
+//	
+//	@Autowired
+//	private LikeService lService;
+//	
+//	@Autowired 
+//	private FollowService fService;
 	//일단 기본 cRUD 만 해보자!!
 	
 	
 	//회원가입 // 유효성 확인 후 hService와 bpService에서 등록하기!
+	
+	@PostMapping("/login")
+	public ResponseEntity<?> doLogin(String userId, String password){
+		Map<String,Object> result = new HashMap<String, Object>();
+		int userNo = uService.login(userId, password);
+		
+		if(userNo==0) {
+			return new ResponseEntity<String>("Login Failed",HttpStatus.UNAUTHORIZED);
+		}else {
+			Map<String, String> data = new HashMap<String, String>();
+			data.put("userNo", String.valueOf(userNo));
+			data.put("userId", userId);
+			try {
+				result.put("login-token", jwtUtil.createToken("claimMap", data));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return new ResponseEntity<Map<String,Object>>(result,HttpStatus.OK);
+	}
+	
+	
+	
 	@PostMapping("/user")
 	public ResponseEntity<?> doRegist(User user){
 		int result = uService.regist(user);

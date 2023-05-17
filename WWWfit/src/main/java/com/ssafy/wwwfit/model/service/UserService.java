@@ -17,7 +17,9 @@ public interface UserService {
 	
 	public User getUser(int userNo);
 	// 로그인~~~  jwt
+	public int login(String userId, String password);
 	
+//	public int loginUser(String userId, String password);
 	//회원 정보 수정
 	public int updateInfo(User user);
 	//경험치 조정(부여, 회수)

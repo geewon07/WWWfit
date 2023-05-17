@@ -20,6 +20,11 @@ select * from users
 where #{key} = #{word}
 </if>
 </select>
+<select id="login" parameterType="String" resultType="int">
+Select userNo from users
+where userId=#{userId} and password =#{password}
+</select>
+
 <update id="update" parameterType="User">
 update users
 set password=#{password},
