@@ -3,15 +3,15 @@ package com.ssafy.wwwfit.model.dto;
 public class Like {
 	private int likeId;
 	private int posterSeq;
-	private String userId;
+	private int userNo;
 	private String likeDate;
 	
 	public Like() {
 	}
-	public Like(int posterSeq, String userId) {
+	public Like(int posterSeq, int userNo) {
 		super();
 		this.posterSeq = posterSeq;
-		this.userId = userId;
+		this.userNo = userNo;
 	}
 	public int getLikeId() {
 		return likeId;
@@ -25,11 +25,11 @@ public class Like {
 	public void setPosterSeq(int posterSeq) {
 		this.posterSeq = posterSeq;
 	}
-	public String getUserId() {
-		return userId;
+	public int getUserNo() {
+		return userNo;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
 	public String getLikeDate() {
 		return likeDate;

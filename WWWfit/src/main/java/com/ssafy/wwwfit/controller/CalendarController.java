@@ -26,8 +26,8 @@ public class CalendarController {
 	private BadgesProgressService badgesProgressService;
 	
 	@GetMapping("/calendar")
-	public ResponseEntity<?> list(String userId) {
-		List<Calendar> list = calendarService.getCalendarList(userId);
+	public ResponseEntity<?> list(int userNo) {
+		List<Calendar> list = calendarService.getCalendarList(userNo);
 		
 		if(list == null || list.size() == 0) {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
@@ -37,10 +37,10 @@ public class CalendarController {
 	
 	// 오늘 꺼를 등록하면 무엇을 반환할지는 미정! //오운완
 	@PostMapping("/calendar")
-	public ResponseEntity<?> write(String userId, String fitPartName) {
+	public ResponseEntity<?> write(int userNo, String fitPartName) {
 		
-		  int writedone = calendarService.addCalendartoday(userId,fitPartName);
-		  int updatefitPartNameCount = badgesProgressService.updateBagesProgress(userId, fitPartName);
+		  int writedone = calendarService.addCalendartoday(userNo,fitPartName);
+		  int updatefitPartNameCount = badgesProgressService.updateBagesProgress(userNo, fitPartName);
 		
 		if(writedone == 1 && updatefitPartNameCount == 1) {
 			return new ResponseEntity<Void>(HttpStatus.OK);

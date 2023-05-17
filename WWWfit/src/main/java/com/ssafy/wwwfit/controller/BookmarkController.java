@@ -23,9 +23,9 @@ public class BookmarkController {
 	@Autowired
 	private BookmarkService bService;
 	
-	@GetMapping("/{userId}")
-	public ResponseEntity<?> getUserBookmark(@PathVariable String userId){
-		List<Bookmark> userBookmark =bService.selectAll(userId);
+	@GetMapping("/{userNo}")
+	public ResponseEntity<?> getUserBookmark(@PathVariable int userNo){
+		List<Bookmark> userBookmark =bService.selectAll(userNo);
 		return new ResponseEntity<List<Bookmark>>(userBookmark,HttpStatus.OK);
 	}
 	@GetMapping("/bookmark/{bookmarkId}")
@@ -34,16 +34,16 @@ public class BookmarkController {
 		return new ResponseEntity<Bookmark>(bookmark,HttpStatus.OK);
 	}
 	
-	@GetMapping("/{userId}/folder/{bname}")
-	public ResponseEntity<?> getUserFolder(@PathVariable String userId,@PathVariable String bname){
-		List<Bookmark> bookmarkfolder= bService.selectBmFolder(userId, bname);
+	@GetMapping("/{userNo}/folder/{bname}")
+	public ResponseEntity<?> getUserFolder(@PathVariable int userNo,@PathVariable String bname){
+		List<Bookmark> bookmarkfolder= bService.selectBmFolder(userNo, bname);
 		
 		return new ResponseEntity<List<Bookmark>>(bookmarkfolder,HttpStatus.OK);
 	}
 	
 	@GetMapping("/bookmark/folders")
-	public ResponseEntity<?> getUserFolders (String userId){
-		List<String> folders = bService.bmFolders(userId);
+	public ResponseEntity<?> getUserFolders (int userNo){
+		List<String> folders = bService.bmFolders(userNo);
 		
 		return new ResponseEntity<List<String>>(folders,HttpStatus.OK);
 	}

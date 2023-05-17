@@ -15,33 +15,33 @@ public class FollowServiceImpl implements FollowService {
 	private FollowDao fDao;
 	
 	@Override
-	public List<Follow> getFollowers(String userId) {
-		List<Follow> followerList = fDao.selectFollowers(userId);
+	public List<Follow> getFollowers(int userNo) {
+		List<Follow> followerList = fDao.selectFollowers(userNo);
 		return followerList;
 		
 	}
 
 	@Override
-	public List<Follow> getFollowing(String userId) {
-		List<Follow> followingList = fDao.selectFollows(userId);
+	public List<Follow> getFollowing(int userNo) {
+		List<Follow> followingList = fDao.selectFollows(userNo);
 		return followingList;
 	}
 
 	@Override
-	public int getFollowerCnt(String userId) {
-		int followerCnt = fDao.selectFollowers(userId).size();
+	public int getFollowerCnt(int userNo) {
+		int followerCnt = fDao.selectFollowers(userNo).size();
 		return followerCnt;
 	}
 
 	@Override
-	public int getFollowingCnt(String userId) {
-		int followingCnt = fDao.selectFollows(userId).size();
+	public int getFollowingCnt(int userNo) {
+		int followingCnt = fDao.selectFollows(userNo).size();
 		return followingCnt;
 	}
 
 	@Override
-	public boolean isFollowing(String userId, String toFollow) {
-		boolean alreadyFollowed = fDao.isfollowing(userId, toFollow)==0?false:true;
+	public boolean isFollowing(int userNo, String toFollow) {
+		boolean alreadyFollowed = fDao.isfollowing(userNo, toFollow)==0?false:true;
 		return alreadyFollowed;
 	}
 

@@ -12,7 +12,7 @@ public interface RatingService {
 	
 	public double getAVG(int contentSeq);
 	
-	public boolean isRated(String userId, int contentSeq);
+	public boolean isRated(int userNo, int contentSeq);
 	
 	public int insert(Rating rating);
 	

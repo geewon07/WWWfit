@@ -2,7 +2,7 @@ package com.ssafy.wwwfit.model.dto;
 
 public class badgesProgress {
 	private int badgesNo;
-	private String userId;
+	private int userNo;
 	private int neck;
 	private int shoulder;
 	private int back;
@@ -10,10 +10,10 @@ public class badgesProgress {
 	private int eye;
 	private int leg;
 	
-	public badgesProgress(int badgesNo, String userId, int neck, int shoulder, int back, int hand, int eye, int leg) {
+	public badgesProgress(int badgesNo, int userNo, int neck, int shoulder, int back, int hand, int eye, int leg) {
 		super();
 		this.badgesNo = badgesNo;
-		this.userId = userId;
+		this.userNo = userNo;
 		this.neck = neck;
 		this.shoulder = shoulder;
 		this.back = back;
@@ -30,11 +30,11 @@ public class badgesProgress {
 	public void setBadgesNo(int badgesNo) {
 		this.badgesNo = badgesNo;
 	}
-	public String getUserId() {
-		return userId;
+	public int getUserId() {
+		return userNo;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserId(int userNo) {
+		this.userNo = userNo;
 	}
 	public int getNeck() {
 		return neck;

@@ -1,6 +1,7 @@
 package com.ssafy.wwwfit.model.dto;
 
 public class User {
+	private int userNo;
 	private String userId;
 	private String password;
 	private String name;
@@ -38,6 +39,12 @@ public class User {
 		this.email = email;
 		this.img = img;
 		this.sub = sub;
+	}
+	public int getUserNo() {
+		return userNo;
+	}
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
 	public String getUserId() {
 		return userId;

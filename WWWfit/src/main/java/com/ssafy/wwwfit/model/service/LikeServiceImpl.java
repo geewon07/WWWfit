@@ -16,8 +16,8 @@ public class LikeServiceImpl implements LikeService {
 	
 	//유저가 좋아요 한 컨텐츠 정보가 조회됨
 	@Override
-	public List<Like> selectAll(String userId) {
-		List<Like> userLikes = lDao.selectAll(userId);
+	public List<Like> selectAll(int userNo) {
+		List<Like> userLikes = lDao.selectAll(userNo);
 		return userLikes;
 	}
 
@@ -34,8 +34,8 @@ public class LikeServiceImpl implements LikeService {
 	}
 
 	@Override
-	public boolean checkLiked(String userId, int posterSeq) {
-		boolean liked = lDao.alreadyliked(userId, posterSeq)==0?false:true;
+	public boolean checkLiked(int userNo, int posterSeq) {
+		boolean liked = lDao.alreadyliked(userNo, posterSeq)==0?false:true;
 		return liked;
 	}
 

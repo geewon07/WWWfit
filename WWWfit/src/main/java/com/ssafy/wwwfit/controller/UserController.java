@@ -51,16 +51,16 @@ public class UserController {
 	public ResponseEntity<?> doRegist(User user){
 		int result = uService.regist(user);
 		if(result!=0) {
-			bpService.registBagesProgress(user.getUserId());
-			hService.registHavingBadge(user.getUserId());
+			bpService.registBagesProgress(user.getUserNo());
+			hService.registHavingBadge(user.getUserNo());
 		}
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
 	
 	//회원조회
-	@GetMapping("/user/{userId}")
-	public ResponseEntity<?> getUser(@PathVariable String userId){
-		User user = uService.getUser(userId);
+	@GetMapping("/user/{userNo}")
+	public ResponseEntity<?> getUser(@PathVariable int userNo){
+		User user = uService.getUser(userNo);
 		if(user==null) {
 			return new ResponseEntity<String>("회원을 찾을 수 없습니다",HttpStatus.NOT_FOUND);
 		}
@@ -92,26 +92,26 @@ public class UserController {
 	}
 	
 	//getexp 서비스 파라미터 유저id로 바꾸고, 서비스를 북마크/평점/챌린지 기록 쪽에서 콜하는 방법 고민중, vs 뷰!
-	@PutMapping("/{userId}/exp")
-	public ResponseEntity<?> getExp(String userId, int points){
+	@PutMapping("/{userNo}/exp")
+	public ResponseEntity<?> getExp(int userNo, int points){
 		///이거 로그인 유저 혹은 관리자여야 가능한 비교를 어디서 하더라??? 교수님 강의중에 admin 적용,, interceptor? prehandle?
-		int result = uService.getExp(uService.getUser(userId),points);
+		int result = uService.getExp(uService.getUser(userNo),points);
 		if(result==0) return new ResponseEntity<String>("수정불가",HttpStatus.BAD_REQUEST);
 		
 		return new ResponseEntity<String>("경험치 조정 완료",HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/user/{userId}")
-	public ResponseEntity<?> deleteUser(@PathVariable String userId,String loginUser){
+	@DeleteMapping("/user/{userNo}")
+	public ResponseEntity<?> deleteUser(@PathVariable int userNo,int loginUser){
 		//자기 자신인지/ 비밀번호 확인하고 넘어가야함 뷰!! 
-		int result = uService.quit(userId);
+		int result = uService.quit(userNo);
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
 	
 	
-//	@GetMapping("/user/follower/{userId}")
-//	public ResponseEntity<?> getFollowers(@PathVariable String userId, User loginUser){
-//		List<Follow> follows= fService.getFollowers(userId);
+//	@GetMapping("/user/follower/{userNo}")
+//	public ResponseEntity<?> getFollowers(@PathVariable int userNo, User loginUser){
+//		List<Follow> follows= fService.getFollowers(userNo);
 //		List<User> followerList = new ArrayList<User>();
 //		for(Follow f : follows) {
 //			followerList.add(uService.getUser(f.getUserId()));

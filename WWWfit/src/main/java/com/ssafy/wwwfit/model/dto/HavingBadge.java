@@ -4,7 +4,7 @@ public class HavingBadge {
 	// 고민해보자
 	// boolean으로 할 것인지 int형으로 5개를 만들어서 할것인지....!
 	private int havingbadgeId;
-	private String userId;
+	private int userNo;
 	private Boolean neck_count5;
 	private Boolean neck_count10;
 	private Boolean neck_count20;
@@ -40,7 +40,7 @@ public class HavingBadge {
 	private Boolean leg_count20;
 	private Boolean leg_count50;
 	private Boolean leg_count100;
-	public HavingBadge(int havingbadgeId, String userId, Boolean neck_count5, Boolean neck_count10,
+	public HavingBadge(int havingbadgeId, int userNo, Boolean neck_count5, Boolean neck_count10,
 			Boolean neck_count20, Boolean neck_count50, Boolean neck_count100, Boolean shoulder_count5,
 			Boolean shoulder_count10, Boolean shoulder_count20, Boolean shoulder_count50, Boolean shoulder_count100,
 			Boolean back_count5, Boolean back_count10, Boolean back_count20, Boolean back_count50,
@@ -50,7 +50,7 @@ public class HavingBadge {
 			Boolean leg_count50, Boolean leg_count100) {
 		super();
 		this.havingbadgeId = havingbadgeId;
-		this.userId = userId;
+		this.userNo = userNo;
 		this.neck_count5 = neck_count5;
 		this.neck_count10 = neck_count10;
 		this.neck_count20 = neck_count20;
@@ -91,11 +91,11 @@ public class HavingBadge {
 	public void setHavingbadgeId(int havingbadgeId) {
 		this.havingbadgeId = havingbadgeId;
 	}
-	public String getUserId() {
-		return userId;
+	public int getUserNo() {
+		return userNo;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
 	public Boolean getNeck_count5() {
 		return neck_count5;

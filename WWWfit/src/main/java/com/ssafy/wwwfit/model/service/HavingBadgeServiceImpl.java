@@ -15,13 +15,13 @@ public class HavingBadgeServiceImpl implements HavingBadgeService {
 	private HavingBadgeDao havingBadgeDao;
 	
 	@Override
-	public int registHavingBadge(String userId) {
-		return havingBadgeDao.createHavingBadge(userId);
+	public int registHavingBadge(int userNo) {
+		return havingBadgeDao.createHavingBadge(userNo);
 	}
 
 	@Override
-	public List<HavingBadge> readHavingBadge(String userId) {
-		return havingBadgeDao.getHavingBadge(userId);
+	public List<HavingBadge> readHavingBadge(int userNo) {
+		return havingBadgeDao.getHavingBadge(userNo);
 	}
 
 }

@@ -13,8 +13,8 @@ public class BookmarkServiceImpl implements BookmarkService {
 	@Autowired
 	private BookmarkDao bmDao;
 	@Override
-	public List<Bookmark> selectAll(String userId) {
-		List<Bookmark> userBookmarks = bmDao.selectAll(userId);
+	public List<Bookmark> selectAll(int userNo) {
+		List<Bookmark> userBookmarks = bmDao.selectAll(userNo);
 		return userBookmarks;
 	}
 
@@ -25,14 +25,14 @@ public class BookmarkServiceImpl implements BookmarkService {
 	}
 
 	@Override
-	public List<Bookmark> selectBmFolder(String userId, String bname) {
-		List<Bookmark> selectedFolder = bmDao.selectMarks(userId, bname);
+	public List<Bookmark> selectBmFolder(int userNo, String bname) {
+		List<Bookmark> selectedFolder = bmDao.selectMarks(userNo, bname);
 		return selectedFolder;
 	}
 
 	@Override
-	public List<String> bmFolders(String userId) {
-		List<String> userBmFolders = bmDao.folders(userId);
+	public List<String> bmFolders(int userNo) {
+		List<String> userBmFolders = bmDao.folders(userNo);
 		return userBmFolders;
 	}
 

@@ -22,9 +22,9 @@ public class HavingBadgeController {
 	
 	// 뱃지 전체 조회
 	@GetMapping("/badge/{id}")
-	public ResponseEntity<?> list(@PathVariable String userId) {
+	public ResponseEntity<?> list(@PathVariable int userNo) {
 		
-		List<HavingBadge> list = havingBadgeService.readHavingBadge(userId);
+		List<HavingBadge> list = havingBadgeService.readHavingBadge(userNo);
 		
 		if(list == null || list.size() == 0) {
 			return new ResponseEntity<String> ("뱃지가 하나도 없어요",HttpStatus.NO_CONTENT);

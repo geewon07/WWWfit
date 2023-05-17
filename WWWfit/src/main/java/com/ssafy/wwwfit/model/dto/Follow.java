@@ -2,8 +2,8 @@ package com.ssafy.wwwfit.model.dto;
 
 public class Follow {
 	private int followId;
-	private String userId;
-	private String followsWho;
+	private int userNo;
+	private int followsWho;
 	private String followDate;
 	
 	public Follow() {
@@ -11,9 +11,9 @@ public class Follow {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Follow(String userId, String followsWho) {
+	public Follow(int userNo, int followsWho) {
 		super();
-		this.userId = userId;
+		this.userNo = userNo;
 		this.followsWho = followsWho;
 	}
 
@@ -25,19 +25,19 @@ public class Follow {
 		this.followId = followId;
 	}
 
-	public String getUserId() {
-		return userId;
+	public int getUserId() {
+		return userNo;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserId(int userNo) {
+		this.userNo = userNo;
 	}
 
-	public String getFollowsWho() {
+	public int getFollowsWho() {
 		return followsWho;
 	}
 
-	public void setFollowsWho(String followsWho) {
+	public void setFollowsWho(int followsWho) {
 		this.followsWho = followsWho;
 	}
 

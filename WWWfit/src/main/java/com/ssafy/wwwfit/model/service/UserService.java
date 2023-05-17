@@ -15,7 +15,7 @@ public interface UserService {
 	
 	public List<User> searchUser(SearchCondition condition);
 	
-	public User getUser(String userId);
+	public User getUser(int userNo);
 	// 로그인~~~  jwt
 	
 	//회원 정보 수정
@@ -30,7 +30,7 @@ public interface UserService {
 	///프로그레스 초기화는 어디서 해야할지?
 	
 	//회원 탈퇴
-	public int quit(String userId);
+	public int quit(int userNo);
 	
 	
 }

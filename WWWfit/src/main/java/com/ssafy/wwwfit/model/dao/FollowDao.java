@@ -10,19 +10,19 @@ public interface FollowDao {
 	// 둘다 시간순으로 가장 먼저 팔로우 한 사람이 상단에 위치하도록?
 	
 	// 현재 유저가 팔로우하는 유저 목록 // select followsWho from follows where userId=#{userId};	
-	public List<Follow> selectFollows(String userId);
+	public List<Follow> selectFollows(int userNo);
 	//매퍼에서 차이--> select userId from follows where followsWho=#{userId};
-	public List<Follow> selectFollowers(String userId);
+	public List<Follow> selectFollowers(int userNo);
 	//dao? service?
 	
 	// 위 메소드로 얻은 list.size() 하면 되는 것 아닐까?
 //	//select Count(followsWho) from follows where userId=#{userId};
-//	public int numFollows(String userId);
+//	public int numFollows(int userNo);
 //	//select Count(userId) from follows where followsWho=#{userId};
-//	public int numFollowers(String userId);
+//	public int numFollowers(int userNo);
 //	
 	//select * from follows where userId=#{userId} and followsWho=#{toFollow};
-	public int isfollowing(String userId, String toFollow);
+	public int isfollowing(int userNo, String toFollow);
 	//팔로우 버튼 상태 확인할때도 씀
 	// 0 이어야 팔로우가능
 	//follow

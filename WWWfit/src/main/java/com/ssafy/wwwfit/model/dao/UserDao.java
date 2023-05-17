@@ -13,7 +13,7 @@ public interface UserDao {
 	//회원 조회
 	public List<User> selectAll();
 	
-	public User selectOne(String userId);
+	public User selectOne(int userNo);
 	
 	//회원 검색
 	public List<User> searchBy(SearchCondition condition);
@@ -24,7 +24,7 @@ public interface UserDao {
 	
 //	public User login();//jwt 배우고 나서
 	//회원탈퇴:정보삭제
-	public int delete(String userId);
+	public int delete(int userNo);
 	
 	//회원 경험치 증가
 	

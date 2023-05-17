@@ -2,15 +2,15 @@ package com.ssafy.wwwfit.model.dto;
 
 public class Calendar {
 	private int calendarId;
-	private String userId;
+	private int userNo;
 	private Boolean challenge;
 	private String fitPartName;
 	private String calendarStart;
 	
-	public Calendar(int calendarId,String userId, Boolean challenge, String fitPartName, String calendarStart) {
+	public Calendar(int calendarId,int userNo, Boolean challenge, String fitPartName, String calendarStart) {
 		super();
 		this.calendarId = calendarId;
-		this.userId = userId;
+		this.userNo = userNo;
 		this.challenge = challenge;
 		this.fitPartName = fitPartName;
 		this.calendarStart = calendarStart;
@@ -48,12 +48,12 @@ public class Calendar {
 		this.calendarId = calendarId;
 	}
 
-	public String getUserId() {
-		return userId;
+	public int getUserNo() {
+		return userNo;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
     
 	public String getCalendarStart() {

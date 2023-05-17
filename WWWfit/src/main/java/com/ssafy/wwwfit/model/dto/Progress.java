@@ -3,7 +3,7 @@ package com.ssafy.wwwfit.model.dto;
 public class Progress {//badgesprogress ---> create 1 when user gets created
 	
 	private int badgesNo;
-	private String userId;
+	private int userNo;
 	private int neck;
 	private int shoulder;
 	private int back;
@@ -20,11 +20,11 @@ public class Progress {//badgesprogress ---> create 1 when user gets created
 	public void setBadgesNo(int badgesNo) {
 		this.badgesNo = badgesNo;
 	}
-	public String getUserId() {
-		return userId;
+	public int getUserNo() {
+		return userNo;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
 	public int getNeck() {
 		return neck;
