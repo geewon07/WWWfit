@@ -43,7 +43,7 @@ const routes = [
   {
     path: "/bookmark",
     name: "bookmark",
-    component: BookmarkView,
+component: BookmarkView,
     children: [
       {
         path: "list",
