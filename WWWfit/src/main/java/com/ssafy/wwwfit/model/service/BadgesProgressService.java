@@ -7,5 +7,7 @@ public interface BadgesProgressService {
 	
 	// 사용자가 완료한 챌린지의 fitpartName으로 등록
 	public int updateBagesProgress(int userNo, String fitPartName);
-
+    
+	// 사용자 탈퇴
+	public int deleteUserBadgesProgress(int userNo);
 }

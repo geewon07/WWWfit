@@ -6,6 +6,12 @@ import MypageView from "../views/MypageView.vue";
 import LoginView from "../components/user/LoginView.vue";
 import RegistView from "../components/user/RegistView.vue";
 import InfoView from "../components/user/InfoView.vue";
+import PostView from "./components/user/PostView.vue";
+import PostDetailView from "./components/user/PostDetailView.vue";
+import PostListView from "./components/user/PostListView.vue";
+import BookmarkView from "./components/user/BookmarkView.vue";
+import BookmarkFolderView from "./components/user/BookmarkFolderView.vue";
+import BookmarkListView from "./components/user/BookmarkListView.vue";
 
 Vue.use(VueRouter);
 
@@ -39,6 +45,40 @@ const routes = [
         path: "info",
         name: "userinfo",
         component: InfoView,
+      },
+    ],
+  },
+  {
+    path: "/bookemark",
+    name: "bookemark",
+    component: bookemarkView,
+    children: [
+      {
+        path: "list",
+        name: "list",
+        component: BookmarkListView,
+      },
+      {
+        path: "Folder",
+        name: "Folder",
+        component: BookmarkFolderView,
+      },
+    ],
+  },
+  {
+    path: "/post",
+    name: "post",
+    component: PostView,
+    children: [
+      {
+        path: "detail",
+        name: "detail",
+        component: PostDetailView,
+      },
+      {
+        path: "list",
+        name: "list",
+        component: PostListView,
       },
     ],
   },

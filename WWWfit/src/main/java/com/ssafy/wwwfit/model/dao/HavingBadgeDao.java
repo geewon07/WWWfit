@@ -15,4 +15,7 @@ public interface HavingBadgeDao {
 	
 	// userid와 뱃지이름에 따른 뱃지 등록  //우선 int 값으로 반환
 	public int updateHavingBadge(HashMap<String, String> params);
+	
+	// 삭제
+	public int deleteUserHavingBadge(int userNo);
 }
