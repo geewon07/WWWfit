@@ -35,8 +35,12 @@ public class BadgesProgressServiceImpl implements BadgesProgressService {
 			params.put("fitPartName", fitPartName);
 			params.put("count",String.valueOf(count));
 			return havingBadgeDao.updateHavingBadge(params);
-		
 		} else return task;
+	}
+
+	@Override
+	public int deleteUserBadgesProgress(int userNo) {
+		return badgesProgressDao.deleteUserBadgesProgress(userNo);
 	}
 
 }

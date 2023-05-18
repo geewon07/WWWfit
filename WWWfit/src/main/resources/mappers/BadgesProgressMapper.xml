@@ -21,4 +21,9 @@
   WHERE userNo = #{userNo}
 </select>
 
+<delete id="deleteUserBadgesProgress" parameterType="int">
+   DELETE FROM badgesprogress
+   WHERE userN0 = #{userNo}
+</delete>
+
 </mapper>

@@ -6,7 +6,7 @@
       </b-navbar-brand>
       <b-collapse id="nav-collaps" is-nav>
         <b-navbar-nav class="ml-auto">
-          <b-nav-item v-if="!getUser" :to="{ name: 'login' }">
+          <b-nav-item v-if="loginUser === null" :to="{ name: 'login' }">
             로그인
           </b-nav-item>
           <b-nav-item v-else @click="logout">로그아웃</b-nav-item>
