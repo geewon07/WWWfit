@@ -12,4 +12,6 @@ public interface HavingBadgeService {
 	// userid에 따른 가지고 있는 뱃지 조회
 	public List<HavingBadge> readHavingBadge(int userNo);
 	
+	public int deleteUserHavingBadge(int userNo) ;
+	
 }

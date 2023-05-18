@@ -11,7 +11,11 @@ export default new Vuex.Store({
   state: {
     user: {},
     users: [],
+<<<<<<< HEAD
     loginUser: null,
+=======
+    loginUser: {},
+>>>>>>> c0a4750344383ef577a2972c8aba42b2733fdcbe
   },
   getters: {
     // getLoginUser() {
