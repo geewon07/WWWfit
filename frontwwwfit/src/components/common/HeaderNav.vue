@@ -6,7 +6,7 @@
       </b-navbar-brand>
       <b-collapse id="nav-collaps" is-nav>
         <b-navbar-nav class="ml-auto">
-          <b-nav-item v-if="getUser"
+          <b-nav-item v-if="getUser" :to="{ name: 'mypage' }"
             >{{ loginUser.userName }}님 마이페이지</b-nav-item
           >
           <b-nav-item v-if="!getUser" :to="{ name: 'login' }">
@@ -33,7 +33,9 @@ export default {
     };
   },
   computed: {
-    ...mapState(["loginUser"]),
+    ...mapState({
+      loginUser: (state) => state.UserIndex.loginUser,
+    }),
     getUser() {
       if (this.loginUser) {
         return true;
@@ -44,7 +46,7 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch("logout");
+      this.$store.dispatch("UserIndex/logout");
     },
   },
 };

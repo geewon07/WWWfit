@@ -74,7 +74,9 @@ export default {
     };
   },
   computed: {
-    ...mapState(["loginUser"]),
+    ...mapState({
+      loginUser: (state) => state.UserIndex.loginUser,
+    }),
   },
   methods: {
     login() {
@@ -83,7 +85,7 @@ export default {
         password: this.password,
       };
       console.log("login attempt");
-      this.$store.dispatch("loginUser", user);
+      this.$store.dispatch("UserIndex/loginUser", user);
     },
   },
 };
