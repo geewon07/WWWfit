@@ -15,6 +15,7 @@ public interface FollowDao {
 	public List<Follow> selectFollowers(int userNo);
 	//dao? service?
 	
+	public Follow selectOne(int followId);
 	// 위 메소드로 얻은 list.size() 하면 되는 것 아닐까?
 //	//select Count(followsWho) from follows where userId=#{userId};
 //	public int numFollows(int userNo);

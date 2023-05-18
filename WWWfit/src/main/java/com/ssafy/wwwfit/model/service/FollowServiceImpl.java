@@ -57,4 +57,10 @@ public class FollowServiceImpl implements FollowService {
 		return result;
 	}
 
+	@Override
+	public Follow selectFollow(int followId) {
+		Follow selected = fDao.selectOne(followId);
+		return selected;
+	}
+
 }

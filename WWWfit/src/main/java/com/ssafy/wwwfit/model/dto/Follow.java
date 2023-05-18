@@ -25,11 +25,11 @@ public class Follow {
 		this.followId = followId;
 	}
 
-	public int getUserId() {
+	public int getUserNo() {
 		return userNo;
 	}
 
-	public void setUserId(int userNo) {
+	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
 

@@ -51,4 +51,10 @@ public class LikeServiceImpl implements LikeService {
 		return result;
 	}
 
+	@Override
+	public Like selectLike(int likeId) {
+		Like selected = lDao.selectLike(likeId);
+		return selected;
+	}
+
 }

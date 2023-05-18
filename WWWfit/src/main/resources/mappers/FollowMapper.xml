@@ -12,7 +12,10 @@ where userNo=#{userNo}
 select * from follow
 where followsWho=#{userNo}
 </select>
-
+<select id="selectOne" parameterType="int" resultType="Follow">
+select * from follow 
+where followId = #{followId}
+</select>
 <select id="isfollowing" parameterType="int" resultType="int">
 select count(followId) from follow
 where userNo=#{userNo} and followsWho=#{toFollow}

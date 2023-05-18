@@ -2,7 +2,6 @@ package com.ssafy.wwwfit.controller;
 
 import java.util.List;
 
-import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.wwwfit.model.dto.Follow;
 import com.ssafy.wwwfit.model.service.FollowService;
+import com.ssafy.wwwfit.model.service.UserService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -23,6 +23,8 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @RequestMapping("/api_follow")
 public class FollowController {
 	
+	@Autowired
+	private UserService uService;
 	@Autowired
 	private FollowService followService;
 	
@@ -37,7 +39,7 @@ public class FollowController {
 	    }
 	}
 	
-	@GetMapping("/Following/{userNo}")
+	@GetMapping("/following/{userNo}")
 	public ResponseEntity<?> getFollowing(@PathVariable int userNo) {
 	    List<Follow> following = followService.getFollowing(userNo);
 	    
@@ -49,7 +51,7 @@ public class FollowController {
 	}
 	
 	//팔로워수 
-	@GetMapping("/follower_count/{userNo}")
+	@GetMapping("/followercount/{userNo}")
 	public ResponseEntity<?> Followercount(@PathVariable int userNo) {
 	    int followers = followService.getFollowerCnt(userNo);
 	    
@@ -61,7 +63,7 @@ public class FollowController {
 	}
 	
 	//팔로잉수
-	@GetMapping("/Following_count/{userNo}")
+	@GetMapping("/followingcount/{userNo}")
 	public ResponseEntity<?> Following_count(@PathVariable int userNo) {
 		int following = followService.getFollowingCnt(userNo);
 	    
@@ -72,8 +74,8 @@ public class FollowController {
 	    }
 	}
 	// Map으로 받을까?
-	@GetMapping("/api_follow/is-following/{userNo}/{toFollow}") // 이게 맞는지...?
-	public ResponseEntity<String> isFollowing(@PathVariable int userNo, @PathVariable int toFollow) {
+	@GetMapping("/isfollowing") // 이게 맞는지...?
+	public ResponseEntity<String> isFollowing( int userNo, int toFollow) {
 	    boolean alreadyFollowed = followService.isFollowing(userNo, toFollow);
 	    if (alreadyFollowed) {
 	        return new ResponseEntity<>("Already following", HttpStatus.OK);
@@ -87,10 +89,17 @@ public class FollowController {
 	public ResponseEntity<String> doFollow(@RequestBody Follow follow) {
 		String result = null;
 		HttpStatus status = null;
+		
+		if(followService.isFollowing(follow.getUserNo(), follow.getFollowsWho())) {
+			
+			result="already following";
+			return new ResponseEntity<String>(result, HttpStatus.BAD_REQUEST);
+		}
 		int insertResult = followService.doFollow(follow);
 			if (insertResult == 1) {
 				result = "success";
 				status = HttpStatus.OK;
+				uService.getExp(uService.getUser(follow.getUserNo()), 1);
 			} else {
 				result = "fail";
 				status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -108,6 +117,7 @@ public class FollowController {
 			if (deleteResult == 1) {
 				result = "success";
 				status = HttpStatus.OK;
+				uService.getExp(uService.getUser(followService.selectFollow(followId).getUserNo()), -11);
 			} else {
 				result = "fail";
 				status = HttpStatus.INTERNAL_SERVER_ERROR;

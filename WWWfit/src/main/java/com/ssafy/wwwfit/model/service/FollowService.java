@@ -10,6 +10,8 @@ public interface FollowService {
 	
 	public List<Follow> getFollowing(int userNo);
 	
+	public Follow selectFollow(int followId);
+	
 	// selecfollows/ers 활용해서 cnt값 반환
 	public int getFollowerCnt(int userNo);
 	

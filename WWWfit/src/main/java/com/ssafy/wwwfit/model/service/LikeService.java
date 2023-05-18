@@ -10,6 +10,8 @@ public interface LikeService {
 	
 	public List<Like> selectOne(int posterSeq);
 	
+	public Like selectLike(int likeId);
+	
 	public int numLikes(int posterSeq);
 	
 	public boolean checkLiked(int userNo, int posterSeq);

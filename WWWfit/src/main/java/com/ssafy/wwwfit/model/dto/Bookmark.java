@@ -38,10 +38,10 @@ public class Bookmark {
 	public void setPosterSeq(int posterSeq) {
 		this.posterSeq = posterSeq;
 	}
-	public int getUserId() {
+	public int getUserNo() {
 		return userNo;
 	}
-	public void setUserId(int userNo) {
+	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
 	public String getbName() {
