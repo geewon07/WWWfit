@@ -6,11 +6,17 @@
       </b-navbar-brand>
       <b-collapse id="nav-collaps" is-nav>
         <b-navbar-nav class="ml-auto">
+          <b-nav-item v-if="getUser"
+            >{{ loginUser.userName }}님 마이페이지</b-nav-item
+          >
+
           <b-nav-item v-if="!getUser" :to="{ name: 'login' }">
             로그인
           </b-nav-item>
           <b-nav-item v-else @click="logout">로그아웃</b-nav-item>
-          <b-nav-item :to="{ name: 'regist' }">회원가입</b-nav-item>
+          <b-nav-item v-if="!getUser" :to="{ name: 'regist' }"
+            >회원가입</b-nav-item
+          >
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>

@@ -45,8 +45,7 @@
         </div> -->
                     <button
                       class="w-100 btn btn-lg btn-primary"
-                      type="submit"
-                      @click="login"
+                      @click.prevent="login"
                     >
                       로그인
                     </button>
