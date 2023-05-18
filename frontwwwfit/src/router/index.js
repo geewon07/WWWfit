@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import UserView from "../views/UserView.vue";
 import MypageView from "../views/MypageView.vue";
 import LoginView from "../components/user/LoginView.vue";
 import RegistView from "../components/user/RegistView.vue";
@@ -27,31 +26,24 @@ const routes = [
     component: MypageView,
   },
   {
-    path: "/user",
-    name: "user",
-    component: UserView,
-    children: [
-      {
-        path: "login",
-        name: "login",
-        component: LoginView,
-      },
-      {
-        path: "regist",
-        name: "regist",
-        component: RegistView,
-      },
-      {
-        path: "info",
-        name: "userinfo",
-        component: InfoView,
-      },
-    ],
+    path: "/login",
+    name: "login",
+    component: LoginView,
   },
   {
-    path: "/bookemark",
-    name: "bookemark",
-    component: BookmarkView,
+    path: "/regist",
+    name: "regist",
+    component: RegistView,
+  },
+  {
+    path: "/info",
+    name: "userinfo",
+    component: InfoView,
+  },
+  {
+    path: "/bookmark",
+    name: "bookmark",
+component: BookmarkView,
     children: [
       {
         path: "list",
@@ -59,8 +51,8 @@ const routes = [
         component: BookmarkListView,
       },
       {
-        path: "Folder",
-        name: "Folder",
+        path: "folder",
+        name: "folder",
         component: BookmarkFolderView,
       },
     ],

@@ -60,14 +60,23 @@ public class UserController {
 //			userNo=0;
 //		}
 		System.out.println(userNo);
-		
+		Map<String, String> data = new HashMap<String, String>();
 		if(userNo==null) {
-			return new ResponseEntity<String>("Login Failed",HttpStatus.UNAUTHORIZED);
+			System.out.println("reached");
+			data.put("auth", "false");
+			try {
+				result.put("login-token", jwtUtil.createToken("login-token", data));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return new ResponseEntity<Map<String,Object>>(result,HttpStatus.OK);
 		}else {
 			String userName  = uService.getUser(userNo).getName();
 			String str = String.valueOf(userNo);
 			System.out.println("!!!!!!!!!!!!!!!!"+str);
-			Map<String, String> data = new HashMap<String, String>();
+//			Map<String, String> data = new HashMap<String, String>();
+			data.put("auth", "true");
 			data.put("userNo", str);
 			data.put("userId", userId);
 			data.put("userName",userName);

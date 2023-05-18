@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-import router from "@/router";
+import router from "../router";
 
 Vue.use(Vuex);
 
@@ -11,30 +11,40 @@ export default new Vuex.Store({
   state: {
     user: {},
     users: [],
-    loginUser: {},
+    loginUser: null,
   },
-  getters: {
-    // getLoginUser() {
-    //   return state.loginUser;
-    // },
-  },
+  getters: {},
   mutations: {
-    CREATE_USER(state, payload) {
-      state.user = payload.user;
-    },
     LOGIN_USER(state, payload) {
-      // state.loginUser.userNo = payload.userNo;
-      state.loginUser.userNo = payload["login-token"].userNo;
-      state.loginUser.userId = payload["login-token"].userId;
-      state.loginUser.userName = payload["login-token"].userName;
+      let user = {
+        userNo: payload["login-token"].userNo,
+        userId: payload["login-token"].userId,
+        userName: payload["login-token"].userName,
+      };
+      console.log(user);
+      state.loginUser = user;
     },
     LOGOUT(state) {
       state.loginUser = null;
     },
   },
   actions: {
-    registUser({ commit }, payload) {
-      commit("REGIST_USER", payload);
+    registUser({ commit }, user) {
+      const API_URL = `${REST_API}user/user`;
+      axios({
+        url: API_URL,
+        method: "POST",
+        params: user,
+      })
+        .then((res) => {
+          console.log(res);
+          router.push("/login");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      commit;
     },
     loginUser({ commit }, user) {
       // commit;
@@ -48,16 +58,26 @@ export default new Vuex.Store({
       })
         .then((res) => {
           // debugger;
-          console.log(res);
-          sessionStorage.setItem("login-token", res.data["login-token"]);
-          localStorage.setItem(
-            "console msg",
-            jwtDecode(res.data["login-token"])
-          );
+          // console.log(res.data);
+
           const decoded = jwtDecode(res.data["login-token"]);
-          console.log(decoded);
-          commit("LOGIN_USER", decoded);
-          router.push("/");
+          // console.log(decoded);
+
+          if (decoded["login-token"].auth == "true") {
+            sessionStorage.setItem("login-token", res.data["login-token"]);
+            localStorage.setItem(
+              "console msg",
+              // jwtDecode(res.data["login-token"].auth)
+              // decoded["login-token"].auth
+              "no"
+            );
+            commit("LOGIN_USER", decoded);
+            alert("로그인 성공");
+            router.replace({ name: "home" });
+            // router.push("/regist");
+          } else {
+            alert("로그인 실패, 입력을 다시 확인해주세요");
+          }
         })
         .catch((err) => {
           console.log(err);

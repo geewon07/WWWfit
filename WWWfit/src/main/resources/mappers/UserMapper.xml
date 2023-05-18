@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.wwwfit.model.dao.UserDao">
-<insert id="insert" parameterType="User" useGeneratedKeys="true">
+<insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="userNo">
 insert into users
 values(#{userNo},#{userId},#{password},#{name},#{email},#{img},#{userRank},#{experience},#{challengedays},#{token},#{regDate})
 </insert>
