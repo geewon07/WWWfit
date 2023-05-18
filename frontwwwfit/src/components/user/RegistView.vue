@@ -154,7 +154,7 @@ export default {
         password: this.password,
         email: this.email,
       };
-      this.$store.dispatch("registUser", user);
+      this.$store.dispatch("UserIndex/registUser", user);
     },
   },
 };

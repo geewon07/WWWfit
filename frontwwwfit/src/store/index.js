@@ -10,6 +10,10 @@ const store = new Vuex.Store({
     MypageIndex,
     UserIndex,
   },
+  state: {},
+  getters: {},
+  mutations: {},
+  actions: {},
 });
 
 export default store;

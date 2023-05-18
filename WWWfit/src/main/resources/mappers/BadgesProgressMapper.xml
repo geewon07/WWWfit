@@ -11,7 +11,7 @@
 
 <update id="fitPartNamecountupdate" parameterType="String">
   UPDATE badgesprogress
-  SET ${fitPartName} = #{fitPartName} + 1
+  SET ${fitPartName} = ${fitPartName} + 1
   WHERE userNo = #{userNo}
  </update>
 
