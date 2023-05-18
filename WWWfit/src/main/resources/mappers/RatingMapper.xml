@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.wwwfit.model.dao.RatingDao">
 <parameterMap type="Map" id="isRatedMap">
-<parameter property="userId" javaType="string"/>
+<parameter property="userNo" javaType="int"/>
 <parameter property="contentSeq" javaType="int"/>
 </parameterMap>
 <select id="selectAll" parameterType="int" resultType="Rating">
@@ -24,13 +24,13 @@ where ratingId = #{ratingId};
 </select>
 <select id="isRated" parameterMap="isRatedMap" resultType="int">
 select count(ratingId)from rating
-where userId = #{userId} and contentSeq=#{contentSeq};
+where userNo = #{userNo} and contentSeq=#{contentSeq};
 </select>
 
 <!-- autoincrement있어야 함 -->
 <insert id="insert" parameterType="Rating">
-insert into rating( userId, contentSeq, score)
-values(#{userId},#{contentSeq},#{score})
+insert into rating( userNo, contentSeq, score)
+values(#{userNo},#{contentSeq},#{score})
 </insert>
 
 <update id="update" parameterType="Rating">

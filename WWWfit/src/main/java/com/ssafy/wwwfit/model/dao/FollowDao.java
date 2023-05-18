@@ -22,7 +22,7 @@ public interface FollowDao {
 //	public int numFollowers(int userNo);
 //	
 	//select * from follows where userId=#{userId} and followsWho=#{toFollow};
-	public int isfollowing(int userNo, String toFollow);
+	public int isfollowing(int userNo, int toFollow);
 	//팔로우 버튼 상태 확인할때도 씀
 	// 0 이어야 팔로우가능
 	//follow

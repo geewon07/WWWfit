@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.wwwfit.model.dao.BookmarkDao">
 <parameterMap type="Map" id="selectMarksMap">
-<parameter property="userId" javaType="string"/>
+<parameter property="userNo" javaType="int"/>
 <parameter property="bname" javaType="string"/>
 </parameterMap>
 <select id="selectAll" parameterType="string" resultType="Bookmark">
@@ -16,11 +16,11 @@ where bookmarkId=#{bookmarkId}
 </select>
 <select id="selectMarks" parameterMap="selectMarksMap">
 select * from bookmarks
-where userId=#{userId} and bname=#{bname}
+where userNo=#{userNo} and bname=#{bname}
 </select>
 <select id="folders" parameterType="string" resultType="string">
 select distinct bname from bookmarks
-where userId=#{userId}
+where userNo=#{userNo}
 </select>
 
 <update id="update" parameterType="Bookmark">
@@ -32,9 +32,9 @@ where bookmarkId=#{bookmarkId}
 
 <insert id="insert" parameterType="Bookmark">
 insert into bookmarks
-(userId, posterSeq,bname)
+(userNo, posterSeq,bname)
 values
-(#{userId},#{posterSeq},#{bname})
+(#{userNo},#{posterSeq},#{bname})
 </insert>
 <delete id="delete" parameterType="int">
 delete from bookmarks where bookmarkId=#{bookmarkId}

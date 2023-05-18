@@ -55,16 +55,26 @@ public class UserController {
 	@PostMapping("/login")
 	public ResponseEntity<?> doLogin(String userId, String password){
 		Map<String,Object> result = new HashMap<String, Object>();
-		int userNo = uService.login(userId, password);
+		Integer userNo = uService.login(userId, password);
+//		if(userNo==null) {
+//			userNo=0;
+//		}
+		System.out.println(userNo);
 		
-		if(userNo==0) {
+		if(userNo==null) {
 			return new ResponseEntity<String>("Login Failed",HttpStatus.UNAUTHORIZED);
 		}else {
+			String userName  = uService.getUser(userNo).getName();
+			String str = String.valueOf(userNo);
+			System.out.println("!!!!!!!!!!!!!!!!"+str);
 			Map<String, String> data = new HashMap<String, String>();
-			data.put("userNo", String.valueOf(userNo));
+			data.put("userNo", str);
 			data.put("userId", userId);
+			data.put("userName",userName);
+			
 			try {
-				result.put("login-token", jwtUtil.createToken("claimMap", data));
+//				result.put("login-token", jwtUtil.createToken("login-token", str,userId,userName));
+				result.put("login-token", jwtUtil.createToken("login-token", data));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
