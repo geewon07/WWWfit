@@ -12,18 +12,11 @@ export default new Vuex.Store({
     user: {},
     users: [],
     loginUser: null,
-  },
+},
   getters: {
-    // getLoginUser() {
-    //   return state.loginUser;
-    // },
   },
   mutations: {
-    // CREATE_USER(state, payload) {
-    //   state.user = payload.user;
-    // },
     LOGIN_USER(state, payload) {
-      // state.loginUser.userNo = payload.userNo;
       let user = {
         userNo: payload["login-token"].userNo,
         userId: payload["login-token"].userId,
@@ -31,7 +24,6 @@ export default new Vuex.Store({
       };
       console.log(user);
       state.loginUser = user;
-      // state.loginUser = payload;
     },
     LOGOUT(state) {
       state.loginUser = null;

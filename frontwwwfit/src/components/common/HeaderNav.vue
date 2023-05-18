@@ -9,7 +9,6 @@
           <b-nav-item v-if="getUser"
             >{{ loginUser.userName }}님 마이페이지</b-nav-item
           >
-
           <b-nav-item v-if="!getUser" :to="{ name: 'login' }">
             로그인
           </b-nav-item>

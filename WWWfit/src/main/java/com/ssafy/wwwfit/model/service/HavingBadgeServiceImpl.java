@@ -24,4 +24,9 @@ public class HavingBadgeServiceImpl implements HavingBadgeService {
 		return havingBadgeDao.getHavingBadge(userNo);
 	}
 
+	@Override
+	public int deleteUserHavingBadge(int userNo) {
+		return havingBadgeDao.deleteUserHavingBadge(userNo);
+	}
+
 }

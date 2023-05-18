@@ -11,5 +11,8 @@ public interface BadgesProgressDao {
 	// 이게 count 수
 	public int getFitPartNamecount(int userNo, String fitPartName);
 	
+	// 삭제
+	public int deleteUserBadgesProgress(int userNo);
+	
 
 }
