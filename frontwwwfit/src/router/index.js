@@ -1,21 +1,16 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
-// import UserView from "../views/UserView.vue";
 import MypageView from "../views/MypageView.vue";
 import LoginView from "../components/user/LoginView.vue";
 import RegistView from "../components/user/RegistView.vue";
 import InfoView from "../components/user/InfoView.vue";
-<<<<<<< HEAD
-// import PostListView from "../components/post/PostListView.vue";
-=======
-import PostView from "./components/user/PostView.vue";
-import PostDetailView from "./components/user/PostDetailView.vue";
-import PostListView from "./components/user/PostListView.vue";
-import BookmarkView from "./components/user/BookmarkView.vue";
-import BookmarkFolderView from "./components/user/BookmarkFolderView.vue";
-import BookmarkListView from "./components/user/BookmarkListView.vue";
->>>>>>> c0a4750344383ef577a2972c8aba42b2733fdcbe
+import PostView from "../views/PostView.vue";
+import PostDetailView from "./components/post/PostDetailView.vue";
+import PostListView from "./components/post/PostListView.vue";
+import BookmarkView from "../views/BookmarkView.vue";
+import BookmarkFolderView from "./components/bookmark/BookmarkFolderView.vue";
+import BookmarkListView from "./components/bookmark/BookmarkListView.vue";
 
 Vue.use(VueRouter);
 
@@ -24,31 +19,18 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
-    // children: [
-    //   {
-    //     path: "/poster",
-    //     name: "main",
-    //     component: PostListView,
-    //   },
-    // ],
   },
   {
     path: "/mypage",
     name: "mypage",
     component: MypageView,
   },
-  // {
-  // path: "/user",
-  // name: "user",
-  // component: UserView,
-  // children: [
   {
     path: "/login",
     name: "login",
     component: LoginView,
   },
   {
-<<<<<<< HEAD
     path: "/regist",
     name: "regist",
     component: RegistView,
@@ -58,12 +40,10 @@ const routes = [
     name: "userinfo",
     component: InfoView,
   },
-  // ],
-  // },
-=======
+  {
     path: "/bookemark",
     name: "bookemark",
-    component: bookemarkView,
+    component: BookmarkView,
     children: [
       {
         path: "list",
@@ -94,7 +74,6 @@ const routes = [
       },
     ],
   },
->>>>>>> c0a4750344383ef577a2972c8aba42b2733fdcbe
 ];
 
 const router = new VueRouter({
