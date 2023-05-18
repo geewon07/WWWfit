@@ -94,8 +94,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int login(String userId, String password) {
-		int result = uDao.login(userId, password);
+	public Integer login(String userId, String password) {
+//		String get = uDao.login(userId, password);
+		
+//		int result = get.equals("null")?0:Integer.parseInt(get);
+		
+		Integer result =  uDao.login(userId, password);
+		System.out.println(result);
 		return result;//==1?true:false;
 	}
 

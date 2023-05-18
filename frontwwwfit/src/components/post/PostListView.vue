@@ -1,9 +1,13 @@
 <template>
-  <div></div>
+  <div>
+    <h2>로그인시 포스트리스트뷰!</h2>
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "PostListView",
+};
 </script>
 
 <style></style>

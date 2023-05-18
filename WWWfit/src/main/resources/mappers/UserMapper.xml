@@ -20,7 +20,7 @@ select * from users
 where #{key} = #{word}
 </if>
 </select>
-<select id="login" parameterType="String" resultType="int">
+<select id="login" parameterType="String" resultType="java.lang.Integer">
 Select userNo from users
 where userId=#{userId} and password =#{password}
 </select>

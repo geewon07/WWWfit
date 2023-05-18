@@ -22,7 +22,7 @@ public interface UserDao {
 	//회원정보 수정, 경험치 증가, 등업, 챌린지 날
 	public int update(User user);
 	
-	public int login(String userId, String password);//jwt 배우고 나서
+	public Integer login(String userId, String password);//jwt 배우고 나서
 	//회원탈퇴:정보삭제
 	public int delete(int userNo);
 	

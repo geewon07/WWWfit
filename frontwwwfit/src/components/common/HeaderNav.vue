@@ -6,8 +6,10 @@
       </b-navbar-brand>
       <b-collapse id="nav-collaps" is-nav>
         <b-navbar-nav class="ml-auto">
-          <b-nav-item v-if="!loginUser" :to="{ name: 'login' }">로그인</b-nav-item>
-          <b-nav-item v-if="loginUser">로그아웃</b-nav-item>
+          <b-nav-item v-if="!getUser" :to="{ name: 'login' }">
+            로그인
+          </b-nav-item>
+          <b-nav-item v-else @click="logout">로그아웃</b-nav-item>
           <b-nav-item :to="{ name: 'regist' }">회원가입</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
@@ -17,12 +19,29 @@
 
 <script>
 // import UserView from "./views/UserView.vue";
-import {mapState} from 'vuex'
+import { mapState } from "vuex";
 export default {
   name: "HeaderNav",
-  computed:{
-    ...mapState(['loginUser'])
-  }
+  data() {
+    return {
+      // loginUser: {},
+    };
+  },
+  computed: {
+    ...mapState(["loginUser"]),
+    getUser() {
+      if (this.loginUser) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+    },
+  },
 };
 </script>
 

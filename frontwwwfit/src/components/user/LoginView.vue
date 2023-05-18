@@ -16,7 +16,7 @@
                   "
                 >
                   <form>
-                    <h1 class="h3 mb-3 fw-normal">로그인 {{loginUser}}</h1>
+                    <h1 class="h3 mb-3 fw-normal">로그인 {{ loginUser }}</h1>
                     <label for="floatingInput">ID</label>
                     <div class="form-floating">
                       <input
@@ -24,7 +24,7 @@
                         class="form-control"
                         id="floatingInput"
                         placeholder="ID"
-                        v-model="user.userId"
+                        v-model="userId"
                       />
                     </div>
                     <label for="floatingPassword">Password</label>
@@ -34,7 +34,7 @@
                         class="form-control"
                         id="floatingPassword"
                         placeholder="Password"
-                        v-model="user.password"
+                        v-model="password"
                       />
                     </div>
                     <br />
@@ -43,7 +43,11 @@
             <input type="checkbox" value="remember-me" /> Remember me
           </label>
         </div> -->
-                    <button class="w-100 btn btn-lg btn-primary" type="submit" @click="login">
+                    <button
+                      class="w-100 btn btn-lg btn-primary"
+                      type="submit"
+                      @click="login"
+                    >
                       로그인
                     </button>
                     <p class="mt-5 mb-3 text-body-secondary">©WWWfit</p>
@@ -54,35 +58,35 @@
           </div>
         </div>
       </div>
-      >
     </section>
   </div>
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import { mapState } from "vuex";
 export default {
   name: "LoginView",
   data() {
     return {
-      user: {
-        userId: "",
-        password: "",
-      },
-
+      // user: {
+      userId: "",
+      password: "",
+      // },
     };
   },
-  computed:{
-    ...mapState(['loginUser']),
-    
+  computed: {
+    ...mapState(["loginUser"]),
   },
-  methods:{
-    login(){
+  methods: {
+    login() {
+      let user = {
+        userId: this.userId,
+        password: this.password,
+      };
       console.log("login attempt");
-  this.$store.dispatch("loginUser",this.user);
-    }
-  
-  }
+      this.$store.dispatch("loginUser", user);
+    },
+  },
 };
 </script>
 
