@@ -6,12 +6,12 @@ import MypageView from "../views/MypageView.vue";
 import LoginView from "../components/user/LoginView.vue";
 import RegistView from "../components/user/RegistView.vue";
 import InfoView from "../components/user/InfoView.vue";
-import PostView from "./components/user/PostView.vue";
-import PostDetailView from "./components/user/PostDetailView.vue";
-import PostListView from "./components/user/PostListView.vue";
-import BookmarkView from "./components/user/BookmarkView.vue";
-import BookmarkFolderView from "./components/user/BookmarkFolderView.vue";
-import BookmarkListView from "./components/user/BookmarkListView.vue";
+import PostView from "../views/PostView.vue";
+import PostDetailView from "../components/post/PostDetailView.vue";
+import PostListView from "../components/post/PostListView.vue";
+import BookmarkView from "../views/BookmarkView.vue";
+import BookmarkFolderView from "../components/bookmark/BookmarkFolderView.vue";
+import BookmarkListView from "../components/bookmark/BookmarkListView.vue";
 
 Vue.use(VueRouter);
 
@@ -51,7 +51,7 @@ const routes = [
   {
     path: "/bookemark",
     name: "bookemark",
-    component: bookemarkView,
+    component: BookmarkView,
     children: [
       {
         path: "list",
