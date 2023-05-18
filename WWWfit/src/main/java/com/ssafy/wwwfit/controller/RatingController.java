@@ -15,10 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.wwwfit.model.dto.Rating;
 import com.ssafy.wwwfit.model.service.RatingService;
+import com.ssafy.wwwfit.model.service.UserService;
 
 @RestController
 @RequestMapping("/api-rating")
 public class RatingController {
+	
+	@Autowired
+	private UserService uService;
 	
 	@Autowired
 	private RatingService rService;
@@ -46,7 +50,9 @@ public class RatingController {
 	@PostMapping("/rating")
 	public ResponseEntity<?> doRate(Rating rating){
 		int result = rService.insert(rating);
-		
+		if(result!=0) {
+			uService.getExp(uService.getUser(rating.getUserNo()), 5);
+		}
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
 	
@@ -59,7 +65,9 @@ public class RatingController {
 	@DeleteMapping("/rating/{ratingId}")
 	public ResponseEntity<?> deleteRating(@PathVariable int ratingId){
 		int result = rService.delete(ratingId);
-		
+		if(result!=0) {
+			uService.getExp(uService.getUser(rService.selectOne(ratingId).getUserNo()), -5);
+		}
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
 	

@@ -30,10 +30,10 @@ public class badgesProgress {
 	public void setBadgesNo(int badgesNo) {
 		this.badgesNo = badgesNo;
 	}
-	public int getUserId() {
+	public int getUserNo() {
 		return userNo;
 	}
-	public void setUserId(int userNo) {
+	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
 	public int getNeck() {

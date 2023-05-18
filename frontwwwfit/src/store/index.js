@@ -38,10 +38,15 @@ export default new Vuex.Store({
       })
         .then((res) => {
           console.log(res);
-          router.push("/login");
+          if (res.data == 1) {
+            router.push("/login");
+          }
         })
         .catch((err) => {
           console.log(err);
+          alert(
+            "가입 불가능 추후 왜 불가능한지도 알려줘야 함, 그전에 유효성검사를 시키는 방법"
+          );
         });
 
       commit;

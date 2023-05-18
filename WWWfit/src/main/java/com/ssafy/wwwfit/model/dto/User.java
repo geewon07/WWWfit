@@ -92,7 +92,7 @@ public class User {
 	public int getChallengedays() {
 		return challengedays;
 	}
-	public void setChallengeDays(int challengedays) {
+	public void setChallengedays(int challengedays) {
 		this.challengedays = challengedays;
 	}
 	public String getToken() {
@@ -101,6 +101,13 @@ public class User {
 	public void setToken(String token) {
 		this.token = token;
 	}
+	public String getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+	}
+
 	
 	
 	
