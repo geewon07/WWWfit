@@ -45,30 +45,44 @@ export default {
         };
       }
     },
-  },
-  created() {
-    this.$store
-      .dispatch("MypageIndex/getCalendar", this.loginUserInfo.userNo)
-      .then(() => {
-        if (Array.isArray(this.calendars)) {
-          this.calendarOptions.events = this.calendars.map((calendar) => ({
-            start: "20" + calendar.start,
+    updateCalendarOptions() {
+      if (Array.isArray(this.calendars.events)) {
+        if (this.calendars.events.length > 0) {
+          this.calendarOptions.events = this.calendars.events.map((event) => ({
+            start: event.start,
             extendedProps: {
               imageurl: this.imageurl,
             },
           }));
         } else {
-          this.calendarOptions.events = [
-            {
-              start: "20" + this.calendars.start,
-              extendedProps: {
-                imageurl: this.imageurl,
-              },
-            },
-          ];
+          this.calendarOptions.events = [];
         }
+      } else if (
+        typeof this.calendars.events === "object" &&
+        this.calendars.events !== null
+      ) {
+        this.calendarOptions.events = [
+          {
+            start: this.calendars.events.start,
+            extendedProps: {
+              imageurl: this.imageurl,
+            },
+          },
+        ];
+      } else {
+        this.calendarOptions.events = [];
+      }
+    },
+  },
+  mounted() {
+    this.$store
+      .dispatch("MypageIndex/getCalendar", this.loginUserInfo.userNo)
+      .then(() => {
+        this.updateCalendarOptions();
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    console.log(this.calendars);
   },
 };
 </script>

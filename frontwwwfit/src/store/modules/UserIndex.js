@@ -69,7 +69,6 @@ const UserIndex = {
 
           const decoded = jwtDecode(res.data["login-token"]);
           // console.log(decoded);
-
           if (decoded["login-token"].auth == "true") {
             sessionStorage.setItem("login-token", res.data["login-token"]);
             localStorage.setItem(
@@ -91,9 +90,10 @@ const UserIndex = {
           console.log(err);
         });
     },
-    logout({ commit }) {
+    logout(context) {
       sessionStorage.removeItem("login-token");
-      commit("LOGOUT");
+      context.commit("LOGOUT");
+      context.dispatch("MypageIndex/resetCalendar", null, { root: true });
       router.push({ name: "login" });
     },
     loginUserInfo({ commit }) {
