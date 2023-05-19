@@ -28,6 +28,11 @@ public interface UserDao {
 	
 	//회원 경험치 증가
 	
+	// 연속 개수 update
+	public int updatechallengedays(int userNo, int challengedays, int check);
+	
+	// 연속 개수 반납
+	public int getchallengedays(int userNo);
 	
 
 }

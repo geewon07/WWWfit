@@ -1,11 +1,14 @@
 package com.ssafy.wwwfit.model.service;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.UriBuilder;
 
+import com.ssafy.wwwfit.model.dao.CalendarDao;
 import com.ssafy.wwwfit.model.dao.UserDao;
 import com.ssafy.wwwfit.model.dto.SearchCondition;
 import com.ssafy.wwwfit.model.dto.User;
@@ -18,6 +21,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao uDao;
+	
+	@Autowired
+	private CalendarDao cDao;
+	
 	@Override
 	public int regist(User user) {
 		int result = uDao.insert(user);
@@ -103,6 +110,48 @@ public class UserServiceImpl implements UserService {
 		System.out.println(result);
 		return result;//==1?true:false;
 	}
+
+	@Override
+	public void updatechallengedays(int userNo, String today) { // 평일만 확인하기!
+		String[] str = today.split("-");
+		LocalDate date = LocalDate.of(Integer.parseInt(str[0]), Integer.parseInt(str[1]), Integer.parseInt(str[2]));
+		DayOfWeek dayOfWeek = date.getDayOfWeek();
+		int todayWeek = dayOfWeek.getValue();
+		
+		if(todayWeek == 1) {
+			LocalDate fridaydate = date.minusDays(3);
+			String friday = fridaydate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			String yesterdayexcise = cDao.getCalendarDay(userNo, friday);
+			if(yesterdayexcise == null) {
+				int challengedays = 1;
+				int check = 0;
+				uDao.updatechallengedays(userNo, challengedays, check);
+			} else {
+				int check = 1;
+				int challengedays = 1;
+				uDao.updatechallengedays(userNo, challengedays, check);
+			}
+		} else {
+			LocalDate yesterdaydate = date.minusDays(1);
+			String yesterday = yesterdaydate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			
+			String yesterdayexcise = cDao.getCalendarDay(userNo, yesterday);
+			if(yesterdayexcise == null) {
+				int challengedays = 1;
+				int check = 0;
+				uDao.updatechallengedays(userNo, challengedays, check);
+			} else {
+				int check = 1;
+				int challengedays = 1;
+				uDao.updatechallengedays(userNo, challengedays, check);
+			}
+		}
+	}
+
+	@Override
+	public int getchallengedays(int userNo) {
+		return uDao.getchallengedays(userNo);
+		}
 
 //	@Override
 //	public int loginUser() {

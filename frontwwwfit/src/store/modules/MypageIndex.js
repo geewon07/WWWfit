@@ -5,6 +5,7 @@ const MypageIndex = {
   namespaced: true,
   state: {
     calendars: [],
+    badges: [],
   },
   getters: {},
   mutations: {
@@ -14,10 +15,23 @@ const MypageIndex = {
     RESET_CALENDAR(state) {
       state.calendars = [];
     },
+    GET_BADGE(state, payload) {
+      state.badges = payload;
+    },
   },
   actions: {
-    getCalendar({ commit }, useNo) {
-      const API_URL = `${REST_API}calendar/calendar/${useNo}`;
+    getBadge({ commit }, userNo) {
+      const API_URL = `${REST_API}badge/badge/${userNo}`;
+
+      axios({
+        url: API_URL,
+        method: "GET",
+      }).then((res) => {
+        commit("GET_BADGE", res.data);
+      });
+    },
+    getCalendar({ commit }, userNo) {
+      const API_URL = `${REST_API}calendar/calendar/${userNo}`;
 
       axios({
         url: API_URL,
