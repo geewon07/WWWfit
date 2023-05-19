@@ -2,7 +2,7 @@
   <div>
     <div v-if="getUser">
       <div b-container fluid="md">
-        <calendar-view :loginUserinfo="loginUserinfo"></calendar-view>
+        <calendar-view :loginUserInfo="loginUserInfo"></calendar-view>
       </div>
     </div>
     <div v-else></div>
@@ -18,14 +18,11 @@ export default {
   },
   computed: {
     ...mapState({
-      loginUserinfo: (state) => state.UserIndex.loginUserinfo,
+      loginUserInfo: (state) => state.UserIndex.loginUserInfo,
     }),
     getUser() {
-      return !!this.loginUserinfo;
+      return !!this.loginUserInfo;
     },
-  },
-  created() {
-    this.$store.dispatch("UserIndex/loginUserinfo");
   },
 };
 </script>
