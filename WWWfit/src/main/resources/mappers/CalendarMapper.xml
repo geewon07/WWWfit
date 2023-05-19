@@ -5,7 +5,7 @@
 <mapper  namespace="com.ssafy.wwwfit.model.dao.CalendarDao">
 
 <select id="getCalendar" resultType="Calendar" parameterType="int">
-   SELECT calendarId, userNo, challenge, fitPartName, date_format(calendarStart, '%y-%m-%d') as calendarStart
+   SELECT calendarId, userNo, challenge, fitPartName, date_format(calendarStart, '%Y-%m-%d') as calendarStart
    From calendars
    WHERE userNo = #{userNo};
 </select>

@@ -11,6 +11,9 @@ const MypageIndex = {
     GET_CALENDAR(state, payload) {
       state.calendars = payload;
     },
+    RESET_CALENDAR(state) {
+      state.calendars = [];
+    },
   },
   actions: {
     getCalendar({ commit }, useNo) {
@@ -41,11 +44,15 @@ const MypageIndex = {
           const calendarData = {
             events: events,
           };
+          console.log(calendarData);
           commit("GET_CALENDAR", calendarData);
         })
         .catch((err) => {
           console.log(err);
         });
+    },
+    resetCalendar({ commit }) {
+      commit("RESET_CALENDAR");
     },
   },
   modules: {},
