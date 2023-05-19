@@ -4,9 +4,10 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper  namespace="com.ssafy.wwwfit.model.dao.CalendarDao">
 
-<select id="getCalendar" resultType="Calendar" parameterType="String">
+<select id="getCalendar" resultType="Calendar" parameterType="int">
    SELECT calendarId, userNo, challenge, fitPartName, date_format(calendarStart, '%y-%m-%d') as calendarStart
-   From calendars;
+   From calendars
+   WHERE userNo = #{userNo};
 </select>
 
 <insert id="createcalendar" parameterType="Calendar">

@@ -9,6 +9,7 @@ const UserIndex = {
     user: {},
     users: [],
     loginUser: null,
+    loginUserinfo: null,
   },
   getters: {},
   mutations: {
@@ -23,6 +24,15 @@ const UserIndex = {
     },
     LOGOUT(state) {
       state.loginUser = null;
+      state.loginUserinfo = null;
+    },
+    LOGIN_USER_INFO(state, payload) {
+      let user = {
+        userNo: payload["login-token"].userNo,
+        userId: payload["login-token"].userId,
+        userName: payload["login-token"].userName,
+      };
+      state.loginUserinfo = user;
     },
   },
   actions: {
@@ -83,7 +93,16 @@ const UserIndex = {
     logout({ commit }) {
       sessionStorage.removeItem("login-token");
       commit("LOGOUT");
-      // router.replace("/");
+      router.push({ name: "login" });
+    },
+    loginUserinfo({ commit }) {
+      const logintoken = sessionStorage.getItem("login-token");
+      const decoded = jwtDecode(logintoken);
+      if (logintoken == null) {
+        router.push("/login");
+      } else {
+        commit("LOGIN_USER_INFO", decoded);
+      }
     },
   },
   modules: {},
