@@ -25,8 +25,8 @@ public class CalendarController {
 	@Autowired
 	private BadgesProgressService badgesProgressService;
 	
-	@GetMapping("/calendar/{userNo}")
-	public ResponseEntity<?> list(@PathVariable int userNo) {
+	@GetMapping("/calendar")
+	public ResponseEntity<?> list(int userNo) {
 		List<Calendar> list = calendarService.getCalendarList(userNo);
 		
 		if(list == null || list.size() == 0) {
