@@ -9,7 +9,7 @@ const UserIndex = {
     user: {},
     users: [],
     loginUser: null,
-    loginUserinfo: null,
+    loginUserInfo: null,
   },
   getters: {},
   mutations: {
@@ -24,7 +24,7 @@ const UserIndex = {
     },
     LOGOUT(state) {
       state.loginUser = null;
-      state.loginUserinfo = null;
+      state.loginUserInfo = null;
     },
     LOGIN_USER_INFO(state, payload) {
       let user = {
@@ -32,7 +32,7 @@ const UserIndex = {
         userId: payload["login-token"].userId,
         userName: payload["login-token"].userName,
       };
-      state.loginUserinfo = user;
+      state.loginUserInfo = user;
     },
   },
   actions: {
@@ -79,6 +79,7 @@ const UserIndex = {
               "no"
             );
             commit("LOGIN_USER", decoded);
+            commit("LOGIN_USER_INFO", decoded);
             alert("로그인 성공");
             router.replace({ name: "home" });
             // router.push("/regist");
@@ -95,11 +96,11 @@ const UserIndex = {
       commit("LOGOUT");
       router.push({ name: "login" });
     },
-    loginUserinfo({ commit }) {
+    loginUserInfo({ commit }) {
       const logintoken = sessionStorage.getItem("login-token");
       const decoded = jwtDecode(logintoken);
       if (logintoken == null) {
-        router.push("/login");
+        // router.push("/login");
       } else {
         commit("LOGIN_USER_INFO", decoded);
       }

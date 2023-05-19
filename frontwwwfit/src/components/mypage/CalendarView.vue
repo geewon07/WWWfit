@@ -13,7 +13,7 @@ export default {
   components: {
     FullCalendar,
   },
-  props: ["loginUserinfo"],
+  props: ["loginUserInfo"],
   computed: {
     ...mapState({
       calendars: (state) => state.MypageIndex.calendars,
@@ -48,11 +48,11 @@ export default {
   },
   created() {
     this.$store
-      .dispatch("MypageIndex/getCalendar", this.loginUserinfo.userNo)
+      .dispatch("MypageIndex/getCalendar", this.loginUserInfo.userNo)
       .then(() => {
         if (Array.isArray(this.calendars)) {
           this.calendarOptions.events = this.calendars.map((calendar) => ({
-            start: calendar.start,
+            start: "20" + calendar.start,
             extendedProps: {
               imageurl: this.imageurl,
             },
@@ -60,7 +60,7 @@ export default {
         } else {
           this.calendarOptions.events = [
             {
-              start: this.calendars.start,
+              start: "20" + this.calendars.start,
               extendedProps: {
                 imageurl: this.imageurl,
               },
