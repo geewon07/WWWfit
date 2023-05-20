@@ -21,7 +21,7 @@ public class HavingBadgeController {
 	private HavingBadgeService havingBadgeService;
 	
 	// 뱃지 전체 조회
-	@GetMapping("/badge/{id}")
+	@GetMapping("/badge/{userNo}")
 	public ResponseEntity<?> list(@PathVariable int userNo) {
 		
 		List<HavingBadge> list = havingBadgeService.readHavingBadge(userNo);

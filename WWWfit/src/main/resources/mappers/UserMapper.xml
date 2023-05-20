@@ -40,4 +40,21 @@ where userNo=#{userNo}
 delete from users
 where userNo=#{userNo}
 </delete>
+<update id="updatechallengedays" parameterType="int">
+update users
+<choose>
+<when test="check == 0">
+set challengedays = ${challengedays}
+</when>
+<otherwise>
+SET challengedays = ${challengedays} + 1
+</otherwise>
+</choose>
+where userNo=#{userNo}
+</update>
+<select id="getchallengedays" parameterType="int" resultType="int">
+Select challengedays from users
+where userNo=#{userNo}
+</select>
+
 </mapper>

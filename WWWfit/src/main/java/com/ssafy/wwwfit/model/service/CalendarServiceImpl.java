@@ -21,13 +21,23 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	@Override
-	public int addCalendartoday(int userNo, String fitPartName) {
-		return calendarDao.createcalendar(userNo,fitPartName);
+	public int addCalendartoday(Calendar calendar) {
+		return calendarDao.createcalendar(calendar);
 	}
 
 	@Override
 	public int removeCalendar(int calendarId) {
 		return calendarDao.deletecalendar(calendarId);
+	}
+
+	@Override
+	public String getCalendarDay(int userNo, String calendarStart) {
+		return calendarDao.getCalendarDay(userNo, calendarStart);
+	}
+
+	@Override
+	public String gettoday(int calendarId) {
+		return calendarDao.gettoday(calendarId);
 	}
 
 }
