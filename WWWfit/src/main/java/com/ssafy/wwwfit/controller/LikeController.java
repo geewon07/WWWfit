@@ -15,10 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.wwwfit.model.dto.Like;
 import com.ssafy.wwwfit.model.service.LikeService;
+import com.ssafy.wwwfit.model.service.UserService;
 
 @RestController
 @RequestMapping("/api-like")
 public class LikeController {
+
+	@Autowired
+	private UserService uService;
 	
 	@Autowired
 	private LikeService lService;
@@ -48,6 +52,9 @@ public class LikeController {
 	public ResponseEntity<?> doLike(int loginUser, int posterSeq){
 
 		int result = lService.doLike(new Like(posterSeq,loginUser));
+		if(result!=0) {
+			uService.getExp(uService.getUser(loginUser), 1);
+		}
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
 	
@@ -55,6 +62,9 @@ public class LikeController {
 	@DeleteMapping("/like/{likeId}")
 	public ResponseEntity<?> unLike(@PathVariable int likeId){
 		int result = lService.unLike(likeId);
+		if(result!=0) {
+			uService.getExp(uService.getUser(lService.selectLike(likeId).getUserNo()), -1);
+		}
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
 }

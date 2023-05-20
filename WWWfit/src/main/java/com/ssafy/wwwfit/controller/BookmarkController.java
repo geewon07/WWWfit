@@ -15,10 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.wwwfit.model.dto.Bookmark;
 import com.ssafy.wwwfit.model.service.BookmarkService;
+import com.ssafy.wwwfit.model.service.UserService;
 
 @RestController
 @RequestMapping("/api-bookmark")
 public class BookmarkController {
+	
+	@Autowired
+	private UserService uService;
 	
 	@Autowired
 	private BookmarkService bService;
@@ -51,6 +55,9 @@ public class BookmarkController {
 	@PostMapping("/bookmark")
 	public ResponseEntity<?> createBookmark(Bookmark bookmark){
 		int result = bService.create(bookmark);
+		if(result !=0) {
+			uService.getExp(uService.getUser(bookmark.getUserNo()), 2);
+		}
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
 	
@@ -63,7 +70,9 @@ public class BookmarkController {
 	@DeleteMapping("/bookmark/{bookmarkId}")
 	public ResponseEntity<?> delete(@PathVariable int bookmarkId){
 		int result = bService.delete(bookmarkId);
-		
+		if(result!=0) {
+			uService.getExp(uService.getUser(bService.selectOne(bookmarkId).getUserNo()), -2);
+		}
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
 	

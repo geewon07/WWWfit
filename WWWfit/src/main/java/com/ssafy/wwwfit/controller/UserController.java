@@ -130,6 +130,22 @@ public class UserController {
 		return new ResponseEntity<List<User>>(searchresult,HttpStatus.OK);
 	}
 	
+	@GetMapping("/mypage/{userNo}")
+	public ResponseEntity<?> getMypage(@PathVariable int userNo){
+		Map<String,String> mpData = new HashMap<String, String>();
+		User viewed = uService.getUser(userNo);
+		
+		mpData.put("name",viewed.getName());
+		mpData.put("img",viewed.getImg());
+		mpData.put("regDate",viewed.getRegDate());
+		mpData.put("userRank",viewed.getUserRank());
+		mpData.put("experience",String.valueOf(viewed.getExperience()));
+		mpData.put("challengedays",String.valueOf(viewed.getChallengedays()));
+		
+		
+		return new ResponseEntity<Map<String,String>>(mpData,HttpStatus.OK);
+	}
+	
 	
 	@PutMapping("/user")
 	public ResponseEntity<?> editUser(User user){

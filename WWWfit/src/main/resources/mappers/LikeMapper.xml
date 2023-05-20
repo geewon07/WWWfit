@@ -14,6 +14,10 @@ select * from likeposters
 select * from likeposters
 where posterSeq=#{posterSeq}
 </select>
+<select id="selectLike" parameterType="int" resultType="Like">
+select * from likeposters
+where likeId=#{likeId}
+</select>
 <select id="numLikes" parameterType="int" resultType="int">
 select count(userNo) from likeposters
 where posterSeq=#{posterSeq}

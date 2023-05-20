@@ -10,6 +10,9 @@ public interface LikeDao {
 	public List<Like> selectAll(int userNo);
 	//포스터에 좋아요 누른 유저리스트, 이리스트 참고해서 좋아요 수 뽑기
 	public List<Like> selectOne(int posterSeq);
+	
+	public Like selectLike(int likeId);
+	
 	//보류?
 	//select count(userId) from likeposters where posterSeq = #{posterSeq};
 	public int numLikes(int posterSeq);//? 굳이 해야할까? .size 돌리면 되나?
