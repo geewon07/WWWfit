@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div></div>
     <FullCalendar :options="calendarOptions" />
   </div>
 </template>
