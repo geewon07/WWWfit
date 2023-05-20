@@ -101,6 +101,15 @@ public class User {
 	public void setToken(String token) {
 		this.token = token;
 	}
+	public String getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+	}
+	public void setChallengedays(int challengedays) {
+		this.challengedays = challengedays;
+	}
 	
 	
 	

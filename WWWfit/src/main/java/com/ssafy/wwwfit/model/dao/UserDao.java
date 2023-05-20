@@ -34,5 +34,8 @@ public interface UserDao {
 	// 연속 개수 반납
 	public int getchallengedays(int userNo);
 	
+	// mypage에 필요한 정보 반납 ( 경험치, 연속일수, 등급 )
+	pubblic
+	
 
 }

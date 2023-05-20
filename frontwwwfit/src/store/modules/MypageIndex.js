@@ -1,11 +1,12 @@
 import axios from "axios";
 
-const REST_API = `http://localhost:9999/api_`;
+const REST_API = `http://localhost:9999/api`;
 const MypageIndex = {
   namespaced: true,
   state: {
     calendars: [],
     badges: [],
+    challengedays: {},
   },
   getters: {},
   mutations: {
@@ -18,10 +19,13 @@ const MypageIndex = {
     GET_BADGE(state, payload) {
       state.badges = payload;
     },
+    GET_CHALLENGEDAYS(state, payload) {
+      state.challengedays = payload;
+    },
   },
   actions: {
     getBadge({ commit }, userNo) {
-      const API_URL = `${REST_API}badge/badge/${userNo}`;
+      const API_URL = `${REST_API}_badge/badge/${userNo}`;
 
       axios({
         url: API_URL,
@@ -31,7 +35,7 @@ const MypageIndex = {
       });
     },
     getCalendar({ commit }, userNo) {
-      const API_URL = `${REST_API}calendar/calendar/${userNo}`;
+      const API_URL = `${REST_API}_calendar/calendar/${userNo}`;
 
       axios({
         url: API_URL,
@@ -67,6 +71,16 @@ const MypageIndex = {
     },
     resetCalendar({ commit }) {
       commit("RESET_CALENDAR");
+    },
+    getChallengedays({ commit }, userNo) {
+      const API_URL = `${REST_API}-user/${userNo}/challengedays`;
+
+      axios({
+        url: API_URL,
+        method: "GET",
+      }).then((res) => {
+        commit("GET_CHALLENGEDAYS", res.data);
+      });
     },
   },
   modules: {},
