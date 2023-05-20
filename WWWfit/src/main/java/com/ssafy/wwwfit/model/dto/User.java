@@ -107,7 +107,6 @@ public class User {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
-
 	
 	
 	

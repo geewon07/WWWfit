@@ -12,6 +12,9 @@ export default {
   components: {
     HeaderNav,
   },
+  created() {
+    this.$store.dispatch("UserIndex/loginUserInfo");
+  },
 };
 </script>
 <style scoped>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.wwwfit.model.dao.UserDao">
+<insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="userNo">
+insert into users
+values(#{userNo},#{userId},#{password},#{name},#{email},#{img},#{userRank},#{experience},#{challengedays},#{token},#{regDate})
+</insert>
+<select id="selectAll" resultType="User">
+select * from users;
+</select>
+<select id="selectOne" parameterType="int" resultType="User">
+select * from users
+where userNo = #{userNo}
+</select>
+<select id="searchBy" parameterType="SearchCondition" resultType="User">
+select * from users
+<if test="key!='none'">
+where #{key} = #{word}
+</if>
+</select>
+<select id="login" parameterType="String" resultType="java.lang.Integer">
+Select userNo from users
+where userId=#{userId} and password =#{password}
+</select>
+
+<update id="update" parameterType="User">
+update users
+set password=#{password},
+name = #{name},
+email =#{email},
+img=#{img},
+userRank=#{userRank},
+experience=#{experience},
+challengedays=#{challengedays}
+where userNo=#{userNo}
+</update>
+<delete id="delete" parameterType="int">
+delete from users
+where userNo=#{userNo}
+</delete>
+</mapper>

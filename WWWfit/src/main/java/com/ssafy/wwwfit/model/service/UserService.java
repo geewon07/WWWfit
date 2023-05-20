@@ -34,5 +34,9 @@ public interface UserService {
 	//회원 탈퇴
 	public int quit(int userNo);
 	
+	// 연속 개수 증가
+	public void updatechallengedays(int userNo, String today) ;
+	
+	public int getchallengedays(int userNo);
 	
 }

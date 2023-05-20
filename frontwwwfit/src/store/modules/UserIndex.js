@@ -9,6 +9,7 @@ const UserIndex = {
     user: {},
     users: [],
     loginUser: null,
+    loginUserInfo: null,
   },
   getters: {},
   mutations: {
@@ -23,6 +24,15 @@ const UserIndex = {
     },
     LOGOUT(state) {
       state.loginUser = null;
+      state.loginUserInfo = null;
+    },
+    LOGIN_USER_INFO(state, payload) {
+      let user = {
+        userNo: payload["login-token"].userNo,
+        userId: payload["login-token"].userId,
+        userName: payload["login-token"].userName,
+      };
+      state.loginUserInfo = user;
     },
   },
   actions: {
@@ -59,7 +69,6 @@ const UserIndex = {
 
           const decoded = jwtDecode(res.data["login-token"]);
           // console.log(decoded);
-
           if (decoded["login-token"].auth == "true") {
             sessionStorage.setItem("login-token", res.data["login-token"]);
             localStorage.setItem(
@@ -69,6 +78,7 @@ const UserIndex = {
               "no"
             );
             commit("LOGIN_USER", decoded);
+            commit("LOGIN_USER_INFO", decoded);
             alert("로그인 성공");
             router.replace({ name: "home" });
             // router.push("/regist");
@@ -80,10 +90,20 @@ const UserIndex = {
           console.log(err);
         });
     },
-    logout({ commit }) {
+    logout(context) {
       sessionStorage.removeItem("login-token");
-      commit("LOGOUT");
-      // router.replace("/");
+      context.commit("LOGOUT");
+      context.dispatch("MypageIndex/resetCalendar", null, { root: true });
+      router.push({ name: "login" });
+    },
+    loginUserInfo({ commit }) {
+      const logintoken = sessionStorage.getItem("login-token");
+      const decoded = jwtDecode(logintoken);
+      if (logintoken == null) {
+        // router.push("/login");
+      } else {
+        commit("LOGIN_USER_INFO", decoded);
+      }
     },
   },
   modules: {},

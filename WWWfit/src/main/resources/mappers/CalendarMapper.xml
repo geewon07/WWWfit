@@ -3,15 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper  namespace="com.ssafy.wwwfit.model.dao.CalendarDao">
-
-<select id="getCalendar" resultType="Calendar" parameterType="String">
-   SELECT calendarId, userNo, challenge, fitPartName, date_format(calendarStart, '%y-%m-%d') as calendarStart
-   From calendars;
+<parameterMap type="Map" id="selectday">
+<parameter property="userNo" javaType="int"/>
+<parameter property="calendarStart" javaType="string"/>
+</parameterMap>
+<select id="getCalendar" resultType="Calendar" parameterType="int">
+   SELECT calendarId, userNo, challenge, fitPartName, date_format(calendarStart, '%Y-%m-%d') as calendarStart
+   From calendars
+   WHERE userNo = #{userNo};
 </select>
 
-<insert id="createcalendar" parameterType="Calendar">
+<insert id="createcalendar" parameterType="Calendar" keyProperty="calendarId" useGeneratedKeys="true" >
    INSERT INTO calendars (userNo, challenge, fitPartName,calendarStart) 
-   VALUES (#{userNo}, TRUE, #{fitPartName}, NOW());
+   VALUES ( #{userNo}, TRUE, #{fitPartName}, NOW());
 </insert>
 
 <delete id="deletecalendar" parameterType="int">
@@ -19,6 +23,17 @@
     WHERE calendarId = #{calendarId}
 </delete>
 
+<select id="getCalendarDay" parameterMap="selectday" resultType="String">
+   SELECT date_format(calendarStart, '%Y-%m-%d') as calendarStart
+   From calendars
+   WHERE userNo = #{userNo} and DATE_FORMAT(calendarStart, '%Y-%m-%d') = DATE_FORMAT(#{calendarStart}, '%Y-%m-%d');
+</select>
+
+<select id="gettoday" parameterType="int" resultType="String">
+   SELECT date_format(calendarStart, '%Y-%m-%d') as calendarStart
+   From calendars
+   WHERE calendarId = #{calendarId};
+</select>
 
 
 

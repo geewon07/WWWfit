@@ -173,6 +173,27 @@ public class UserController {
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
 	
+	@GetMapping("/{userNo}/challengedays")
+	public ResponseEntity<?> getchallengedays(@PathVariable int userNo) {
+		int result = uService.getchallengedays(userNo);
+		return new ResponseEntity<Integer>(result,HttpStatus.OK);
+	}
+	
+	@GetMapping("/mypage/{userNo}")
+    public ResponseEntity<?> getMypage(@PathVariable int userNo){
+        Map<String,String> mpData = new HashMap<String, String>();
+        User viewed = uService.getUser(userNo);
+
+        mpData.put("name",viewed.getName());
+        mpData.put("img",viewed.getImg());
+        mpData.put("regDate",viewed.getRegDate());
+        mpData.put("userRank",viewed.getUserRank());
+        mpData.put("experience",String.valueOf(viewed.getExperience()));
+        mpData.put("challengedays",String.valueOf(viewed.getChallengedays()));
+
+
+        return new ResponseEntity<Map<String,String>>(mpData,HttpStatus.OK);
+    }
 	
 //	@GetMapping("/user/follower/{userNo}")
 //	public ResponseEntity<?> getFollowers(@PathVariable int userNo, User loginUser){

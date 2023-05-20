@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.wwwfit.model.dao.BadgesProgressDao">
+
+<insert id="createBadgesprogress" parameterType="int">
+  INSERT INTO badgesprogress (userNo)
+  VALUES (#{userNo})
+</insert>
+
+<update id="fitPartNamecountupdate" parameterType="String">
+  UPDATE badgesprogress
+  SET ${fitPartName} = #{fitPartName} + 1
+  WHERE userNo = #{userNo}
+ </update>
+
+<select id="getFitPartNamecount" parameterType="String" resultType="int">
+ SELECT ${fitPartName}
+  FROM badgesprogress
+  WHERE userNo = #{userNo}
+</select>
+
+<delete id="deleteUserBadgesProgress" parameterType="int">
+   DELETE FROM badgesprogress
+   WHERE userN0 = #{userNo}
+</delete>
+
+</mapper>

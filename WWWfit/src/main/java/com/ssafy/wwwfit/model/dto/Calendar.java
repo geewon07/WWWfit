@@ -15,8 +15,16 @@ public class Calendar {
 		this.fitPartName = fitPartName;
 		this.calendarStart = calendarStart;
 	}
-    
 	
+	public Calendar(int userNo, String fitPartName) {
+		super();
+		this.userNo = userNo;
+		this.fitPartName = fitPartName;
+	}
+
+
+
+
 	public Boolean getChallenge() {
 		return challenge;
 	}

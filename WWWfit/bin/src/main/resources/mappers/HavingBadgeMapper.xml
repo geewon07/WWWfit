@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.wwwfit.model.dao.HavingBadgeDao">
+
+<insert id="createHavingBadge" parameterType="int">
+  INSERT INTO havingbadge (userNo)
+  VALUES (#{userNo})
+</insert>
+
+<select id="getHavingBadge" parameterType="int" resultType="HavingBadge">
+   SELECT *
+   FROM havingbadge
+   WHERE userNo = #{userNo}
+</select>
+
+<update id="updateHavingBadge" parameterType="java.util.HashMap">
+  <choose>
+    <when test="params.fitPartName == 'neck'">
+      UPDATE havingbadge
+      SET neck_count${params.count} = true
+      WHERE userNo = #{params.userNo}
+    </when>
+    <when test="params.fitPartName == 'shoulder'">
+      UPDATE havingbadge
+      SET shoulder_count${params.count} = true
+      WHERE userNo = #{params.userNo}
+    </when>
+    <when test="params.fitPartName == 'back'">
+      UPDATE havingbadge
+      SET back_count${params.count} = true
+      WHERE userNo = #{params.userNo}
+    </when>
+    <when test="params.fitPartName == 'hand'">
+      UPDATE havingbadge
+      SET hand_count${params.count} = true
+      WHERE userNo = #{params.userNo}
+    </when>
+    <when test="params.fitPartName == 'eye'">
+      UPDATE havingbadge
+      SET eye_count${params.count} = true
+      WHERE userNo = #{params.userNo}
+    </when>
+    <when test="params.fitPartName == 'leg'">
+      UPDATE havingbadge
+      SET leg_count${params.count} = true
+      WHERE userNo = #{params.userNo}
+    </when>
+  </choose>
+</update>
+<delete id="deleteUserHavingBadge" parameterType="int">
+   DELETE FROM havingbadge
+   WHERE userN0 = #{userNo}
+</delete>
+
+
+</mapper>
