@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="vh-100" style="background-color: #eee">
-      <div class="container">
+      <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-sm-12 col-sm-11">
             <div class="card text-black" style="border-radius: 25px">
