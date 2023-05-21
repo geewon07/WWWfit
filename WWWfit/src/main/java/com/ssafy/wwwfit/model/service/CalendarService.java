@@ -10,9 +10,12 @@ public interface CalendarService {
 	public List<Calendar> getCalendarList(int userNo);
 	
 	// 캘린더 등록하기
-	public int addCalendartoday(int userNo, String fitPartName);
+	public int addCalendartoday(Calendar calendar);
 	
 	// 캘린더 삭제하기
 	public int removeCalendar(int calendarId);
-
+    
+	public String getCalendarDay(int userNo, String calendarStart);
+	
+	public String gettoday(int calendarId);
 }

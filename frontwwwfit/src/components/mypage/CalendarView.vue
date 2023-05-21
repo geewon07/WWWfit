@@ -49,12 +49,14 @@ export default {
     updateCalendarOptions() {
       if (Array.isArray(this.calendars.events)) {
         if (this.calendars.events.length > 0) {
-          this.calendarOptions.events = this.calendars.events.map((event) => ({
-            start: event.start,
-            extendedProps: {
-              imageurl: this.imageurl,
-            },
-          }));
+          this.calendarOptions.events = [...this.calendars.events].map(
+            (event) => ({
+              start: event.start,
+              extendedProps: {
+                imageurl: this.imageurl,
+              },
+            })
+          );
         } else {
           this.calendarOptions.events = [];
         }
@@ -75,7 +77,15 @@ export default {
       }
     },
   },
-  mounted() {
+  watch: {
+    calendars: {
+      handler() {
+        this.updateCalendarOptions();
+      },
+      deep: true,
+    },
+  },
+  created() {
     this.$store
       .dispatch("MypageIndex/getCalendar", this.loginUserInfo.userNo)
       .then(() => {
