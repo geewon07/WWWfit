@@ -20,7 +20,7 @@ public class HavingBadgeServiceImpl implements HavingBadgeService {
 	}
 
 	@Override
-	public List<HavingBadge> readHavingBadge(int userNo) {
+	public HavingBadge readHavingBadge(int userNo) {
 		return havingBadgeDao.getHavingBadge(userNo);
 	}
 
