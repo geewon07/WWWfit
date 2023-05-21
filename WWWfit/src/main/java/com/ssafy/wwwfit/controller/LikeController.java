@@ -34,7 +34,7 @@ public class LikeController {
 		return new ResponseEntity<List<Like>>(likes, HttpStatus.OK);
 	}
 	//해당 유저의 좋아요 조회
-	@GetMapping("/like/{userNo}")
+	@GetMapping("/user/{userNo}")
 	public ResponseEntity<?> getUserLikes(@PathVariable int userNo){
 		List<Like> likes = lService.selectAll(userNo);
 		return new ResponseEntity<List<Like>>(likes, HttpStatus.OK);

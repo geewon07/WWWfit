@@ -11,6 +11,8 @@ import PostListView from "../components/post/PostListView.vue";
 import BookmarkView from "../views/BookmarkView.vue";
 import BookmarkFolderView from "../components/bookmark/BookmarkFolderView.vue";
 import BookmarkListView from "../components/bookmark/BookmarkListView.vue";
+import SearchResult from "../components/home/SearchResult.vue"
+
 
 Vue.use(VueRouter);
 
@@ -19,6 +21,23 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
+    children:[
+      {
+        path: "detail",
+        name: "detail",
+        component: PostDetailView,
+      },
+      {
+        path: "plist",
+        name: "plist",
+        component: PostListView,
+      },
+      {
+        path:"/searchresult",
+        name:"sresult",
+        component: SearchResult,
+      },
+    ]
   },
   {
     path: "/mypage",
@@ -47,7 +66,7 @@ component: BookmarkView,
     children: [
       {
         path: "list",
-        name: "list",
+        name: "blist",
         component: BookmarkListView,
       },
       {
@@ -62,16 +81,16 @@ component: BookmarkView,
     name: "post",
     component: PostView,
     children: [
-      {
-        path: "detail",
-        name: "detail",
-        component: PostDetailView,
-      },
-      {
-        path: "list",
-        name: "list",
-        component: PostListView,
-      },
+      // {
+      //   path: "detail",
+      //   name: "detail",
+      //   component: PostDetailView,
+      // },
+      // {
+      //   path: "/plist",
+      //   name: "plist",
+      //   component: PostListView,
+      // },
     ],
   },
 ];

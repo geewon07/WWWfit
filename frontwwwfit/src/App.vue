@@ -1,13 +1,13 @@
 <template>
-  <div id="app">
-    <header-nav></header-nav>
-    <router-view />
+  <div id="app" style="background-color: #eee">
+    <header-nav style="background-color: white"></header-nav>
+    <router-view  class="col-8 offset-2" style="background-color: white"/>
   </div>
 </template>
 
 <script>
 import HeaderNav from "./components/common/HeaderNav.vue";
-
+// style="padding-left: 100px; padding-right: 100px;"
 export default {
   components: {
     HeaderNav,

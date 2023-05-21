@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div @click="executeSearch">
     <div>
       <b-carousel
         id="carousel-1"
-        v-model="slide"
+     
         :interval="4000"
         controls
         indicators
@@ -12,7 +12,7 @@
         img-height="480"
         style="text-shadow: 1px 1px 2px #333"
       >
-        <!-- Text slides with image           @sliding-start="onSlideStart"
+        <!-- Text slides with image          v-model="slide"    @sliding-start="onSlideStart"
             @sliding-end="onSlideEnd"-->
         <b-carousel-slide
           caption="First slide"
@@ -24,52 +24,30 @@
         <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
           <h1>Hello world!</h1>
         </b-carousel-slide>
-
-        <!-- Slides with image only -->
-        <b-carousel-slide
-          img-src="https://picsum.photos/1024/480/?image=58"
-        ></b-carousel-slide>
-
-        <!-- Slides with img slot -->
-        <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-        <b-carousel-slide>
-          <template #img>
-            <img
-              class="d-block img-fluid w-100"
-              width="1024"
-              height="480"
-              src="https://picsum.photos/1024/480/?image=55"
-              alt="image slot"
-            />
-          </template>
-        </b-carousel-slide>
-
-        <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-        <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            eros felis, tincidunt a tincidunt eget, convallis vel est. Ut
-            pellentesque ut lacus vel interdum.
-          </p>
-        </b-carousel-slide>
       </b-carousel>
     </div>
-    <post-list-view></post-list-view>
-    <search-bar></search-bar>
-    <search-result></search-result>
+    <!-- <post-list-view :loginUserInfo="loginUserInfo"></post-list-view> -->
+    <search-bar :loginUserInfo="this.loginUserInfo" ></search-bar>
+    <post-view :loginUserInfo="this.loginUserInfo"></post-view>
+    <!-- <search-result :loginUserInfo="loginUserInfo"></search-result> -->
+    <!-- <post-list-view :loginUserInfo="loginUserInfo"></post-list-view> -->
   </div>
 </template>
 
 <script>
-import SearchResult from "@/components/home/SearchResult.vue";
+// import PostView from "@/views/PostView.vue";
+// import SearchResult from "@/components/home/SearchResult.vue";
 import SearchBar from "../components/home/SearchBar.vue";
-import PostListView from "@/components/post/PostListView.vue";
-// import { mapState } from "vuex";//v-if="getUser"
+// import PostListView from "@/components/post/PostListView.vue";
+import { mapState } from "vuex";//v-if="getUser"PostListView , SearchResult
+import PostView from '@/views/PostView.vue';
 export default {
-  components: { SearchBar, SearchResult, PostListView },
+  components: { PostView , SearchBar },
   name: "HomeView",
   computed: {
-    // ...mapState(["loginUser"]),
+    ...mapState({
+      loginUserInfo: (state) => state.UserIndex.loginUserInfo,
+    }),
     // getUser() {
     //   if (this.loginUser) {
     //     return true;
@@ -78,6 +56,15 @@ export default {
     //   }
     // },
   },
+  created(){
+    // this.$refs.SearchBar.search();
+    // this.$store.dispatch("PostIndex/search","사무실 운동");
+  },
+  methods:{
+    executeSearch(){
+      //  this.$store.dispatch("PostIndex/search","사무실 운동");
+    }
+  }
 };
 </script>
 
