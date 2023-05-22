@@ -5,8 +5,8 @@ const MypageIndex = {
   namespaced: true,
   state: {
     calendars: [],
-    badges: [],
-    challengedays: {},
+    badges: {},
+    mypageinfo: {},
   },
   getters: {},
   mutations: {
@@ -21,6 +21,9 @@ const MypageIndex = {
     },
     GET_CHALLENGEDAYS(state, payload) {
       state.challengedays = payload;
+    },
+    GET_MYPAGE(state, payload) {
+      state.mypageinfo = payload;
     },
   },
   actions: {
@@ -72,14 +75,15 @@ const MypageIndex = {
     resetCalendar({ commit }) {
       commit("RESET_CALENDAR");
     },
-    getChallengedays({ commit }, userNo) {
-      const API_URL = `${REST_API}-user/${userNo}/challengedays`;
+    getMypage({ commit }, userNo) {
+      const API_URL = `${REST_API}-user/mypage/${userNo}`;
 
       axios({
         url: API_URL,
         method: "GET",
       }).then((res) => {
-        commit("GET_CHALLENGEDAYS", res.data);
+        commit("GET_MYPAGE", res.data);
+        console.log(res.data);
       });
     },
   },

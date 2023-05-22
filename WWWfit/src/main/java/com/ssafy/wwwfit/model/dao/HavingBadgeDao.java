@@ -11,7 +11,7 @@ public interface HavingBadgeDao {
 	public int createHavingBadge(int userNo);
 	
 	// userid에 따른 가지고 있는 뱃지 조회
-	public List<HavingBadge> getHavingBadge(int userNo);
+	public HavingBadge getHavingBadge(int userNo);
 	
 	// userid와 뱃지이름에 따른 뱃지 등록  //우선 int 값으로 반환
 	public int updateHavingBadge(HashMap<String, String> params);
