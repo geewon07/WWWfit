@@ -1,10 +1,10 @@
 package com.ssafy.wwwfit.model.dto;
 
 public class Like {
-	private int likeId;
+	private int likeposterId;
 	private int posterSeq;
 	private int userNo;
-	private String likeDate;
+	private String likedate;
 	
 	public Like() {
 	}
@@ -13,11 +13,11 @@ public class Like {
 		this.posterSeq = posterSeq;
 		this.userNo = userNo;
 	}
-	public int getLikeId() {
-		return likeId;
+	public int getLikeposterId() {
+		return likeposterId;
 	}
-	public void setLikeId(int likeId) {
-		this.likeId = likeId;
+	public void setLikeposterId(int likeposterId) {
+		this.likeposterId = likeposterId;
 	}
 	public int getPosterSeq() {
 		return posterSeq;
@@ -31,11 +31,11 @@ public class Like {
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
-	public String getLikeDate() {
-		return likeDate;
+	public String getLikedate() {
+		return likedate;
 	}
-	public void setLikeDate(String likeDate) {
-		this.likeDate = likeDate;
+	public void setLikedate(String likedate) {
+		this.likedate = likedate;
 	}
 	
 	

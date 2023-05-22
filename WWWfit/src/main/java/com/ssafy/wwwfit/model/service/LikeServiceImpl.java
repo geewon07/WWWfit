@@ -34,9 +34,9 @@ public class LikeServiceImpl implements LikeService {
 	}
 
 	@Override
-	public boolean checkLiked(int userNo, int posterSeq) {
-		boolean liked = lDao.alreadyliked(userNo, posterSeq)==0?false:true;
-		return liked;
+	public int checkLiked(int userNo, int posterSeq) {
+		int likedId = lDao.alreadyliked(userNo, posterSeq);
+		return likedId;
 	}
 
 	@Override

@@ -7,8 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <parameter property="userNo" javaType="int"/>
 <parameter property="bname" javaType="string"/>
 </parameterMap>
-<select id="selectAll" parameterType="string" resultType="Bookmark">
+<select id="selectAll" parameterType="int" resultType="Bookmark">
 select * from bookmarks
+where userNo=#{userNo}
 </select>
 <select id="selectOne" parameterType="int" resultType="Bookmark">
 select * from bookmarks

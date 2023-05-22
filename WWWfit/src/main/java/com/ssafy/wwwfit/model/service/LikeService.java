@@ -14,7 +14,7 @@ public interface LikeService {
 	
 	public int numLikes(int posterSeq);
 	
-	public boolean checkLiked(int userNo, int posterSeq);
+	public int checkLiked(int userNo, int posterSeq);
 	
 	public int doLike(Like like);
 	

@@ -9,14 +9,14 @@
                 <div class="row justify-content-center">
                   <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                     <p class="h3 fw-bold mb-5 mx-1 mx-md-4 mt-4">회원가입</p>
-                    <form class="mx-1 mx-md-4">
+                    <b-form class="mx-1 mx-md-4">
                       <label class="form-label" for="useridform">
                         아이디
                       </label>
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                          <input
+                          <b-form-input
                             type="text"
                             id="useridform"
                             class="form-control"
@@ -31,7 +31,7 @@
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                          <input
+                          <b-form-input
                             type="text"
                             id="usernameform"
                             class="form-control"
@@ -46,7 +46,7 @@
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                          <input
+                          <b-form-input
                             type="email"
                             id="useremailform"
                             class="form-control"
@@ -61,7 +61,7 @@
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                          <input
+                          <b-form-input
                             type="password"
                             id="userpwform"
                             class="form-control"
@@ -76,7 +76,7 @@
                       <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                          <input
+                          <b-form-input
                             type="password"
                             id="form3Example4cd"
                             class="form-control"
@@ -110,7 +110,7 @@
                           가입
                         </button>
                       </div>
-                    </form>
+                    </b-form>
                   </div>
                 </div>
               </div>
