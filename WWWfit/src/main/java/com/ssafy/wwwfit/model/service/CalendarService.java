@@ -18,4 +18,6 @@ public interface CalendarService {
 	public String getCalendarDay(int userNo, String calendarStart);
 	
 	public String gettoday(int calendarId);
+	
+	public int gettodaychallenge(int userNo, String calendarStart);
 }

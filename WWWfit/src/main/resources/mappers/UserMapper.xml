@@ -47,7 +47,7 @@ update users
 set challengedays = ${challengedays}
 </when>
 <otherwise>
-SET challengedays = ${challengedays} + 1
+SET challengedays = challengedays + 1
 </otherwise>
 </choose>
 where userNo=#{userNo}

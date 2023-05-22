@@ -7,6 +7,7 @@ const MypageIndex = {
     calendars: [],
     badges: {},
     mypageinfo: {},
+    notification: [],
   },
   getters: {},
   mutations: {
@@ -25,8 +26,22 @@ const MypageIndex = {
     GET_MYPAGE(state, payload) {
       state.mypageinfo = payload;
     },
+    GET_NOTIFICATION(state, payload) {
+      state.notification = payload;
+    },
   },
   actions: {
+    getNotification({ commit }, userNo) {
+      const API_URL = `${REST_API}_notification/notification/${userNo}`;
+      axios({
+        url: API_URL,
+        method: "GET",
+      }).then((res) => {
+        commit;
+        commit("GET_NOTIFICATION", res.data);
+        console.log(res);
+      });
+    },
     getBadge({ commit }, userNo) {
       const API_URL = `${REST_API}_badge/badge/${userNo}`;
 
