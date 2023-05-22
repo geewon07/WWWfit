@@ -16,9 +16,9 @@ where #{key} =#{word}
 
 <select id="selectOne" parameterType="int" resultType="Poster">
 select * from posters
-where posterId = #{posterId}
+where posterSeq = #{posterSeq}
 </select>
-<update id="update">
+<update id="update" parameterType="Poster">
 update posters
 set 
 likeCount=#{likeCount},

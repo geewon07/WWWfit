@@ -5,6 +5,11 @@
         <h3>logo placeholder</h3>
       </b-navbar-brand>
       <b-collapse id="nav-collaps" is-nav>
+        <b-navbar-nav>
+          <b-nav-item :to="{ name: 'post' }" :loginUserInfo="loginUserInfo">
+            포스터
+          </b-nav-item>
+        </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item v-if="loginUserInfo" :to="{ name: 'mypage' }"
             >{{ loginUserInfo.userName }}님 마이페이지</b-nav-item

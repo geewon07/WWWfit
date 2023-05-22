@@ -1,12 +1,10 @@
 <template>
   <div id="app" style="background-color: #eee">
     <header-nav style="background-color: white"></header-nav>
-    <div
+    <router-view
       class="col-8 offset-2"
-      style="background-color: white; padding-left: 5px; padding-right: 5px"
-    >
-      <router-view></router-view>
-    </div>
+      style="background-color: white; padding: 0"
+    />
   </div>
 </template>
 

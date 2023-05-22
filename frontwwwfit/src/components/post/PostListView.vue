@@ -2,27 +2,39 @@
   <div>
     <h2>홈화면 오픈시 포스트리스트뷰!</h2>
     <div class="container">
-      <b-card-group>
-      <b-card
-        v-for="(poster,index) in postList"
-        :key="index"
-        :img-alt="poster.title"
-        img-top
-      >
-           <!--        :title="poster.title" :img-src="require(`@/assets/${poster.posterSrc}`)" -->
-      <b-card-img :style="{ objectFit: 'cover', objectPosition: 'top' }" :src="require(`@/assets/${poster.posterSrc}`)"/>
-        <b-card-text>
-          난이도:{{poster.difficulty}}
-          좋아요:{{poster.likeCount}}
-          <b-button v-if="loginUserInfo">
-          <b-icon v-if="userLiked(poster.posterSeq)" icon="heart-fill" @click="unlike(poster.posterSeq)"/>
-          <b-icon v-else icon="heart" @click="like(poster.posterSeq)" />
-          </b-button>
-        </b-card-text>
-        <b-card-text class="small text-muted"
-          >Last updated 3 mins ago</b-card-text
+      <b-card-group columns>
+        <b-card
+          v-for="poster in postList"
+          :key="poster.posterSeq"
+          :img-alt="poster.title"
+          img-top
         >
-      </b-card>
+          <!--        :title="poster.title" :img-src="require(`@/assets/${poster.posterSrc}`)" -->
+          <b-card-img
+            @click="selectPoster(poster.posterSeq)"
+            :style="{ objectFit: 'cover', objectPosition: 'top' }"
+            :src="require(`@/assets/${poster.posterSrc}`)"
+          />
+
+          <!-- 난이도:{{ poster.difficulty }}  -->
+          <b-card-text>
+            <b-button v-if="loginUserInfo" pill variant="outline-danger">
+              <b-icon
+                shift-v="-"
+                v-if="userLiked(poster.posterSeq)"
+                icon="heart-fill"
+                @click="unlike(poster.posterSeq)"
+              />
+              <b-icon v-else icon="heart" @click="like(poster.posterSeq)" />
+            </b-button>
+            <b-button v-if="loginUserInfo" pill variant="outline-secondary">
+              <b-icon icon="bookmark" @click="bookmark"></b-icon>
+            </b-button>
+          </b-card-text>
+          <b-card-text class="small text-muted">
+            좋아요:{{ poster.likeCount }}</b-card-text
+          >
+        </b-card>
       </b-card-group>
     </div>
   </div>
@@ -32,45 +44,72 @@
 import { mapState } from "vuex";
 export default {
   name: "PostListView",
-  props:[
-    "loginUserInfo",
-  ],
+  props: ["loginUserInfo"],
   data() {
     return {
       slide: 0,
       sliding: null,
       text: " accordion",
-      likePosterSeq:"",
+      // likePosterSeq: "",
     };
   },
-  methods:{
-    userLiked(posterSeq){
-      if(this.userLikes==null){
+  methods: {
+    selectPoster(posterSeq) {
+      this.$store.dispatch("PostIndex/selectPoster", posterSeq);
+    },
+    userLiked(posterSeq) {
+      if (this.userLikes == null) {
         return false;
       }
-      for(let liked of this.userLikes){
-        if(liked.posterSeq == posterSeq){
+      for (let liked of this.userLikes) {
+        if (liked.posterSeq == posterSeq) {
           return true;
         }
       }
       return false;
     },
-    like(){
-      this.$store.dispatch("PostIndex/likePoster");
+    like(posterSeq) {
+      let like = {
+        loginUser: this.loginUserInfo.userNo,
+        posterSeq: posterSeq,
+      };
+      this.$store.dispatch("PostIndex/likePoster", like).then(() => {
+        // Dispatch additional actions to refresh the data
+        this.$store.dispatch("PostIndex/getPosters");
+        this.$store.dispatch(
+          "PostIndex/getUserLikes",
+          this.loginUserInfo.userNo
+        );
+      });
     },
-    unlike(){
-      this.$store.dispatch("PostIndex/likePoster");
+    unlike(posterSeq) {
+      let like = {
+        loginUser: this.loginUserInfo.userNo,
+        posterSeq: posterSeq,
+      };
+
+      this.$store.dispatch("PostIndex/unlikePoster", like).then(() => {
+        // Dispatch additional actions to refresh the data
+        this.$store.dispatch("PostIndex/getPosters");
+        this.$store.dispatch(
+          "PostIndex/getUserLikes",
+          this.loginUserInfo.userNo
+        );
+      });
+    },
+    bookmark() {},
+  },
+  created() {
+    this.$store.dispatch("PostIndex/getPosters");
+    console.log(this.loginUserInfo);
+    if (this.loginUserInfo) {
+      this.$store.dispatch("PostIndex/getUserLikes", this.loginUserInfo.userNo);
     }
   },
-  created(){
-    this.$store.dispatch("PostIndex/getPosters");
-    console.log(this.loginUserInfo)
-    if(this.loginUserInfo)
-    this.$store.dispatch("PostIndex/getUserLikes",this.loginUserInfo.userNo);
-  },
   computed: {
-    ...mapState({ postList: (state) => state.PostIndex.postList ,
-    userLikes:(state)=> state.PostIndex.userLikes,
+    ...mapState({
+      postList: (state) => state.PostIndex.postList,
+      userLikes: (state) => state.PostIndex.userLikes,
     }),
   },
 
@@ -101,4 +140,5 @@ export default {
   object-fit: cover;
   object-position: top;
   height: 50%;
-}</style>
+}
+</style>

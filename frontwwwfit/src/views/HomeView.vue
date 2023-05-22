@@ -3,7 +3,6 @@
     <div>
       <b-carousel
         id="carousel-1"
-     
         :interval="4000"
         controls
         indicators
@@ -27,22 +26,22 @@
       </b-carousel>
     </div>
     <!-- <post-list-view :loginUserInfo="loginUserInfo"></post-list-view> -->
-    <search-bar :loginUserInfo="this.loginUserInfo" ></search-bar>
-    <post-view :loginUserInfo="this.loginUserInfo"></post-view>
-    <!-- <search-result :loginUserInfo="loginUserInfo"></search-result> -->
+    <search-bar :loginUserInfo="this.loginUserInfo"></search-bar>
+    <!-- <post-view :loginUserInfo="this.loginUserInfo"></post-view> -->
+    <search-result :loginUserInfo="loginUserInfo"></search-result>
     <!-- <post-list-view :loginUserInfo="loginUserInfo"></post-list-view> -->
   </div>
 </template>
 
 <script>
 // import PostView from "@/views/PostView.vue";
-// import SearchResult from "@/components/home/SearchResult.vue";
+import SearchResult from "@/components/home/SearchResult.vue";
 import SearchBar from "../components/home/SearchBar.vue";
-// import PostListView from "@/components/post/PostListView.vue";
-import { mapState } from "vuex";//v-if="getUser"PostListView , SearchResult
-import PostView from '@/views/PostView.vue';
+// import PostListView from "@/components/post/PostListView.vue";PostView,
+import { mapState } from "vuex"; //v-if="getUser"PostListView , SearchResult
+// import PostView from "@/views/PostView.vue";
 export default {
-  components: { PostView , SearchBar },
+  components: { SearchBar, SearchResult },
   name: "HomeView",
   computed: {
     ...mapState({
@@ -56,15 +55,15 @@ export default {
     //   }
     // },
   },
-  created(){
+  created() {
     // this.$refs.SearchBar.search();
     // this.$store.dispatch("PostIndex/search","사무실 운동");
   },
-  methods:{
-    executeSearch(){
+  methods: {
+    executeSearch() {
       //  this.$store.dispatch("PostIndex/search","사무실 운동");
-    }
-  }
+    },
+  },
 };
 </script>
 
