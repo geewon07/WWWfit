@@ -15,13 +15,13 @@ import com.google.api.services.storage.model.Notification;
 import com.ssafy.wwwfit.model.service.NotificationService;
 
 @RestController
-@RequestMapping("/api_Notification")
+@RequestMapping("/api_notification")
 public class NotificationController {
 	
 	@Autowired
 	private NotificationService nService;
 	
-	@GetMapping("/Notification/{userNo}")
+	@GetMapping("/notification/{userNo}")
 	public ResponseEntity<?> getUser(@PathVariable int userNo){
 		List<Notification> notifications = nService.getNotification(userNo);
 		if(notifications==null | notifications.size() == 0) {

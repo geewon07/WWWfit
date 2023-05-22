@@ -28,7 +28,7 @@ export default {
         events: [],
         eventContent: this.customEventContent,
       },
-      imageurl: require("@/assets/pngegg.png"),
+      imageurl: require("@/assets/brand.png"),
     };
   },
   methods: {
@@ -55,6 +55,8 @@ export default {
               extendedProps: {
                 imageurl: this.imageurl,
               },
+              backgroundColor: "rgb(247, 232, 255)",
+              borderColor: "rgb(247, 232, 255)",
             })
           );
         } else {
@@ -70,6 +72,8 @@ export default {
             extendedProps: {
               imageurl: this.imageurl,
             },
+            backgroudColor: "rgb(247, 232, 255)",
+            borderColor: "rgb(247, 232, 255)",
           },
         ];
       } else {

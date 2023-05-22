@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.wwwfit.model.dto.Calendar;
 import com.ssafy.wwwfit.model.service.BadgesProgressService;
 import com.ssafy.wwwfit.model.service.CalendarService;
+import com.ssafy.wwwfit.model.service.NotificationService;
 import com.ssafy.wwwfit.model.service.UserService;
 
 @RestController
@@ -27,6 +28,9 @@ public class CalendarController {
 	private BadgesProgressService badgesProgressService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private NotificationService notificationService;
+	
 	
 	@GetMapping("/calendar/{userNo}")
 	public ResponseEntity<?> list(@PathVariable int userNo) {
@@ -48,8 +52,13 @@ public class CalendarController {
 		  // 반환해준 오늘 날짜를 토대로 User의 연속 개수 count! ( userService에서!  ? )
 		  userService.updatechallengedays(calendar.getUserNo(), today);
 		  int challengedays = userService.getchallengedays(calendar.getUserNo());
-		  if(challengedays == 5) {
+		  if(challengedays != 0 && challengedays/4  == 0) {
 			  userService.getExp(userService.getUser(calendar.getUserNo()), 5);
+			  String context = "[경험치 5] 연속";
+			  context += challengedays;
+			  context += "회 운동을 달성하여 경험치 5를 획득하셨습니다.";
+			  
+			  notificationService.insertNotification(calendar.getUserNo(), context);
 		  }
 		if(writedone == 1 && updatefitPartNameCount == 1) {
 			userService.getExp(userService.getUser(calendar.getUserNo()), 3);// 운동완료할때 경험치 올려주기
@@ -73,4 +82,11 @@ public class CalendarController {
 			return new ResponseEntity<Void>(HttpStatus.NOT_ACCEPTABLE);
 		}
      }
+	
+	@GetMapping("/calendar/{userNo}/{calendarStart}")
+	public ResponseEntity<?> list(@PathVariable int userNo,@PathVariable String calendarStart) {
+		int today = calendarService.gettodaychallenge(userNo, calendarStart);
+		
+		return new ResponseEntity<Integer>(today,HttpStatus.OK); 
+	}
 }

@@ -9,13 +9,13 @@
           height="50px"
         />
       </div>
-      <div class="col-md-1">
+      <div class="col-md-2">
         <p class="name">{{ mypageinfo.name }}님</p>
       </div>
       <div class="col-md-2 text-right">
         <p class="ex">보유 경험치 {{ mypageinfo.experience }}</p>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-4">
         <div class="d-flex justify-content-between">
           <div>{{ getStartValue(mypageinfo.userRank) }}</div>
           <div class="ml-auto">{{ getEndValue(mypageinfo.userRank) }}</div>

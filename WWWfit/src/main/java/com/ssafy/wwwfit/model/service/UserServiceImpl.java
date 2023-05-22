@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
 			user.setUserRank("Silver");
 		}else if(exp<60) {
 			user.setUserRank("Gold");
-		}else if(exp>100) {
+		}else if(exp<=100) {
 			user.setUserRank("VIP");
 		}
 		
@@ -126,6 +126,8 @@ public class UserServiceImpl implements UserService {
 				int challengedays = 1;
 				int check = 0;
 				uDao.updatechallengedays(userNo, challengedays, check);
+
+				System.out.println("인식됨");
 			} else {
 				int check = 1;
 				int challengedays = 1;
