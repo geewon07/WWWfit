@@ -16,16 +16,26 @@
           </template>
 
           <b-card-body>
-            <b-card-title>Card Title</b-card-title>
-            <b-card-sub-title class="mb-2">Card Sub Title</b-card-sub-title>
+            <b-card-title>Card Title </b-card-title>
+            <b-card-sub-title class="mb-2"
+              >평점:{{ getAverage }}</b-card-sub-title
+            >
             <b-card-text>
-              <b-form>
-                <label for="rating-inline">평점:</label>
+              <b-form class="d-flex flex-row">
+                <!-- <label for="rating-inline">평점:</label> -->
                 <b-form-rating
                   id="rating-inline"
                   inline
                   value="0"
+                  v-model="score"
                 ></b-form-rating>
+                <!-- <label for="rating">평가</label>        class="mr-lg-2"-->
+                <b-form-input
+                  type="text"
+                  v-model="comment"
+                  placeholder="코멘트 입력해도 되고 안해도 됨"
+                ></b-form-input>
+                <b-button type="submit" @click.prevent="rate">등록</b-button>
               </b-form>
             </b-card-text>
           </b-card-body>
@@ -55,13 +65,64 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "PostDetailView",
-  props: ["selected"],
+  props: {
+    selected: Object,
+    loginUserInfo: Object,
+  },
+  data() {
+    return {
+      score: 0,
+      comment: "",
+      average: 0,
+    };
+  },
+  // watch:{
+  //   selected(newVal){
+
+  //   }
+  // },
   methods: {
     printposter() {
       console.log();
     },
+    rate() {
+      let rating = {
+        userNo: this.loginUserInfo.userNo,
+        review: this.comment,
+        score: this.score,
+        contentSeq: this.selected.posterSeq,
+      };
+      console.log(rating);
+      this.$store.dispatch("PostIndex/ratePoster", rating);
+    },
+    getAVG() {
+      this.average = this.$store.dispatch(
+        "PostIndex/getRating",
+        this.selected.posterSeq
+      );
+    },
+  },
+  created() {
+    // const Average = this.$store.dispatch(
+    //   "PostIndex/getRating",
+    //   this.selected.posterSeq
+    // );
+    this.getAVG();
+  },
+  computed: {
+    ...mapState({
+      getAverage: (state) => state.PostIndex.contentAVG,
+    }),
+    // getAVG() {
+    //   // this.average =
+    //   return this.$store.dispatch(
+    //     "PostIndex/getRating",
+    //     this.selected.posterSeq
+    //   );
+    // },
   },
 };
 </script>

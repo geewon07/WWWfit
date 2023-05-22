@@ -16,6 +16,7 @@ public class Rating {
 		this.contentSeq = contentSeq;
 		this.score = score;
 	}
+	
 	public Rating(int userNo, int contentSeq, int score, String review) {
 		super();
 		this.userNo = userNo;

@@ -1,7 +1,10 @@
 <template>
   <div>
     <h2>포스트 뷰!!</h2>
-    <post-detail-view :selected="poster"></post-detail-view>
+    <post-detail-view
+      :selected="poster"
+      :loginUserInfo="loginUserInfo"
+    ></post-detail-view>
     <post-list-view :loginUserInfo="loginUserInfo"></post-list-view>
     <!-- <router-view ></router-view> -->
   </div>

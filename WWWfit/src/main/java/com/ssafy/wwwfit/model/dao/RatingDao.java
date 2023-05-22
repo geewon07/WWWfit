@@ -9,7 +9,7 @@ public interface RatingDao {
 	public List<Rating> selectAll(int contentSeq);//
 	
 	//select AVG(score) from ratings where contentSeq = #{contentSeq};
-	public int getAVG(int contentSeq);
+	public Double getAVG(Integer contentSeq);
 	
 	public Rating selectOne(int ratingId);
 	

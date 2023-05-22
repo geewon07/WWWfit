@@ -41,8 +41,8 @@ public class RatingController {
 	
 	//굳이 여기서 해줄까 싶기도 한데,,
 	@GetMapping("/rating")
-	public ResponseEntity<?> contentAVG(int contentSeq){
-		double avg = rService.getAVG(contentSeq);
+	public ResponseEntity<?> contentAVG(Integer contentSeq){
+		Double avg = rService.getAVG(contentSeq);
 		return new ResponseEntity<Double>(avg,HttpStatus.OK);
 	}
 	

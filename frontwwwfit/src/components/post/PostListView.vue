@@ -21,13 +21,17 @@
             <b-button v-if="loginUserInfo" pill variant="outline-danger">
               <b-icon
                 shift-v="-"
-                v-if="userLiked(poster.posterSeq)"
+                v-show="userLiked(poster.posterSeq)"
                 icon="heart-fill"
                 @click="unlike(poster.posterSeq)"
               />
-              <b-icon v-else icon="heart" @click="like(poster.posterSeq)" />
+              <b-icon
+                v-show="!userLiked(poster.posterSeq)"
+                icon="heart"
+                @click="like(poster.posterSeq)"
+              />
             </b-button>
-            <b-button v-if="loginUserInfo" pill variant="outline-secondary">
+            <b-button v-show="loginUserInfo" pill variant="outline-secondary">
               <b-icon icon="bookmark" @click="bookmark"></b-icon>
             </b-button>
           </b-card-text>
@@ -56,6 +60,12 @@ export default {
   methods: {
     selectPoster(posterSeq) {
       this.$store.dispatch("PostIndex/selectPoster", posterSeq);
+      this.$router.push({
+        name: "detail",
+        params: { id: 1 }, // route parameters
+
+        props: { loginUserInfo: "this.loginUserInfo", selected: "posterSeq" }, // additional props
+      });
     },
     userLiked(posterSeq) {
       if (this.userLikes == null) {
