@@ -7,7 +7,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 @Configuration
 @EnableScheduling
-public class ScheduledConfing {
+public class ScheduledConfig {
 	
 	private final int POOL_SIZE = 10;
 	
