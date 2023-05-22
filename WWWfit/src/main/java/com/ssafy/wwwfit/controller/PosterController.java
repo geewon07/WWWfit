@@ -38,6 +38,15 @@ public class PosterController { // 관리자 전용!!!!!
 		}
 		return new ResponseEntity<List<Poster>>(pList,HttpStatus.OK);
 	}
+	@GetMapping("/poster/{posterId}")
+	public ResponseEntity<?> getPoster(@PathVariable int posterId){
+		Poster selected =pService.getOne(posterId);
+		
+		if(selected.getTitle()==null) {
+			return new ResponseEntity<String>("없습니다",HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Poster>(selected,HttpStatus.OK);
+	}
 	
 	@PostMapping("/poster")
 	public ResponseEntity<?> postPoster(Poster poster){

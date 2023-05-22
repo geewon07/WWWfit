@@ -173,15 +173,6 @@ public class UserController {
 		int result = uService.quit(userNo);
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
-	
-//	@GetMapping("/user/follower/{userNo}")
-//	public ResponseEntity<?> getFollowers(@PathVariable int userNo, User loginUser){
-//		List<Follow> follows= fService.getFollowers(userNo);
-//		List<User> followerList = new ArrayList<User>();
-//		for(Follow f : follows) {
-//			followerList.add(uService.getUser(f.getUserId()));
-//		}
-////		List<User> followerList = fService
-//		return new ResponseEntity<List<User>>(followerList,HttpStatus.OK);
-//	}
+
+
 }

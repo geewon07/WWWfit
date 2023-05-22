@@ -35,6 +35,5 @@ public interface UserDao {
 	public int getchallengedays(int userNo);
 	
 	
-	
 
 }
