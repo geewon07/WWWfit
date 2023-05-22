@@ -1,11 +1,14 @@
 <template>
   <div>
     <h2>포스트 뷰!!</h2>
-    <post-detail-view
+    <!-- <post-detail-view
       :selected="poster"
       :loginUserInfo="loginUserInfo"
-    ></post-detail-view>
+    ></post-detail-view> -->
     <post-list-view :loginUserInfo="loginUserInfo"></post-list-view>
+    <!-- <router-link :to="{name:'detail'}" :selected="poster"
+      :loginUserInfo="loginUserInfo">포스터 세부</router-link> -->
+    <!-- <router-link :to="{name:'plist'}">포스터 리스트</router-link> -->
     <!-- <router-view ></router-view> -->
   </div>
 </template>
@@ -14,9 +17,9 @@
 import PostListView from "@/components/post/PostListView.vue";
 // import SearchResult from "@/components/home/SearchResult.vue";
 import { mapState } from "vuex";
-import PostDetailView from "@/components/post/PostDetailView.vue";
+// import PostDetailView from  PostDetailView "@/components/post/PostDetailView.vue";
 export default {
-  components: { PostListView, PostDetailView },
+  components: { PostListView,},
   name: "PostView",
   // props: ["loginUserInfo"],
   created() {

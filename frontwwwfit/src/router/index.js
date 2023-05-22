@@ -70,17 +70,21 @@ const routes = [
     name: "post",
     component: PostView,
     children: [
+
       {
-        path: "detail",
-        name: "detail",
-        component: PostDetailView,
-      },
-      {
-        path: "/plist",
+        path: "list",
         name: "plist",
         component: PostListView,
       },
     ],
+  },
+  {
+    path: "detail",
+    name: "detail",
+    component: PostDetailView,
+    // children:[
+    //   path:""
+    // ],
   },
 ];
 

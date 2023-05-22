@@ -20,7 +20,6 @@
           <b-card-text>
             <b-button v-if="loginUserInfo" pill variant="outline-danger">
               <b-icon
-                shift-v="-"
                 v-show="userLiked(poster.posterSeq)"
                 icon="heart-fill"
                 @click="unlike(poster.posterSeq)"
@@ -48,12 +47,13 @@
 import { mapState } from "vuex";
 export default {
   name: "PostListView",
-  props: ["loginUserInfo"],
+  props: ["loginUserInfo",],
   data() {
     return {
       slide: 0,
       sliding: null,
       text: " accordion",
+      selected:{},
       // likePosterSeq: "",
     };
   },
@@ -62,9 +62,7 @@ export default {
       this.$store.dispatch("PostIndex/selectPoster", posterSeq);
       this.$router.push({
         name: "detail",
-        params: { id: 1 }, // route parameters
-
-        props: { loginUserInfo: "this.loginUserInfo", selected: "posterSeq" }, // additional props
+        props: { loginUserInfo:this.loginUserInfo }, // additional props
       });
     },
     userLiked(posterSeq) {
@@ -85,11 +83,12 @@ export default {
       };
       this.$store.dispatch("PostIndex/likePoster", like).then(() => {
         // Dispatch additional actions to refresh the data
-        this.$store.dispatch("PostIndex/getPosters");
+        // this.$store.dispatch("PostIndex/getPosters");
         this.$store.dispatch(
           "PostIndex/getUserLikes",
           this.loginUserInfo.userNo
         );
+         this.$forceUpdate();
       });
     },
     unlike(posterSeq) {
@@ -100,11 +99,13 @@ export default {
 
       this.$store.dispatch("PostIndex/unlikePoster", like).then(() => {
         // Dispatch additional actions to refresh the data
-        this.$store.dispatch("PostIndex/getPosters");
+         this.$forceUpdate();
+        // this.$store.dispatch("PostIndex/getPosters");
         this.$store.dispatch(
           "PostIndex/getUserLikes",
           this.loginUserInfo.userNo
         );
+        this.$forceUpdate();
       });
     },
     bookmark() {},
@@ -120,6 +121,8 @@ export default {
     ...mapState({
       postList: (state) => state.PostIndex.postList,
       userLikes: (state) => state.PostIndex.userLikes,
+      poster:(state)=> state.PostIndex.poster,
+      loginUserInfo:(state)=>state.UserIndex.loginUserInfo,
     }),
   },
 

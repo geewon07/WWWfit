@@ -7,7 +7,7 @@ const PostIndex = {
     poster: {},
     postList: [],
     userLikes: [],
-    contentAVG: {},
+    contentAVG: 0,
   },
   getters: {},
   mutations: {
