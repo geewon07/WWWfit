@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
 		}
 		//새싹 
 		int exp=user.getExperience();
-		if(exp<10&&0<exp) {
+		if(exp<10&&0<=exp) {
 			user.setUserRank("Green");
 		}else if(exp<20) {
 			user.setUserRank("Bronze");
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
 			user.setUserRank("Silver");
 		}else if(exp<60) {
 			user.setUserRank("Gold");
-		}else if(exp>80) {
+		}else if(exp>100) {
 			user.setUserRank("VIP");
 		}
 		

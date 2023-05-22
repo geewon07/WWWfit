@@ -47,8 +47,12 @@ public class CalendarController {
 		  String today = calendarService.gettoday(calendar.getCalendarId());
 		  // 반환해준 오늘 날짜를 토대로 User의 연속 개수 count! ( userService에서!  ? )
 		  userService.updatechallengedays(calendar.getUserNo(), today);
+		  int challengedays = userService.getchallengedays(calendar.getUserNo());
+		  if(challengedays == 5) {
+			  userService.getExp(userService.getUser(calendar.getUserNo()), 5);
+		  }
 		if(writedone == 1 && updatefitPartNameCount == 1) {
-			userService.getExp(userService.getUser(calendar.getUserNo()), 7);// 운동완료할때 경험치 올려주기
+			userService.getExp(userService.getUser(calendar.getUserNo()), 3);// 운동완료할때 경험치 올려주기
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}else if(writedone == 0 ){
 			return new ResponseEntity<String>("캘린더에 등록되지 않음",HttpStatus.NOT_ACCEPTABLE);

@@ -98,6 +98,7 @@ public class UserController {
 	
 	@PostMapping("/user")
 	public ResponseEntity<?> doRegist(User user){
+		user.setUserRank("Green");
 		int result = uService.regist(user);
 		if(result!=0) {
 			bpService.registBagesProgress(user.getUserNo());
@@ -172,23 +173,6 @@ public class UserController {
 		int result = uService.quit(userNo);
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
-	
-	@GetMapping("/{userNo}/challengedays")
-	public ResponseEntity<?> getchallengedays(@PathVariable int userNo) {
-		int result = uService.getchallengedays(userNo);
-		return new ResponseEntity<Integer>(result,HttpStatus.OK);
-	}
-	
 
-	
-//	@GetMapping("/user/follower/{userNo}")
-//	public ResponseEntity<?> getFollowers(@PathVariable int userNo, User loginUser){
-//		List<Follow> follows= fService.getFollowers(userNo);
-//		List<User> followerList = new ArrayList<User>();
-//		for(Follow f : follows) {
-//			followerList.add(uService.getUser(f.getUserId()));
-//		}
-////		List<User> followerList = fService
-//		return new ResponseEntity<List<User>>(followerList,HttpStatus.OK);
-//	}
+
 }

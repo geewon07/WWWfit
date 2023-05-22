@@ -24,12 +24,13 @@ public class HavingBadgeController {
 	@GetMapping("/badge/{userNo}")
 	public ResponseEntity<?> list(@PathVariable int userNo) {
 		
-		List<HavingBadge> list = havingBadgeService.readHavingBadge(userNo);
+		HavingBadge havingBadge = havingBadgeService.readHavingBadge(userNo);
 		
-		if(list == null || list.size() == 0) {
+		if(havingBadge == null) {
 			return new ResponseEntity<String> ("뱃지가 하나도 없어요",HttpStatus.NO_CONTENT);
 		} else {
-			return new ResponseEntity<List<HavingBadge>> (list, HttpStatus.OK);
+			return new ResponseEntity <HavingBadge> (havingBadge, HttpStatus.OK);
+			// list로 반환하고있어서 vue에서 제대로 처리를 못해줬었다
 		}
 	}
 
