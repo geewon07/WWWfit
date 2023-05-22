@@ -15,40 +15,49 @@
    WHERE userNo = #{userNo}
 </select>
 
-<update id="updateHavingBadge" parameterType="java.util.HashMap">
+<!-- <update id="updateHavingBadge" parameterType="java.util.HashMap">
   <choose>
-    <when test="params.fitPartName == 'neck'">
+    <when test="params['fitPartName'] == 'neck'">
       UPDATE havingbadge
-      SET neck_count${params.count} = true
-      WHERE userNo = #{params.userNo}
+      SET neck_count${params['count']} = true
+      WHERE userNo = #{params['userNo']}
     </when>
-    <when test="params.fitPartName == 'shoulder'">
+    <when test="params['fitPartName'] == 'shoulder'">
       UPDATE havingbadge
-      SET shoulder_count${params.count} = true
-      WHERE userNo = #{params.userNo}
+      SET shoulder_count${params['count']} = true
+      WHERE userNo = #{params['userNo']}
     </when>
-    <when test="params.fitPartName == 'back'">
+    <when test="params['fitPartName'] == 'back'">
       UPDATE havingbadge
-      SET back_count${params.count} = true
-      WHERE userNo = #{params.userNo}
+      SET back_count${params['count']} = true
+      WHERE userNo = #{params['userNo']}
     </when>
-    <when test="params.fitPartName == 'hand'">
+    <when test="params['fitPartName'] == 'hand'">
       UPDATE havingbadge
-      SET hand_count${params.count} = true
-      WHERE userNo = #{params.userNo}
+      SET hand_count${params['count']} = true
+      WHERE userNo = #{params['userNo']}
     </when>
-    <when test="params.fitPartName == 'eye'">
+    <when test="params['fitPartName'] == 'eye'">
       UPDATE havingbadge
-      SET eye_count${params.count} = true
-      WHERE userNo = #{params.userNo}
+      SET eye_count${params['count']} = true
+      WHERE userNo = #{params['userNo']}
     </when>
-    <when test="params.fitPartName == 'leg'">
+    <when test="params['fitPartName'] == 'leg'">
       UPDATE havingbadge
-      SET leg_count${params.count} = true
-      WHERE userNo = #{params.userNo}
+      SET leg_count${params['count']} = true
+      WHERE userNo = #{params['userNo']}
     </when>
   </choose>
+</update> -->
+
+<update id="updateHavingBadge" parameterType="java.util.HashMap">
+  <if test="fitPartName != null">
+      UPDATE havingbadge
+      SET ${fitPartName}_count${count} = true
+      WHERE userNo = #{userNo}
+  </if>
 </update>
+
 <delete id="deleteUserHavingBadge" parameterType="int">
    DELETE FROM havingbadge
    WHERE userN0 = #{userNo}

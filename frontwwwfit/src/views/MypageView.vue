@@ -41,7 +41,14 @@ export default {
     MylevelView,
     NotificationView,
   },
-
+  computed: {
+    ...mapState({
+      loginUserInfo: (state) => state.UserIndex.loginUserInfo,
+    }),
+    getUser() {
+      return !!this.loginUserInfo;
+    },
+  },
 };
 </script>
 

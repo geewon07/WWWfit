@@ -21,5 +21,6 @@ public interface CalendarDao {
 	// calendarId로 등록 날짜 가져오기
 	public String gettoday(int calendarId);
 	
+	public int gettodaychallenge(int userNo, String calendarStart);
 
 }

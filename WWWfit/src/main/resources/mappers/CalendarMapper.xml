@@ -2,12 +2,13 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper  namespace="com.ssafy.wwwfit.model.dao.CalendarDao">
+<mapper namespace="com.ssafy.wwwfit.model.dao.CalendarDao">
 
 <parameterMap type="Map" id="selectday">
 <parameter property="userNo" javaType="int"/>
 <parameter property="calendarStart" javaType="string"/>
 </parameterMap>
+
   
 <select id="getCalendar" resultType="Calendar" parameterType="int">
    SELECT calendarId, userNo, challenge, fitPartName, date_format(calendarStart, '%Y-%m-%d') as calendarStart
@@ -37,7 +38,11 @@
    WHERE calendarId = #{calendarId};
 </select>
 
-
-
+<!-- 사실 위에 getCalendarDay이용해두댐 -->
+<select id="gettodaychallenge" parameterMap="selectday" resultType="int">
+   SELECT COUNT(*)
+   From calendars
+   WHERE userNo = #{userNo} and DATE_FORMAT(calendarStart, '%Y-%m-%d') = DATE_FORMAT(#{calendarStart}, '%Y-%m-%d');
+</select>
 
 </mapper>

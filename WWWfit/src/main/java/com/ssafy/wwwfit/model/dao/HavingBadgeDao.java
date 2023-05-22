@@ -2,6 +2,7 @@ package com.ssafy.wwwfit.model.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.ssafy.wwwfit.model.dto.HavingBadge;
 
@@ -14,7 +15,7 @@ public interface HavingBadgeDao {
 	public HavingBadge getHavingBadge(int userNo);
 	
 	// userid와 뱃지이름에 따른 뱃지 등록  //우선 int 값으로 반환
-	public int updateHavingBadge(HashMap<String, String> params);
+	public int updateHavingBadge(Map<String, String> params);
 	
 	// 삭제
 	public int deleteUserHavingBadge(int userNo);
