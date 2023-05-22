@@ -61,6 +61,7 @@ export default {
       console.log(rating);
       this.$store.dispatch("PostIndex/ratePoster", rating);
       this.$store.dispatch("PostIndex/getRating");
+      this.$router.push({name:'detail',params:{id:this.selected.posterSeq}});
       
     },
 

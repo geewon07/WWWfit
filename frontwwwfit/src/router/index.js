@@ -79,9 +79,10 @@ const routes = [
     ],
   },
   {
-    path: "detail",
+    path: "/detail/:id",
     name: "detail",
     component: PostDetailView,
+    props: true,
     // children:[
     //   path:""
     // ],
