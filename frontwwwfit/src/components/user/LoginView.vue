@@ -49,6 +49,13 @@
                     >
                       로그인
                     </button>
+                    <div class="kakao_img">
+                      <img
+                        src="../../assets/kakao_login.png"
+                        @click="kakaoLogin()"
+                        style="width: 100%; height: 55px"
+                      />
+                    </div>
                     <p class="mt-5 mb-3 text-body-secondary">©WWWfit</p>
                   </form>
                 </main>
@@ -87,6 +94,12 @@ export default {
       console.log("login attempt");
       this.$store.dispatch("UserIndex/loginUser", user);
     },
+  },
+  kakaoLogin() {
+    window.Kakao.Auth.login({
+      scope: "account_email",
+      success: this.getKakaoAccount,
+    });
   },
 };
 </script>

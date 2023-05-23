@@ -1,8 +1,8 @@
 import Vue from "vue";
 import "./plugins/bootstrap-vue";
-import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
-Vue.use(BootstrapVue)
-Vue.use(BootstrapVueIcons)
+import { BootstrapVue, BootstrapVueIcons } from "bootstrap-vue";
+Vue.use(BootstrapVue);
+Vue.use(BootstrapVueIcons);
 
 import App from "./App.vue";
 import router from "./router";
@@ -42,7 +42,7 @@ Notification.requestPermission().then((permission) => {
 });
 
 // TODO: Send token to server for send notification
-messaging.getToken(); //.then(console.log);
+messaging.getToken().then(console.log);
 
 // Handle received push notification at foreground
 messaging.onMessage((payload) => {
@@ -51,6 +51,7 @@ messaging.onMessage((payload) => {
 });
 
 Vue.config.productionTip = false;
+window.Kakao.init("35c7d27f96655d764a1d5d15a3981b9f");
 
 new Vue({
   router,
