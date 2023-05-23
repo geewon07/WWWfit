@@ -21,6 +21,7 @@
                             id="useridform"
                             class="form-control"
                             v-model.trim="userId"
+                            required
                           />
                         </div>
                       </div>
@@ -36,6 +37,7 @@
                             id="usernameform"
                             class="form-control"
                             v-model.trim="name"
+                            required
                           />
                         </div>
                       </div>
@@ -51,6 +53,7 @@
                             id="useremailform"
                             class="form-control"
                             v-model.trim="email"
+                            required
                           />
                         </div>
                       </div>
@@ -66,6 +69,7 @@
                             id="userpwform"
                             class="form-control"
                             v-model.trim="password"
+                            required
                           />
                         </div>
                       </div>
@@ -81,6 +85,7 @@
                             id="form3Example4cd"
                             class="form-control"
                             v-model="pwcheck"
+                            required
                           />
                         </div>
                       </div>
@@ -129,6 +134,9 @@ export default {
   name: "RegistView",
   data() {
     return {
+      isIdValid: false,
+      isPwdValid: false,
+      isEmailValid: false,
       name: "",
       userId: "",
       password: "",
@@ -143,6 +151,10 @@ export default {
       } else {
         return false;
       }
+    },
+    isFormValid() {
+      let result = this.isIdValid && this.isPwdValid && this.isEmailValid;
+      return result;
     },
   },
 

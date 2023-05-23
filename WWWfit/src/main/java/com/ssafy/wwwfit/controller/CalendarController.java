@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -71,7 +72,6 @@ public class CalendarController {
 			return new ResponseEntity<String>("아무것도 되지 않음",HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
-    
 	@DeleteMapping("/calendar/{id}")
 	public ResponseEntity<?> delete(@PathVariable int calendarId) {
         int deletedone = calendarService.removeCalendar(calendarId);

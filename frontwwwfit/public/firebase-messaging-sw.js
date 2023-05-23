@@ -8,7 +8,7 @@ importScripts("https://www.gstatic.com/firebasejs/8.6.5/firebase-messaging.js");
 // messagingSenderId.
 firebase.initializeApp({
   apiKey: "AIzaSyAf1RTS3Mb101hGxSd70lfpH4vPkDSpK3k",
-  projectId: "fit-6npm6c29",
+  projectId: "fit-66c29",
   messagingSenderId: "1000689444688",
   appId: "1:1000689444688:web:c2175b4ffda57d727bae55",
 });
@@ -16,17 +16,18 @@ firebase.initializeApp({
 // Retrieve an instance of Firebase Messaging so that it can handle background
 // messages.
 const messaging = firebase.messaging();
-
 // 백그라운드 상태에서 받은 알림 처리
 messaging.setBackgroundMessageHandler((payload) => {
   console.log(
     "[firebase-messaging-sw.js] Received background message ",
-    payload
+    payload,
+    payload.data.content,
+    payload.data.title
   );
   // Customize notification here
-  const notificationTitle = "Background Message Title";
+  const notificationTitle = payload.data.title;
   const notificationOptions = {
-    body: "Background Message body.",
+    body: payload.data.content,
     icon: "/firebase-logo.png",
   };
 

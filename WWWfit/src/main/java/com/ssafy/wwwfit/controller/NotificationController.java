@@ -24,9 +24,6 @@ public class NotificationController {
 	@GetMapping("/notification/{userNo}")
 	public ResponseEntity<?> getUser(@PathVariable int userNo){
 		List<Notification> notifications = nService.getNotification(userNo);
-		if(notifications==null | notifications.size() == 0) {
-			return new ResponseEntity<String>("알림없음",HttpStatus.NOT_FOUND);
-		}
 		return new ResponseEntity<List<Notification>>(notifications, HttpStatus.OK);
 	}
 }
