@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
 export default {
   name: "PostDetailRating",
   props: ["selected", "loginUserInfo", "getAverage"],
@@ -60,7 +60,7 @@ export default {
     },
   },
   computed: {
-    ...mapState("PostIndex/contentAVG"),
+    // ...mapState("PostIndex/contentAVG"),
     // ...mapState("PostIndex/"),
   },
 };

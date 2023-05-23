@@ -1,5 +1,5 @@
 <template>
-  <div @click="executeSearch">
+  <div>
     <div>
       <b-carousel
         id="carousel-1"
@@ -25,21 +25,51 @@
         </b-carousel-slide>
       </b-carousel>
     </div>
-    <search-bar :loginUserInfo="this.loginUserInfo"></search-bar>
-    <router-view></router-view>
+
+  <b-card title="Card Title" no-body>
+    <!-- <search-bar :loginUserInfo="this.loginUserInfo"></search-bar> -->
+        <b-card-header header-tag="nav">
+      <b-nav card-header pills>
+        <!-- <b-nav-item>'s with child routes. Note the trailing slash on the first <b-nav-item> -->
+        <b-nav-item to="/"  :videos="this.videos"
+          :loginUserInfo="loginUserInfo" exact exact-active-class="active">동영상검색 결과</b-nav-item>
+        <b-nav-item to="/bookmark" v-show="loginUserInfo"
+            :loginUserInfo="loginUserInfo" exact exact-active-class="active">북마크</b-nav-item>
+        <b-nav-form class="ml-auto">
+        <b-form-input
+          v-model="keyword"
+          size="lg"
+          class="mr-lg-2"
+          placeholder="Search"
+        ></b-form-input>
+        <b-button size="lg" class="my-2 my-sm" @click="search">Search</b-button>
+      </b-nav-form>
+      </b-nav>
+    </b-card-header>
+     <b-card-body>
+      <router-view></router-view>
+    </b-card-body>
+  </b-card>
   </div>
 </template>
 
 <script>
 // import SearchResult from "@/components/home/SearchResult.vue";//, SearchResult
-import SearchBar from "../components/home/SearchBar.vue";
+// import SearchBar from "../components/home/SearchBar.vue";
 import { mapState } from "vuex"; //v-if="getUser"PostListView , SearchResult
 export default {
-  components: { SearchBar },
+  // components: { SearchBar },
   name: "HomeView",
+  data(){
+    return{
+      keyword:"",
+    };
+  },
   computed: {
     ...mapState({
       loginUserInfo: (state) => state.UserIndex.loginUserInfo,
+      videos:(state)=> state.SearchIndex.videos,
+
     }),
     // getUser() {
     //   if (this.loginUser) {
@@ -54,7 +84,7 @@ export default {
     // this.$store.dispatch("PostIndex/search","사무실 운동");
   },
   methods: {
-    executeSearch() {
+    search() {
       //  this.$store.dispatch("PostIndex/search","사무실 운동");
     },
   },

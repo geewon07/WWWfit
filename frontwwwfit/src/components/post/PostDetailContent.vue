@@ -99,11 +99,14 @@ export default {
         fitPartName: fitPartName,
         userNo: this.loginUserInfo.userNo,
       };
+
       this.$store.dispatch("MypageIndex/challengeDone", calendar);
-      this.$router.push({
-        name: "detail",
-        params: { posterSeq: this.selected.posterSeq },
-      });
+      // this.$router.push({
+      //   name: "detail",
+      //   params: { posterSeq: this.selected.posterSeq },
+      // });
+      this.$router.go(0);
+
     },
   },
   computed: {

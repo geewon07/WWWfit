@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-navbar>
-      <b-navbar-brand :to="{ name: 'home' }">
+      <b-navbar-brand to="/">
         <h3>logo placeholder</h3>
       </b-navbar-brand>
       <b-collapse id="nav-collaps" is-nav>

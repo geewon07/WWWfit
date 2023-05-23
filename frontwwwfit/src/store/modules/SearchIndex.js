@@ -20,6 +20,10 @@ const UserIndex = {
   },
   actions: {
     search({ commit }, payload) {
+      if(localStorage.getItem("searchresult")!=null){
+        commit("SEARCH_VIDEO",localStorage.getItem("searchresult"));
+        return;
+      }
       console.log("called search");
       const URL = "https://www.googleapis.com/youtube/v3/search";
       const API_KEY = "AIzaSyBCO-66WLwAatfv9ne98gfQ1oJlBlYWNj8"; //process.env.VUE_APP_YOUTUBE_API_KEY;
@@ -36,6 +40,8 @@ const UserIndex = {
       })
         .then((res) => {
           console.log(res);
+          localStorage
+          res.data.items
           commit("SEARCH_VIDEO", res.data.items);
           // return res.data.items;
         })

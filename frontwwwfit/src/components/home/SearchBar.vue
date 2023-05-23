@@ -1,8 +1,13 @@
 <template>
   <div>
-    <h1></h1>
-    <div>
-      <b-nav-form>
+    <b-card-header header-tag="nav">
+      <b-nav card-header tabs>
+        <!-- <b-nav-item>'s with child routes. Note the trailing slash on the first <b-nav-item> -->
+        <b-nav-item><router-link to="/search/result"  :videos="this.videos"
+          :loginUserInfo="this.loginUserInfo" exact exact-active-class="active">동영상검색 결과</router-link></b-nav-item>
+        <b-nav-item to="/search/bookmark" v-show="loginUserInfo"
+            :loginUserInfo="this.loginUserInfo" exact exact-active-class="active">북마크</b-nav-item>
+        <b-nav-form>
         <b-form-input
           v-model="keyword"
           size="lg"
@@ -11,29 +16,8 @@
         ></b-form-input>
         <b-button size="lg" class="my-2 my-sm" @click="search">Search</b-button>
       </b-nav-form>
-      <b-nav pills>
-        <!-- <b-nav-item :to="{ name: 'plist' }" :loginUserInfo="this.loginUserInfo">
-          포스터리스트
-        </b-nav-item> -->
-        <b-nav-item
-          :to="{ name: 'sresult' }"
-          :videos="this.videos"
-          :loginUserInfo="this.loginUserInfo"
-        >
-          동영상</b-nav-item
-        >
-
-        <b-nav-item
-          ><router-link
-            v-show="loginUserInfo"
-            :loginUserInfo="this.loginUserInfo"
-            :to="{ name: 'bookmark' }"
-            >북마크</router-link
-          ></b-nav-item
-        >
       </b-nav>
-      <router-view></router-view>
-    </div>
+    </b-card-header>
   </div>
 </template>
 
