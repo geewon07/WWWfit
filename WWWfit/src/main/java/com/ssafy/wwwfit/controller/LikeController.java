@@ -58,6 +58,7 @@ public class LikeController {
 		if(result!=0) {
 			Poster selected = pService.getOne(posterSeq);
 			selected.setLikeCount(selected.getLikeCount()+1);
+			System.out.println(selected.getLikeCount());
 			pService.edit(selected);
 			uService.getExp(uService.getUser(loginUser), 1);
 		}

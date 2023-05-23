@@ -33,8 +33,8 @@ public class RatingController {
 		return new ResponseEntity<List<Rating>>(ratings,HttpStatus.OK);
 	}
 	
-	@GetMapping("/rating/{ratingId}")
-	public ResponseEntity<?> getBookmark (@PathVariable int ratingId){
+	@GetMapping("/one/{ratingId}")
+	public ResponseEntity<?> getRating(@PathVariable int ratingId){
 		Rating rating = rService.selectOne(ratingId);
 		return new ResponseEntity<Rating>(rating,HttpStatus.OK);
 	}

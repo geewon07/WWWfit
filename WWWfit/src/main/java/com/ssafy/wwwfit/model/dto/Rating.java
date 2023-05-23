@@ -6,6 +6,7 @@ public class Rating {
 	private int contentSeq;
 	private int score;
 	private String review;//!! 이부분 추가??? `review` varchar(300)
+	private String RegDate;
 	public Rating() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -53,6 +54,12 @@ public class Rating {
 	}
 	public void setReview(String review) {
 		this.review = review;
+	}
+	public String getRegDate() {
+		return RegDate;
+	}
+	public void setRegDate(String regDate) {
+		RegDate = regDate;
 	}
 	
 	

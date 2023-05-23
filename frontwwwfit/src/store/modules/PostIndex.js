@@ -7,7 +7,8 @@ const PostIndex = {
     poster: {},
     postList: [],
     userLikes: [],
-    contentAVG: 0,
+    contentAVG: {},
+    ratings: [],
   },
   getters: {},
   mutations: {
@@ -20,8 +21,11 @@ const PostIndex = {
     GET_USER_LIKES(state, payload) {
       state.userLikes = payload;
     },
-    GET_RATING(state, payload) {
+    GET_AVG(state, payload) {
       state.contentAVG = payload;
+    },
+    GET_RATINGS(state, payload) {
+      state.ratings = payload;
     },
   },
   actions: {
@@ -108,7 +112,7 @@ const PostIndex = {
           console.log("unlike error:" + err);
         });
     },
-    getRating({ commit }, contentSeq) {
+    getAVG({ commit }, contentSeq) {
       const API_URL = `${REST_API}rating/rating`;
 
       axios({
@@ -119,8 +123,23 @@ const PostIndex = {
         console.log("rating get " + res.data);
         // commit("GET_RATING");
 
-        commit("GET_RATING", res.data);
+        commit("GET_AVG", res.data);
         return res.data;
+      });
+    },
+    getRatings({ commit }, contentSeq) {
+      const API_URL = `${REST_API}rating/rating/${contentSeq}`;
+
+      axios({
+        url: API_URL,
+        method: "GET",
+        params: { contentSeq },
+      }).then((res) => {
+        console.log("rating get " + res.data);
+        // commit("GET_RATING");
+
+        commit("GET_RATINGS", res.data);
+        // return res.data;
       });
     },
     ratePoster({ commit }, rating) {

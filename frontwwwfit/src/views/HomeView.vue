@@ -25,23 +25,17 @@
         </b-carousel-slide>
       </b-carousel>
     </div>
-    <!-- <post-list-view :loginUserInfo="loginUserInfo"></post-list-view> -->
     <search-bar :loginUserInfo="this.loginUserInfo"></search-bar>
-    <!-- <post-view :loginUserInfo="this.loginUserInfo"></post-view> -->
-    <search-result :loginUserInfo="loginUserInfo"></search-result>
-    <!-- <post-list-view :loginUserInfo="loginUserInfo"></post-list-view> -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-// import PostView from "@/views/PostView.vue";
-import SearchResult from "@/components/home/SearchResult.vue";
+// import SearchResult from "@/components/home/SearchResult.vue";//, SearchResult
 import SearchBar from "../components/home/SearchBar.vue";
-// import PostListView from "@/components/post/PostListView.vue";PostView,
 import { mapState } from "vuex"; //v-if="getUser"PostListView , SearchResult
-// import PostView from "@/views/PostView.vue";
 export default {
-  components: { SearchBar, SearchResult },
+  components: { SearchBar },
   name: "HomeView",
   computed: {
     ...mapState({

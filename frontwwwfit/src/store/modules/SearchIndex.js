@@ -1,15 +1,21 @@
 import axios from "axios";
 
+const REST_API = `http://localhost:9999/api`;
 const UserIndex = {
   namespaced: true,
   state: {
     video: null,
     videos: [],
+    bookmarks: [],
+    bfolders: [],
   },
   getters: {},
   mutations: {
     SEARCH_VIDEO(state, payload) {
       state.videos = payload;
+    },
+    GET_BOOKMARKS(state, payload) {
+      state.bookmarks = payload;
     },
   },
   actions: {
@@ -43,6 +49,30 @@ const UserIndex = {
         .catch((err) => {
           console.log(err);
         });
+    },
+    getBookmarks({ commit }, userNo) {
+      const API_URL = `${REST_API}-bookmark/${userNo}`;
+      axios({
+        url: API_URL,
+        method: "GET",
+        params: {
+          userNo,
+        },
+      }).then((res) => {
+        commit("GET_BOOKMARKS", res.data);
+      });
+    },
+    getFolders({ commit }, userNo) {
+      const API_URL = `${REST_API}-bookmark/bookmark/folders`;
+      axios({
+        url: API_URL,
+        method: "GET",
+        params: {
+          userNo,
+        },
+      }).then((res) => {
+        commit("GET_FOLDERS", res.data);
+      });
     },
   },
   modules: {},

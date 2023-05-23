@@ -8,6 +8,7 @@ const MypageIndex = {
     badges: {},
     mypageinfo: {},
     notification: [],
+    todaydone: {},
   },
   getters: {},
   mutations: {
@@ -28,6 +29,9 @@ const MypageIndex = {
     },
     GET_NOTIFICATION(state, payload) {
       state.notification = payload;
+    },
+    TODAY_CHECK(state, payload) {
+      state.todaydone = payload;
     },
   },
   actions: {
@@ -100,6 +104,45 @@ const MypageIndex = {
         commit("GET_MYPAGE", res.data);
         console.log(res.data);
       });
+    },
+    todaycheck({ commit }, calendar) {
+      const API_URL = `${REST_API}_calendar/calendar/${calendar.userNo}/${calendar.calendarStart}`;
+      console.log("today check action called" + API_URL);
+      axios({
+        url: API_URL,
+        method: "GET",
+        params: {
+          userNo: calendar.userNo,
+          calendarStart: calendar.calendarStart,
+        },
+      }).then((res) => {
+        console.log(res.data);
+        if (res.data === 0) {
+          commit("TODAY_CHECK", false);
+        } else commit("TODAY_CHECK", true);
+      });
+    },
+    challengeDone({ commit }, calendar) {
+      const API_URL = `${REST_API}_calendar/calendar`;
+      axios({
+        url: API_URL,
+        method: "POST",
+        params: {
+          calendarStart: calendar.calendarStart,
+          fitPartName: calendar.fitPartName,
+          userNo: calendar.userNo,
+        },
+      })
+        .then((res) => {
+          console.log("challenge post sent" + res.data);
+          if (res.data == 1) {
+            this.todaycheck({ commit }, calendar);
+          }
+          commit;
+        })
+        .catch((err) => {
+          console.log("challenge post req err" + err);
+        });
     },
   },
   modules: {},

@@ -20,13 +20,19 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
-    children: [
-      {
-        path: "/searchresult",
-        name: "sresult",
-        component: SearchResult,
-      },
-    ],
+    // children: [
+    //   {
+    //     path: "/searchresult",
+    //     name: "sresult",
+    //     component: SearchResult,
+    //   },
+    // ],
+  },
+
+  {
+    path: "/searchresult",
+    name: "sresult",
+    component: SearchResult,
   },
   {
     path: "/mypage",
@@ -70,7 +76,6 @@ const routes = [
     name: "post",
     component: PostView,
     children: [
-
       {
         path: "list",
         name: "plist",
@@ -79,7 +84,7 @@ const routes = [
     ],
   },
   {
-    path: "/detail/:id",
+    path: "/detail/:posterSeq",
     name: "detail",
     component: PostDetailView,
     props: true,

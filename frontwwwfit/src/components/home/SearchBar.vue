@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>SEARCH BAR placeholder</h1>
+    <h1></h1>
     <div>
       <b-nav-form>
         <b-form-input
@@ -23,22 +23,30 @@
           동영상</b-nav-item
         >
 
-        <b-nav-item v-show="loginUserInfo" :loginUserInfo="this.loginUserInfo"
-          >북마크</b-nav-item
+        <b-nav-item
+          ><router-link
+            v-show="loginUserInfo"
+            :loginUserInfo="this.loginUserInfo"
+            :to="{ name: 'bookmark' }"
+            >북마크</router-link
+          ></b-nav-item
         >
       </b-nav>
-      <!-- <router-view></router-view> -->
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
+// import BookmarkViewVue from "@/views/BookmarkView.vue";
+// import SearchResultVue from "./SearchResult.vue";
 import { mapState } from "vuex"; //v-if="getUser"
-// import PostListView from "@/components/post/PostListView.vue";
+
 export default {
   name: "SearchBar",
   components: {
-    // PostListView,
+    // BookmarkViewVue,
+    // SearchResultVue,
   },
   props: {
     loginUserInfo: {
