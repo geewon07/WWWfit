@@ -39,11 +39,10 @@
               precision="1"
             >
             </b-form-rating>
-            {{ rating.userNo }}|{{ rating.review }}|<span
-              id="date_font"
-              class="text-right"
-              >{{ rating.regDate }}</span
-            >
+            {{ rating.userNo }}무기명 고?|{{ rating.review }} 수정 삭제
+            추가?|<span id="date_font" class="text-right"
+              >{{ rating.regDate }}<button></button
+            ></span>
           </b-list-group-item>
         </b-list-group>
 
@@ -51,10 +50,15 @@
           <router-link :to="{ name: 'plist' }" class="card-link">
             목록으로
           </router-link>
-          <a href="#" class="card-link"></a>
+          <a
+            :href="`https://darebee.com/workouts/${address}`"
+            class="card-link"
+          >
+            DAREBEE
+          </a>
         </b-card-body>
 
-        <b-card-footer>
+        <b-card-footer v-if="this.loginUserInfo">
           <b-button
             variant="success"
             v-if="!todaydone"
@@ -106,17 +110,26 @@ export default {
       //   params: { posterSeq: this.selected.posterSeq },
       // });
       this.$router.go(0);
-
     },
   },
   computed: {
     // ...mapState("PostIndex", ["ratings"]),
+    address() {
+      let mod = this.selected.posterSrc.replace(".jpg", ".html");
+      console.log(mod);
+      return mod;
+    },
     contentfilter() {
       return this.ratings.filter(
         (item) => item.contentSeq === this.selected.posterSeq
       );
     },
   },
+  // data() {
+  //   return {
+  //     address: this.selected.posterSrc.replace(".jpg", ".html"),
+  //   };
+  // },
 };
 </script>
 

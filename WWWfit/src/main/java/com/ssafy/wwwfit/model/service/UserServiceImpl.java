@@ -166,6 +166,12 @@ public class UserServiceImpl implements UserService {
 		return uDao.gettokens();
 	}
 
+	@Override
+	public String getUsername(int userNo) {
+		
+		return uDao.getUsername(userNo);
+	}
+
 //	@Override
 //	public int loginUser() {
 //		login

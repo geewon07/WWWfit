@@ -33,6 +33,7 @@
                       :id="`${index}`"
                       :title="video.snippet.title"
                       size="xl"
+                      @ok="doBookmark(video.id.videoId)"
                     >
                       <div class="row">
                         <div class="col">

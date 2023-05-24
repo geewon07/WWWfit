@@ -9,13 +9,20 @@
           :img-alt="poster.title"
           img-top
         >
-          <b-card-img
+          <post-list-item
+            :poster="poster"
+            :userLikes="userLikes"
+          ></post-list-item>
+          <!-- <b-card-img
             @click="selectPoster(poster.posterSeq)"
             :style="{ objectFit: 'cover', objectPosition: 'top' }"
             :src="require(`@/assets/${poster.posterSrc}`)"
-          />
-          <!-- 난이도:{{ poster.difficulty }}  -->
-          <b-card-text>
+          /> -->
+
+          <!-- <b-card-text
+            class="small text-muted d-flex justify-content-between align-items-center"
+          >
+            <span>좋아요: {{ poster.likeCount }}</span>
             <b-button v-if="loginUserInfo" pill variant="outline-danger">
               <b-icon
                 v-show="userLiked(poster.posterSeq)"
@@ -28,13 +35,7 @@
                 @click="like(poster.posterSeq)"
               />
             </b-button>
-            <b-button v-show="loginUserInfo" pill variant="outline-secondary">
-              <b-icon icon="bookmark" @click="bookmark"></b-icon>
-            </b-button>
-          </b-card-text>
-          <b-card-text class="small text-muted">
-            좋아요:{{ poster.likeCount }}</b-card-text
-          >
+          </b-card-text> -->
         </b-card>
       </b-card-group>
     </div>
@@ -43,8 +44,12 @@
 
 <script>
 import { mapState } from "vuex";
+import PostListItem from "./PostListItem.vue";
 export default {
   name: "PostListView",
+  components: {
+    PostListItem,
+  },
   props: ["loginUserInfo", "select", "postList"],
   data() {
     return {

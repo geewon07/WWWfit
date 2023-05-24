@@ -2,12 +2,12 @@
   <div>
     <!-- <h2>포스트 디테일 뷰! 선택하면 커지게?</h2>
     <b-button v-b-toggle.collapse-detail> X </b-button>
-    <b-collapse visible id="collapse-detail"> -->
+    <b-collapse visible id="collapse-detail">     :loginUserInfo="loginUserInfo"-->
     <!-- <div> -->
     <post-detail-content
       :selected="poster"
-      :loginUserInfo="loginUserInfo"
       :getAverage="getAverage"
+      :loginUserInfo="loginUserInfo"
       :ratings="ratings"
       :todaydone="todaydone"
     ></post-detail-content>
@@ -39,20 +39,22 @@ export default {
 
     const formattedDate = `${year}-${month}-${day}`;
     console.log(formattedDate);
+    if (this.loginUserInfo != null) {
+      let calendar = {
+        calendarStart: formattedDate,
 
-    let calendar = {
-      calendarStart: formattedDate,
-      userNo: this.loginUserInfo.userNo,
-    };
-    this.$store.dispatch("MypageIndex/todaycheck", calendar);
-    console.log("todaydone:" + this.todaydone);
+        userNo: this.loginUserInfo.userNo,
+      };
+      this.$store.dispatch("MypageIndex/todaycheck", calendar);
+      console.log("todaydone:" + this.todaydone);
+    }
   },
 
   computed: {
     ...mapState({
       getAverage: (state) => state.PostIndex.contentAVG,
       poster: (state) => state.PostIndex.poster,
-      loginUserInfo: (state) => state.UserIndex.loginUserInfo,
+      // loginUserInfo: (state) => state.UserIndex.loginUserInfo,
       ratings: (state) => state.PostIndex.ratings,
       todaydone: (state) => state.MypageIndex.todaydone,
     }),

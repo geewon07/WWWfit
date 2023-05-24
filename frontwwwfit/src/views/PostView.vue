@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>포스트 뷰!!</h2>
+    <!-- <h2>포스트 뷰!!</h2> -->
     <b-container>
       <b-row>
         <b-col>

@@ -20,6 +20,14 @@
         ></b-carousel-slide>
 
         <!-- Slides with custom text -->
+        <b-carousel-slide :img-src="require('@/assets/resize.jpg')">
+          <h1>Hello world!</h1>
+        </b-carousel-slide>
+
+        <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
+          <h1>Hello world!</h1>
+        </b-carousel-slide>
+
         <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
           <h1>Hello world!</h1>
         </b-carousel-slide>
@@ -91,8 +99,13 @@ export default {
     // },
   },
   created() {
-    this.$store.dispatch("SearchIndex/getBookmarks", this.loginUserInfo.userNo);
-    this.$store.dispatch("SearchIndex/getFolders", this.loginUserInfo.userNo);
+    if (this.loginUserInfo) {
+      this.$store.dispatch(
+        "SearchIndex/getBookmarks",
+        this.loginUserInfo.userNo
+      );
+      this.$store.dispatch("SearchIndex/getFolders", this.loginUserInfo.userNo);
+    }
   },
   methods: {
     search() {
