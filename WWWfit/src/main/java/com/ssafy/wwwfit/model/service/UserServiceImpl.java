@@ -195,7 +195,7 @@ public class UserServiceImpl implements UserService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=948d2203ba0cab173c54be84a312f82b"); // TODO REST_API_KEY 입력
-            sb.append("&redirect_uri=http://localhost:8080/"); // TODO 인가코드 받은 redirect_uri 입력
+            sb.append("&redirect_uri=http://localhost:8080/login"); // TODO 인가코드 받은 redirect_uri 입력
             sb.append("&code=" + code);
             bw.write(sb.toString());
             bw.flush();
@@ -238,9 +238,13 @@ public class UserServiceImpl implements UserService {
     }
 
 	@Override
-	public void createKakaoUser(String access_token) {
+	public User createKakaoUser(String access_token) {
 		String reqURL = "https://kapi.kakao.com/v2/user/me";
-        
+        String email = "";
+        long id = 0;
+        String userId ="";
+        String name = "";
+        String password = "";
 		//access_token을 이용하여 사용자 정보 조회
 	    try {
 	       URL url = new URL(reqURL);
@@ -268,23 +272,43 @@ public class UserServiceImpl implements UserService {
 	       ObjectMapper objectMapper = new ObjectMapper();
            Map<String, Object> resultMap = objectMapper.readValue(result, new TypeReference<Map<String, Object>>() {});
 //         access_Token = (String) resultMap.get("access_token");
-	       long id = (long) resultMap.get("id");
+	       id = (long) resultMap.get("id");
 	       Map<String, Object> kakaoAccount = (Map<String, Object>) resultMap.get("kakao_account");
 	       boolean hasEmail = (boolean) kakaoAccount.get("has_email");
-	       String email = "";
 	       if(hasEmail){
 	           email = (String) kakaoAccount.get("email");
 	       }
-//
-	       System.out.println("id : " + id);
+	       Map<String, Object> properties = (Map<String, Object>) resultMap.get("properties");
+           name = (String) properties.get("nickname");
+	       
+           System.out.println("id : " + id);
 	       System.out.println("email : " + email);
-//
+           System.out.println(name);
 //	       br.close();
-//
+           
 	       } catch (IOException e) {
 	            e.printStackTrace();
 	       }
-		
+	       // user의 id는 이메일에서@앞
+	        // 비번 : 이메일 + 고유 id
+//	      System.out.println(email);
+	      int idx = email.indexOf("@");
+	      if(idx > 1) {
+	      userId = email.substring(0,idx);}
+	      password = email + id;
+	      return new User(userId, password, name, email);
+	}
+
+	@Override
+	public int getUserId(String userId) {
+		// TODO Auto-generated method stub
+		return uDao.getUserId(userId);
+	}
+
+	@Override
+	public int insert_kakao(User user) {
+		// TODO Auto-generated method stub
+		return uDao.insert_kakao(user);
 	}
 
 //	@Override

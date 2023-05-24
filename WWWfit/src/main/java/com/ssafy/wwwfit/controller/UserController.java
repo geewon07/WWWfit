@@ -185,11 +185,21 @@ public class UserController {
 	}
 	
 	@GetMapping("auth/kakao/callback")
-	public void kakaoCallback(@RequestParam String code) {
+	public User kakaoCallback(@RequestParam String code) {
 		System.out.println("카카오토큰 : "+code);
 		String access_Token = uService.getKakaoAccessToken(code);
-		uService.createKakaoUser(access_Token);
+		User user = uService.createKakaoUser(access_Token);
+		int having = uService.getUserId(user.getUserId());
 		
+		// 회원가입
+		if(having == 0) {
+            user.setUserRank("Green");
+			uService.insert_kakao(user);
+			bpService.registBagesProgress(user.getUserNo());
+			hService.registHavingBadge(user.getUserNo());
+		}
+		
+		return user;
 		
 	}
 

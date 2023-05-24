@@ -11,7 +11,7 @@ public interface UserService {
 	//회원 가입
 	//유저 생성시 같이 병행하는 것: 배지 소유목록 초기화, 뱃지 경과 초기화, 환경설정 초기화,
 	public int regist(User user);
-	
+	public int insert_kakao(User user);
 	//회원 조회
 	public List<User> getUsers();
 	
@@ -53,5 +53,7 @@ public interface UserService {
 	// access-token 발급받기
 	public String getKakaoAccessToken ( String code) ;
 	
-	public void createKakaoUser(String access_token);
+	public User createKakaoUser(String access_token);
+	
+	public int getUserId(String userId);
 }
