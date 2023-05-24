@@ -27,49 +27,50 @@ const routes = [
       //   name:"searchbar",
       //   component:SearchBar,
       //   children: [
+      {
+        path: "",
+        name: "sresult",
+        component: SearchResult,
+      },
+      {
+        path: "bookmark",
+        name: "bookmark",
+        component: BookmarkView,
+        children: [
           {
-            path: "",
-            name: "sresult",
-            component: SearchResult,
-          },  {
-            path: "bookmark",
-            name: "bookmark",
-            component: BookmarkView,
-            children: [
-              {
-                path: "list",
-                name: "blist",
-                component: BookmarkListView,
-              },
-              {
-                path: "folder",
-                name: "folder",
-                component: BookmarkFolderView,
-              },
-            // ],
+            path: "list",
+            name: "blist",
+            component: BookmarkListView,
+          },
+          {
+            path: "folder",
+            name: "folder",
+            component: BookmarkFolderView,
+          },
+          // ],
           // },
         ],
       },
-    //     path: "searchresult",
-    //     name: "sresult",
-    //     component: SearchResult,
-    //   },  {
-    //     path: "bookmark",
-    //     name: "bookmark",
-    //     component: BookmarkView,
-    //     children: [
-    //       {
-    //         path: "list",
-    //         name: "blist",
-    //         component: BookmarkListView,
-    //       },
-    //       {
-    //         path: "folder",
-    //         name: "folder",
-    //         component: BookmarkFolderView,
-    //       },
-    //     ],
-    //   },
+      //     path: "searchresult",
+      //     name: "sresult",
+      //     component: SearchResult,
+      //   },  {
+      //     path: "bookmark",
+      //     name: "bookmark",
+      //     component: BookmarkView,
+      //     children: [
+      //       {
+      //         path: "list",
+      //         name: "blist",
+      //         component: BookmarkListView,
+      //       },
+      //       {
+      //         path: "folder",
+      //         name: "folder",
+      //         component: BookmarkFolderView,
+      //       },
+      //     ],
+      //   },
     ],
   },
   // {

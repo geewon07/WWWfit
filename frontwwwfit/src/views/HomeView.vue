@@ -16,7 +16,7 @@
         <b-carousel-slide
           caption="First slide"
           text="Nulla vitae elit libero, a pharetra augue mollis interdum."
-          img-src="https://picsum.photos/1024/480/?image=52"
+          :img-src="require('@/assets/WWWfit feat.png')"
         ></b-carousel-slide>
 
         <!-- Slides with custom text -->
@@ -26,30 +26,42 @@
       </b-carousel>
     </div>
 
-  <b-card title="Card Title" no-body>
-    <!-- <search-bar :loginUserInfo="this.loginUserInfo"></search-bar> -->
-        <b-card-header header-tag="nav">
-      <b-nav card-header pills>
-        <!-- <b-nav-item>'s with child routes. Note the trailing slash on the first <b-nav-item> -->
-        <b-nav-item to="/"  :videos="this.videos"
-          :loginUserInfo="loginUserInfo" exact exact-active-class="active">동영상검색 결과</b-nav-item>
-        <b-nav-item to="/bookmark" v-show="loginUserInfo"
-            :loginUserInfo="loginUserInfo" exact exact-active-class="active">북마크</b-nav-item>
-        <b-nav-form class="ml-auto">
-        <b-form-input
-          v-model="keyword"
-          size="lg"
-          class="mr-lg-2"
-          placeholder="Search"
-        ></b-form-input>
-        <b-button size="lg" class="my-2 my-sm" @click="search">Search</b-button>
-      </b-nav-form>
-      </b-nav>
-    </b-card-header>
-     <b-card-body>
-      <router-view></router-view>
-    </b-card-body>
-  </b-card>
+    <b-card title="Card Title" no-body>
+      <!-- <search-bar :loginUserInfo="this.loginUserInfo"></search-bar> -->
+      <b-card-header header-tag="nav">
+        <b-nav card-header pills>
+          <!-- <b-nav-item>'s with child routes. Note the trailing slash on the first <b-nav-item> -->
+          <b-nav-item to="/" exact exact-active-class="active"
+            >동영상검색 결과</b-nav-item
+          >
+          <b-nav-item
+            to="/bookmark"
+            v-show="loginUserInfo"
+            :loginUserInfo="loginUserInfo"
+            exact
+            exact-active-class="active"
+            >북마크</b-nav-item
+          >
+          <b-nav-form class="ml-auto">
+            <b-form-input
+              v-model="keyword"
+              size="lg"
+              class="mr-lg-2"
+              placeholder="Search"
+            ></b-form-input>
+            <b-button size="lg" class="my-2 my-sm" @click.prevent="search"
+              >Search</b-button
+            >
+          </b-nav-form>
+        </b-nav>
+      </b-card-header>
+      <b-card-body>
+        <router-view
+          :videos="videos"
+          :loginUserInfo="loginUserInfo"
+        ></router-view>
+      </b-card-body>
+    </b-card>
   </div>
 </template>
 
@@ -60,16 +72,15 @@ import { mapState } from "vuex"; //v-if="getUser"PostListView , SearchResult
 export default {
   // components: { SearchBar },
   name: "HomeView",
-  data(){
-    return{
-      keyword:"",
+  data() {
+    return {
+      keyword: "",
     };
   },
   computed: {
     ...mapState({
       loginUserInfo: (state) => state.UserIndex.loginUserInfo,
-      videos:(state)=> state.SearchIndex.videos,
-
+      videos: (state) => state.SearchIndex.videos,
     }),
     // getUser() {
     //   if (this.loginUser) {
@@ -80,12 +91,12 @@ export default {
     // },
   },
   created() {
-    // this.$refs.SearchBar.search();
-    // this.$store.dispatch("PostIndex/search","사무실 운동");
+    this.$store.dispatch("SearchIndex/getBookmarks", this.loginUserInfo.userNo);
+    this.$store.dispatch("SearchIndex/getFolders", this.loginUserInfo.userNo);
   },
   methods: {
     search() {
-      //  this.$store.dispatch("PostIndex/search","사무실 운동");
+      this.$store.dispatch("SearchIndex/search", "사무실 운동" + this.keyword);
     },
   },
 };

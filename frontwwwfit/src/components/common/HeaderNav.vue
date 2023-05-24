@@ -2,7 +2,7 @@
   <div>
     <b-navbar>
       <b-navbar-brand to="/">
-        <h3>logo placeholder</h3>
+        <h3>WWWfit</h3>
       </b-navbar-brand>
       <b-collapse id="nav-collaps" is-nav>
         <b-navbar-nav>

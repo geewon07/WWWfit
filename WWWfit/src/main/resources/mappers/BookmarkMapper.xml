@@ -19,7 +19,7 @@ where bookmarkId=#{bookmarkId}
 select * from bookmarks
 where userNo=#{userNo} and bname=#{bname}
 </select>
-<select id="folders" parameterType="string" resultType="string">
+<select id="folders" parameterType="int" resultType="java.lang.String">
 select distinct bname from bookmarks
 where userNo=#{userNo}
 </select>
@@ -33,9 +33,9 @@ where bookmarkId=#{bookmarkId}
 
 <insert id="insert" parameterType="Bookmark">
 insert into bookmarks
-(userNo, posterSeq,bname)
+(userNo, posterSeq,bname, description)
 values
-(#{userNo},#{posterSeq},#{bname})
+(#{userNo},#{posterSeq},#{bname},#{description})
 </insert>
 <delete id="delete" parameterType="int">
 delete from bookmarks where bookmarkId=#{bookmarkId}
