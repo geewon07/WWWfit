@@ -13,20 +13,27 @@ const UserIndex = {
   mutations: {
     SEARCH_VIDEO(state, payload) {
       state.videos = payload;
+      console.log(state.videos);
     },
     GET_BOOKMARKS(state, payload) {
       state.bookmarks = payload;
     },
+    GET_FOLDERS(state, payload) {
+      state.bfolders = payload;
+    },
   },
   actions: {
     search({ commit }, payload) {
-      if(localStorage.getItem("searchresult")!=null){
-        commit("SEARCH_VIDEO",localStorage.getItem("searchresult"));
+      if (localStorage.getItem("searchresult") != null) {
+        commit(
+          "SEARCH_VIDEO",
+          JSON.parse(localStorage.getItem("searchresult"))
+        );
         return;
       }
       console.log("called search");
       const URL = "https://www.googleapis.com/youtube/v3/search";
-      const API_KEY = "AIzaSyBCO-66WLwAatfv9ne98gfQ1oJlBlYWNj8"; //process.env.VUE_APP_YOUTUBE_API_KEY;
+      const API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY; //process.env.VUE_APP_YOUTUBE_API_KEY;
       axios({
         url: URL,
         method: "GET", //default get방식
@@ -35,13 +42,14 @@ const UserIndex = {
           part: "snippet",
           q: payload,
           type: "video",
-          maxResults: 1,
+          maxResults: 10,
         },
       })
         .then((res) => {
-          console.log(res);
-          localStorage
-          res.data.items
+          console.log("response" + res);
+          console.log("response data" + res.data);
+          console.log("response data items" + res.data.items);
+          localStorage.setItem("searchresult", JSON.stringify(res.data.items));
           commit("SEARCH_VIDEO", res.data.items);
           // return res.data.items;
         })
@@ -79,6 +87,26 @@ const UserIndex = {
       }).then((res) => {
         commit("GET_FOLDERS", res.data);
       });
+    },
+    createBookmark({ commit }, bookmark) {
+      const API_URL = `${REST_API}-bookmark/bookmark`;
+      axios({
+        url: API_URL,
+        method: "POST",
+        params: {
+          bname: bookmark.bName,
+          description: bookmark.description,
+          posterSeq: bookmark.posterSeq,
+          userNo: bookmark.userNo,
+        },
+      })
+        .then((res) => {
+          console.log(res + "posted bookmark");
+          commit; // and refresh?
+        })
+        .catch((err) => {
+          console.log("bookmark post error" + err);
+        });
     },
   },
   modules: {},

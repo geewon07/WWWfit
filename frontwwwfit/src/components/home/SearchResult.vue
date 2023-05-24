@@ -1,164 +1,86 @@
 <template>
   <div>
-    <h2>SEARCH RESULT placeholder</h2>
+    <!-- <h2>SEARCH RESULT placeholder</h2> -->
     <div class="album py-5 bg-light">
-      <div class="container">
-        카드컨테이너
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-              <svg
-                class="bd-placeholder-img card-img-top"
-                width="100%"
-                height="225"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: Thumbnail"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c"></rect>
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-              </svg>
-
-              <div class="card-body">
-                <p class="card-text">
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                   <button
-                      v-b-modal.modal-2
-                      type="button"
-                      class="btn btn-sm btn-outline-secondary"
-                    >
-                      자세히
-                    </button>
-                    <b-modal id="modal-2" title="BootstrapVue">
-                      <p class="my-4">
-                        !!!!!!! 여기에 ifram player 북마크 버튼,
-                        userLoginInfo.userNo dispatch
-                      </p>
-                    </b-modal>
-                    <button
-                      type="button"
-                      class="btn btn-sm btn-outline-secondary"
-                    >
-                      북마크
-                    </button>
-                  </div>
-                  <small class="text-muted">
-                    작은 글씨는 뭐를 나타내면 좋을까?</small
-                  >
-
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div v-if="videos">
-            <div
-              class="col-md-3"
-              v-for="(video,index) in videos"
-              :key="video.id.videoId"
-            >
-              <div class="card mb-4 box-shadow">
-                <img
-                  class="card-img-top"
-                  style="object-fit: cover"
-                  :src="video.snippet.thumbnails.high.url"
-                  data-holder-rendered="true"
-                />
-                <div class="card-body">
-                  <p class="card-text">{{ video.snippet.title }}</p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                       :v-b-modal="'modal-'+index"
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        자세히
-                      </button>
-                      <b-modal :id="'modal-'+index" title="video.snippet.title">
-                      <p class="my-4">
-
-
-<iframe width="560" height="315" :src="`https://www.youtube.com/embed/${video.id.videoId}`" 
-title="YouTube video player" frameborder="0" 
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-allowfullscreen></iframe>
-
-                        !!!!!!! 여기에 ifram player 북마크 버튼,
-                        userLoginInfo.userNo dispatch
-                      </p>
-                    </b-modal>
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        북마크
-                      </button>
-                    </div>
-                    <small class="text-muted">
-                      작은 글씨는 뭐를 나타내면 좋을까?</small
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3">
+      <div class="container" v-if="videos.length != 0">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div
+            v-for="(video, index) in videos"
+            :key="video.id.videoId"
+            class="col"
+          >
+            <!-- <div class="col"> -->
             <div class="card mb-4 box-shadow">
               <img
                 class="card-img-top"
                 style="object-fit: cover"
-                img-src="http://i.ytimg.com/vi/DwTqs4IHwbs/maxresdefault.jpg"
+                :src="video.snippet.thumbnails.high.url"
                 data-holder-rendered="true"
               />
               <div class="card-body">
-                <p class="card-text">영상제목</p>
+                <p class="card-text">{{ video.snippet.title }}</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <button
-                      v-b-modal.modal-1
+                    <b-button
+                      v-b-modal="`${index}`"
                       type="button"
-                      class="btn btn-sm btn-outline-secondary"
+                      class="btn btn-sm btn-outline"
                     >
                       자세히
-                    </button>
-                    <b-modal id="modal-1" size="lg" style="min-width:600px" title="BootstrapVue">
-                      <p class="my-4">
-                        !!!!!!! 여기에 ifram player 북마크 버튼,
-                        userLoginInfo.userNo dispatch
+                    </b-button>
 
-                        <iframe width="560" height="315" :src="`https://www.youtube.com/embed/wcIf3huwFhc`" 
-title="YouTube video player" frameborder="0" 
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-allowfullscreen></iframe>
-                      </p>
+                    <b-modal
+                      :id="`${index}`"
+                      :title="video.snippet.title"
+                      size="xl"
+                    >
+                      <div class="row">
+                        <div class="col">
+                          <iframe
+                            width="560"
+                            height="315"
+                            :src="`https://www.youtube.com/embed/${video.id.videoId}`"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                          ></iframe>
+                        </div>
+
+                        <div class="col">
+                          <p>
+                            {{ video.snippet.description }}
+                          </p>
+                          폴더 이름(미지정시 기본폴더에 저장됩니다):
+                          <b-input type="text" v-model="bName"> </b-input>
+                          북마크 설명(미지정시 동영상 제목이 저장됩니다, 100자)
+                          <b-input
+                            type="text"
+                            v-model="description"
+                            :placeholder="video.snippet.title"
+                          ></b-input>
+                        </div>
+                      </div>
                     </b-modal>
+
                     <button
                       type="button"
                       class="btn btn-sm btn-outline-secondary"
+                      @click="bmpopup(video.id.videoId, video.snippet.title)"
                     >
                       북마크
                     </button>
                   </div>
-                  <small class="text-muted">
-                    작은 글씨는 뭐를 나타내면 좋을까?</small
-                  >
+                  <small class="text-muted"> </small>
                 </div>
               </div>
             </div>
+            <!-- </div> -->
           </div>
         </div>
+      </div>
+      <div v-else>
+        <h2>검색하세요(스트레칭 부위, 통증, 증상)</h2>
       </div>
     </div>
   </div>
@@ -168,12 +90,36 @@ allowfullscreen></iframe>
 import { mapState } from "vuex";
 export default {
   name: "SearchResult",
+  props: ["videos", "loginUserInfo"],
   data() {
-    return {};
+    return {
+      bName: "default",
+      description: "",
+    };
+  },
+  methods: {
+    bmpopup(videoId, title) {
+      if (window.confirm("기본 폴더에 북마크를 저장하시겠습니까")) {
+        this.description = title;
+        this.doBookmark(videoId);
+      }
+    },
+    doBookmark(videoId) {
+      console.log("detail bookmark");
+      let bookmark = {
+        bName: this.bName,
+        description: this.description.slice(0, 80),
+        posterSeq: videoId,
+        userNo: this.loginUserInfo.userNo,
+      };
+      console.log(bookmark);
+      this.$store.dispatch("SearchIndex/createBookmark", bookmark);
+    },
   },
   computed: {
     ...mapState({
-      videos: (state) => state.PostIndex.videos,
+      // videos: (state) => state.PostIndex.videos,
+      // loginUserInfo: (state) => state.UserIndex.loginUserInfo,
     }),
   },
 };

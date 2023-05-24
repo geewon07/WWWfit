@@ -54,6 +54,7 @@ public class BookmarkController {
 	
 	@PostMapping("/bookmark")
 	public ResponseEntity<?> createBookmark(Bookmark bookmark){
+		System.out.println(bookmark);
 		int result = bService.create(bookmark);
 		if(result !=0) {
 			uService.getExp(uService.getUser(bookmark.getUserNo()), 2);
