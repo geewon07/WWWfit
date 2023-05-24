@@ -47,10 +47,11 @@ messaging.getToken().then(console.log);
 // Handle received push notification at foreground
 messaging.onMessage((payload) => {
   // console.log(payload);
-  alert(payload.data.message);
+  alert(payload.data.content);
 });
 
 Vue.config.productionTip = false;
+
 window.Kakao.init("35c7d27f96655d764a1d5d15a3981b9f");
 
 new Vue({

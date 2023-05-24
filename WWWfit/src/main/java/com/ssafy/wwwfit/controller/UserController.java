@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.wwwfit.model.dto.SearchCondition;
@@ -21,6 +23,7 @@ import com.ssafy.wwwfit.model.service.BadgesProgressService;
 import com.ssafy.wwwfit.model.service.HavingBadgeService;
 import com.ssafy.wwwfit.model.service.UserService;
 import com.ssafy.wwwfit.util.JwtUtil;
+
 
 @RestController
 @RequestMapping("/api-user")
@@ -53,12 +56,17 @@ public class UserController {
 	//회원가입 // 유효성 확인 후 hService와 bpService에서 등록하기!
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> doLogin(String userId, String password){
+	public ResponseEntity<?> doLogin(@RequestBody HashMap<String, Object> payload){
+		String userId = (String) payload.get("userId");
+		String password = (String) payload.get("userpassword");
+		String token = (String) payload.get("token");
 		Map<String,Object> result = new HashMap<String, Object>();
 		Integer userNo = uService.login(userId, password);
 //		if(userNo==null) {
 //			userNo=0;
 //		}
+		uService.updateTokenFirebase(userNo, token);
+		
 		System.out.println(userNo);
 		Map<String, String> data = new HashMap<String, String>();
 		if(userNo==null) {

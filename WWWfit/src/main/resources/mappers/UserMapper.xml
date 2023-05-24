@@ -56,5 +56,12 @@ where userNo=#{userNo}
 Select challengedays from users
 where userNo=#{userNo}
 </select>
-
+<update id="updateTokenFirebase" parameterType="Map">
+update users
+set token=#{token}
+where userNo=#{userNo}
+</update>
+<select id="gettokens" resultType="java.lang.String">
+select token from users;
+</select>
 </mapper>
