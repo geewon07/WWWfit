@@ -69,6 +69,7 @@
 // import SearchResult from "@/components/home/SearchResult.vue";//, SearchResult
 // import SearchBar from "../components/home/SearchBar.vue";
 import { mapState } from "vuex"; //v-if="getUser"PostListView , SearchResult
+import axios from "axios";
 export default {
   // components: { SearchBar },
   name: "HomeView",
@@ -91,12 +92,35 @@ export default {
     // },
   },
   created() {
-    this.$store.dispatch("SearchIndex/getBookmarks", this.loginUserInfo.userNo);
-    this.$store.dispatch("SearchIndex/getFolders", this.loginUserInfo.userNo);
+    if (this.loginUserInfo) {
+      this.$store.dispatch(
+        "SearchIndex/getBookmarks",
+        this.loginUserInfo.userNo
+      );
+      this.$store.dispatch("SearchIndex/getFolders", this.loginUserInfo.userNo);
+    }
+    if (this.$route.query.code) {
+      console.log("카카오코드: " + this.$route.query.code); //인가 코드
+
+      this.getToken();
+    }
   },
   methods: {
     search() {
       this.$store.dispatch("SearchIndex/search", "사무실 운동" + this.keyword);
+    },
+    getToken() {
+      const API_URL = "http://localhost:9999/api-user/auth/kakao/callback";
+
+      axios({
+        url: API_URL,
+        method: "GET",
+        params: {
+          code: this.$route.query.code,
+        },
+      }).then((res) => {
+        console.log(res);
+      });
     },
   },
 };

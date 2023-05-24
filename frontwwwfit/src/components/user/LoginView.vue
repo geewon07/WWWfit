@@ -94,12 +94,12 @@ export default {
       console.log("login attempt");
       this.$store.dispatch("UserIndex/loginUser", user);
     },
-    // kakaoLogin() {
-    //   const params = {
-    //     redirectUri: "http://localhost:8080/regist",
-    //   };
-    //   window.kakao.Auth.authorize(params);
-    // },
+    kakaoLogin() {
+      const param = {
+        redirectUri: "http://localhost:8080/",
+      };
+      window.Kakao.Auth.authorize(param);
+    },
     // getKakaoAccount() {
     //   window.Kakao.API.request({
     //     url: "/v2/user/me",

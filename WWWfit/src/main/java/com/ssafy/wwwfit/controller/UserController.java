@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -181,6 +183,14 @@ public class UserController {
 		int result = uService.quit(userNo);
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
-
+	
+	@GetMapping("auth/kakao/callback")
+	public void kakaoCallback(@RequestParam String code) {
+		System.out.println("카카오토큰 : "+code);
+		String access_Token = uService.getKakaoAccessToken(code);
+		uService.createKakaoUser(access_Token);
+		
+		
+	}
 
 }
