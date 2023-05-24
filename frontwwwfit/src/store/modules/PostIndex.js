@@ -7,6 +7,8 @@ const PostIndex = {
     poster: {},
     postList: [],
     userLikes: [],
+    contentAVG: {},
+    ratings: [],
   },
   getters: {},
   mutations: {
@@ -18,6 +20,12 @@ const PostIndex = {
     },
     GET_USER_LIKES(state, payload) {
       state.userLikes = payload;
+    },
+    GET_AVG(state, payload) {
+      state.contentAVG = payload;
+    },
+    GET_RATINGS(state, payload) {
+      state.ratings = payload;
     },
   },
   actions: {
@@ -102,6 +110,59 @@ const PostIndex = {
         })
         .catch((err) => {
           console.log("unlike error:" + err);
+        });
+    },
+    getAVG({ commit }, contentSeq) {
+      const API_URL = `${REST_API}rating/rating`;
+
+      axios({
+        url: API_URL,
+        method: "GET",
+        params: { contentSeq },
+      }).then((res) => {
+        console.log("rating get " + res.data);
+        // commit("GET_RATING");
+
+        commit("GET_AVG", res.data);
+        return res.data;
+      });
+    },
+    getRatings({ commit }, contentSeq) {
+      const API_URL = `${REST_API}rating/rating/${contentSeq}`;
+
+      axios({
+        url: API_URL,
+        method: "GET",
+        params: { contentSeq },
+      }).then((res) => {
+        console.log("rating get " + res.data);
+        // commit("GET_RATING");
+
+        commit("GET_RATINGS", res.data);
+        // return res.data;
+      });
+    },
+    ratePoster({ commit }, rating) {
+      const API_URL = `${REST_API}rating/rating`;
+      axios({
+        url: API_URL,
+        method: "POST",
+        params: rating,
+        // {
+        //   rating: {
+        //     contentSeq: rating.contentSeq,
+        //     review: rating.review,
+        //     score: rating.score,
+        //     userNo: rating.userNo,
+        //   },
+        // },
+      })
+        .then((res) => {
+          console.log(res.data);
+          commit;
+        })
+        .catch((err) => {
+          console.log("dorating err :" + err);
         });
     },
   },

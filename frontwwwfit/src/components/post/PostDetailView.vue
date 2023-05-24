@@ -1,67 +1,61 @@
 <template>
   <div>
-    <h2>포스트 디테일 뷰! 선택하면 커지게?</h2>
+    <!-- <h2>포스트 디테일 뷰! 선택하면 커지게?</h2>
     <b-button v-b-toggle.collapse-detail> X </b-button>
-    <b-collapse visible id="collapse-detail">
-      <div>
-        <b-card
-          no-body
-          style="max-width: auto"
-          :img-src="require(`@/assets/${selected.posterSrc}`)"
-          img-alt="Image"
-          img-top
-        >
-          <template #header>
-            <h4 class="mb-0">{{ selected.title }}</h4>
-          </template>
-
-          <b-card-body>
-            <b-card-title>Card Title</b-card-title>
-            <b-card-sub-title class="mb-2">Card Sub Title</b-card-sub-title>
-            <b-card-text>
-              <b-form>
-                <label for="rating-inline">평점:</label>
-                <b-form-rating
-                  id="rating-inline"
-                  inline
-                  value="0"
-                ></b-form-rating>
-              </b-form>
-            </b-card-text>
-          </b-card-body>
-
-          <b-list-group flush>
-            <b-list-group-item>{{ selected.fitPartName }}</b-list-group-item>
-            <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
-            <b-list-group-item>Vestibulum at eros</b-list-group-item>
-          </b-list-group>
-
-          <b-card-body>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-          </b-card-body>
-
-          <b-card-footer>This is a footer</b-card-footer>
-
-          <b-card-img
-            :src="require(`@/assets/darebee.png`)"
-            alt="Image"
-            bottom
-          ></b-card-img>
-        </b-card>
-      </div>
-    </b-collapse>
+    <b-collapse visible id="collapse-detail"> -->
+    <!-- <div> -->
+    <post-detail-content
+      :selected="poster"
+      :loginUserInfo="loginUserInfo"
+      :getAverage="getAverage"
+      :ratings="ratings"
+      :todaydone="todaydone"
+    ></post-detail-content>
   </div>
+  <!-- </b-collapse> -->
+  <!-- </div> -->
 </template>
 
 <script>
+import { mapState } from "vuex";
+import PostDetailContent from "@/components/post/PostDetailContent.vue";
 export default {
+  components: { PostDetailContent },
   name: "PostDetailView",
-  props: ["selected"],
-  methods: {
-    printposter() {
-      console.log();
-    },
+  props: ["loginUserInfo"],
+  created() {
+    this.$store.dispatch(
+      "PostIndex/selectPoster",
+      this.$route.params.posterSeq
+    );
+    this.$store.dispatch("PostIndex/getAVG", this.$route.params.posterSeq);
+    this.$store.dispatch("PostIndex/getRatings", this.$route.params.posterSeq);
+    //여기까지 받아오기!! 선택한 포스터, 평점- 리뷰 목록
+    // 오운완 조회
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+    const day = String(currentDate.getDate()).padStart(2, "0");
+
+    const formattedDate = `${year}-${month}-${day}`;
+    console.log(formattedDate);
+
+    let calendar = {
+      calendarStart: formattedDate,
+      userNo: this.loginUserInfo.userNo,
+    };
+    this.$store.dispatch("MypageIndex/todaycheck", calendar);
+    console.log("todaydone:" + this.todaydone);
+  },
+
+  computed: {
+    ...mapState({
+      getAverage: (state) => state.PostIndex.contentAVG,
+      poster: (state) => state.PostIndex.poster,
+      loginUserInfo: (state) => state.UserIndex.loginUserInfo,
+      ratings: (state) => state.PostIndex.ratings,
+      todaydone: (state) => state.MypageIndex.todaydone,
+    }),
   },
 };
 </script>

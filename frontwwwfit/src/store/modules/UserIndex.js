@@ -98,11 +98,13 @@ const UserIndex = {
     },
     loginUserInfo({ commit }) {
       const logintoken = sessionStorage.getItem("login-token");
-      const decoded = jwtDecode(logintoken);
-      if (logintoken == null) {
-        // router.push("/login");
-      } else {
-        commit("LOGIN_USER_INFO", decoded);
+      if (logintoken != null) {
+        const decoded = jwtDecode(logintoken);
+        if (logintoken == null) {
+          // router.push("/login");
+        } else {
+          commit("LOGIN_USER_INFO", decoded);
+        }
       }
     },
   },

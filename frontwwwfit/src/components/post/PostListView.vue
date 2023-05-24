@@ -1,33 +1,34 @@
 <template>
   <div>
-    <h2>홈화면 오픈시 포스트리스트뷰!</h2>
+    <h2></h2>
     <div class="container">
       <b-card-group columns>
         <b-card
-          v-for="poster in postList"
+          v-for="poster in posterfilter"
           :key="poster.posterSeq"
           :img-alt="poster.title"
           img-top
         >
-          <!--        :title="poster.title" :img-src="require(`@/assets/${poster.posterSrc}`)" -->
           <b-card-img
             @click="selectPoster(poster.posterSeq)"
             :style="{ objectFit: 'cover', objectPosition: 'top' }"
             :src="require(`@/assets/${poster.posterSrc}`)"
           />
-
           <!-- 난이도:{{ poster.difficulty }}  -->
           <b-card-text>
             <b-button v-if="loginUserInfo" pill variant="outline-danger">
               <b-icon
-                shift-v="-"
-                v-if="userLiked(poster.posterSeq)"
+                v-show="userLiked(poster.posterSeq)"
                 icon="heart-fill"
                 @click="unlike(poster.posterSeq)"
               />
-              <b-icon v-else icon="heart" @click="like(poster.posterSeq)" />
+              <b-icon
+                v-show="!userLiked(poster.posterSeq)"
+                icon="heart"
+                @click="like(poster.posterSeq)"
+              />
             </b-button>
-            <b-button v-if="loginUserInfo" pill variant="outline-secondary">
+            <b-button v-show="loginUserInfo" pill variant="outline-secondary">
               <b-icon icon="bookmark" @click="bookmark"></b-icon>
             </b-button>
           </b-card-text>
@@ -44,18 +45,20 @@
 import { mapState } from "vuex";
 export default {
   name: "PostListView",
-  props: ["loginUserInfo"],
+  props: ["loginUserInfo", "select", "postList"],
   data() {
     return {
-      slide: 0,
-      sliding: null,
-      text: " accordion",
-      // likePosterSeq: "",
+      selected: {},
     };
   },
   methods: {
     selectPoster(posterSeq) {
       this.$store.dispatch("PostIndex/selectPoster", posterSeq);
+      this.$router.push({
+        name: "detail",
+        params: { posterSeq },
+        props: { loginUserInfo: this.loginUserInfo }, // additional props
+      });
     },
     userLiked(posterSeq) {
       if (this.userLikes == null) {
@@ -75,11 +78,12 @@ export default {
       };
       this.$store.dispatch("PostIndex/likePoster", like).then(() => {
         // Dispatch additional actions to refresh the data
-        this.$store.dispatch("PostIndex/getPosters");
+        // this.$store.dispatch("PostIndex/getPosters");
         this.$store.dispatch(
           "PostIndex/getUserLikes",
           this.loginUserInfo.userNo
         );
+        this.$forceUpdate();
       });
     },
     unlike(posterSeq) {
@@ -90,11 +94,13 @@ export default {
 
       this.$store.dispatch("PostIndex/unlikePoster", like).then(() => {
         // Dispatch additional actions to refresh the data
-        this.$store.dispatch("PostIndex/getPosters");
+        this.$forceUpdate();
+        // this.$store.dispatch("PostIndex/getPosters");
         this.$store.dispatch(
           "PostIndex/getUserLikes",
           this.loginUserInfo.userNo
         );
+        this.$forceUpdate();
       });
     },
     bookmark() {},
@@ -108,18 +114,31 @@ export default {
   },
   computed: {
     ...mapState({
-      postList: (state) => state.PostIndex.postList,
+      // postList: (state) => state.PostIndex.postList,
       userLikes: (state) => state.PostIndex.userLikes,
+      poster: (state) => state.PostIndex.poster,
+      // loginUserInfo: (state) => state.UserIndex.loginUserInfo,
     }),
+    posterfilter() {
+      if (this.select == null) {
+        return this.postList;
+      }
+      if (this.select == "likes") {
+        if (this.userLikes == null) {
+          return [];
+        }
+        const likedPosters = this.userLikes.map((like) => like.posterSeq);
+
+        return this.postList.filter((item) =>
+          likedPosters.includes(item.posterSeq)
+        );
+      }
+      return this.postList.filter((item) => item.fitPartName == this.select);
+    },
   },
 
   // methods: {
-  //   onSlideStart(slide) {
-  //     this.sliding = true;
-  //   },
-  //   onSlideEnd(slide) {
-  //     this.sliding = false;
-  //   },
+
   // },
 };
 </script>

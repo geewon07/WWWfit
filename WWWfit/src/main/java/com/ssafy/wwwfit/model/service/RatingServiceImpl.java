@@ -50,8 +50,11 @@ public class RatingServiceImpl implements RatingService {
 	}
 
 	@Override
-	public double getAVG(int contentSeq) {
-		double result = rDao.getAVG(contentSeq);
+	public Double getAVG(Integer contentSeq) {
+		if(rDao.getAVG(contentSeq)==null) {
+			return (double) 0;
+		}
+		Double result = rDao.getAVG(contentSeq);
 		return result;
 	}
 

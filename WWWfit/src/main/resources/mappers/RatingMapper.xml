@@ -10,10 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="selectAll" parameterType="int" resultType="Rating">
 	select * from rating;
 </select>
-<!--double로 다 바꿀건지 select round (average(score),1) double -->
-<select id="getAVG" parameterType="int" resultType="int">
+<!--double로 다 바꿀건지 select round (average(score),1) double CAST( as signed)  -->
+<select id="getAVG" parameterType="java.lang.Integer" resultType="java.lang.Double">
 
-select CAST(AVERAGE(score) as signed) 
+select ROUND(AVG(score),1)
 from rating 
 where contentSeq =#{contentSeq};
 </select>
@@ -29,8 +29,8 @@ where userNo = #{userNo} and contentSeq=#{contentSeq};
 
 <!-- autoincrement있어야 함 -->
 <insert id="insert" parameterType="Rating">
-insert into rating( userNo, contentSeq, score)
-values(#{userNo},#{contentSeq},#{score})
+insert into rating( userNo, contentSeq, score, review)
+values(#{userNo},#{contentSeq},#{score},#{review})
 </insert>
 
 <update id="update" parameterType="Rating">

@@ -10,7 +10,7 @@ public interface RatingService {
 	
 	public Rating selectOne(int ratingId);
 	
-	public double getAVG(int contentSeq);
+	public Double getAVG(Integer contentSeq);
 	
 	public boolean isRated(int userNo, int contentSeq);
 	

@@ -33,16 +33,16 @@ public class RatingController {
 		return new ResponseEntity<List<Rating>>(ratings,HttpStatus.OK);
 	}
 	
-	@GetMapping("/rating/{ratingId}")
-	public ResponseEntity<?> getBookmark (@PathVariable int ratingId){
+	@GetMapping("/one/{ratingId}")
+	public ResponseEntity<?> getRating(@PathVariable int ratingId){
 		Rating rating = rService.selectOne(ratingId);
 		return new ResponseEntity<Rating>(rating,HttpStatus.OK);
 	}
 	
 	//굳이 여기서 해줄까 싶기도 한데,,
 	@GetMapping("/rating")
-	public ResponseEntity<?> contentAVG(int contentSeq){
-		double avg = rService.getAVG(contentSeq);
+	public ResponseEntity<?> contentAVG(Integer contentSeq){
+		Double avg = rService.getAVG(contentSeq);
 		return new ResponseEntity<Double>(avg,HttpStatus.OK);
 	}
 	

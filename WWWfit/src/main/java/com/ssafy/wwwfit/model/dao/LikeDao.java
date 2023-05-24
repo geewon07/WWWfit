@@ -17,7 +17,7 @@ public interface LikeDao {
 	//select count(userId) from likeposters where posterSeq = #{posterSeq};
 	public int numLikes(int posterSeq);//? 굳이 해야할까? .size 돌리면 되나?
 	
-	//select * from likeposters where userId=#{userId} and posterSeq = #{posterSeq};
+	//select likeposterId from likeposters where userId=#{userId} and posterSeq = #{posterSeq};
 	public int alreadyliked(int userNo, int posterSeq);
 	//like
 	public int insert(Like like);

@@ -12,6 +12,7 @@ import BookmarkView from "../views/BookmarkView.vue";
 import BookmarkFolderView from "../components/bookmark/BookmarkFolderView.vue";
 import BookmarkListView from "../components/bookmark/BookmarkListView.vue";
 import SearchResult from "../components/home/SearchResult.vue";
+// import SearchBar from "../components/home/SearchBar.vue";
 
 Vue.use(VueRouter);
 
@@ -21,13 +22,90 @@ const routes = [
     name: "home",
     component: HomeView,
     children: [
-      {
-        path: "/searchresult",
-        name: "sresult",
-        component: SearchResult,
+      // {
+      //   path:"search",
+      //   name:"searchbar",
+      //   component:SearchBar,
+      //   children: [
+          {
+            path: "",
+            name: "sresult",
+            component: SearchResult,
+          },  {
+            path: "bookmark",
+            name: "bookmark",
+            component: BookmarkView,
+            children: [
+              {
+                path: "list",
+                name: "blist",
+                component: BookmarkListView,
+              },
+              {
+                path: "folder",
+                name: "folder",
+                component: BookmarkFolderView,
+              },
+            // ],
+          // },
+        ],
       },
+    //     path: "searchresult",
+    //     name: "sresult",
+    //     component: SearchResult,
+    //   },  {
+    //     path: "bookmark",
+    //     name: "bookmark",
+    //     component: BookmarkView,
+    //     children: [
+    //       {
+    //         path: "list",
+    //         name: "blist",
+    //         component: BookmarkListView,
+    //       },
+    //       {
+    //         path: "folder",
+    //         name: "folder",
+    //         component: BookmarkFolderView,
+    //       },
+    //     ],
+    //   },
     ],
   },
+  // {
+  //   path:"/search",
+  //   name:"searchbar",
+  //   component:SearchBar,
+  //   children: [
+  //     {
+  //       path: "result",
+  //       name: "sresult",
+  //       component: SearchResult,
+  //     },  {
+  //       path: "bookmark",
+  //       name: "bookmark",
+  //       component: BookmarkView,
+  //       children: [
+  //         {
+  //           path: "list",
+  //           name: "blist",
+  //           component: BookmarkListView,
+  //         },
+  //         {
+  //           path: "folder",
+  //           name: "folder",
+  //           component: BookmarkFolderView,
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+
+  // {
+  //   path: "/searchresult",
+  //   name: "sresult",
+  //   component: SearchResult,
+  // },
   {
     path: "/mypage",
     name: "mypage",
@@ -48,39 +126,43 @@ const routes = [
     name: "userinfo",
     component: InfoView,
   },
-  {
-    path: "/bookmark",
-    name: "bookmark",
-    component: BookmarkView,
-    children: [
-      {
-        path: "list",
-        name: "blist",
-        component: BookmarkListView,
-      },
-      {
-        path: "folder",
-        name: "folder",
-        component: BookmarkFolderView,
-      },
-    ],
-  },
+  // {
+  //   path: "/bookmark",
+  //   name: "bookmark",
+  //   component: BookmarkView,
+  //   children: [
+  //     {
+  //       path: "list",
+  //       name: "blist",
+  //       component: BookmarkListView,
+  //     },
+  //     {
+  //       path: "folder",
+  //       name: "folder",
+  //       component: BookmarkFolderView,
+  //     },
+  //   ],
+  // },
   {
     path: "/post",
     name: "post",
     component: PostView,
     children: [
       {
-        path: "detail",
-        name: "detail",
-        component: PostDetailView,
-      },
-      {
-        path: "/plist",
+        path: "list",
         name: "plist",
         component: PostListView,
       },
     ],
+  },
+  {
+    path: "/detail/:posterSeq",
+    name: "detail",
+    component: PostDetailView,
+    props: true,
+    // children:[
+    //   path:""
+    // ],
   },
 ];
 
