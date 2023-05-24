@@ -39,4 +39,9 @@ public interface UserService {
 	
 	public int getchallengedays(int userNo);
 	
+	// 토큰 업데이트 ( 로그인시 )
+	public int updateTokenFirebase(int userNo,String token);
+	
+	// 모든 유저의 토큰 가져오기
+		public List<String> gettokens();
 }

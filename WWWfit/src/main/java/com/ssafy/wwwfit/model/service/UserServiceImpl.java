@@ -155,6 +155,17 @@ public class UserServiceImpl implements UserService {
 		return uDao.getchallengedays(userNo);
 		}
 
+	@Override
+	public int updateTokenFirebase(int userNo, String token) {
+		return uDao.updateTokenFirebase(userNo, token);
+	}
+
+	@Override
+	public List<String> gettokens() {
+		// TODO Auto-generated method stub
+		return uDao.gettokens();
+	}
+
 //	@Override
 //	public int loginUser() {
 //		login

@@ -53,10 +53,11 @@ export default {
       console.log(rating);
       this.$store.dispatch("PostIndex/ratePoster", rating);
       this.$store.dispatch("PostIndex/getAVG", this.selected.posterSeq);
-      this.$router.push({
-        name: "detail",
-        params: { posterSeq: this.selected.posterSeq },
-      });
+      // this.$router.push({
+      //   name: "detail",
+      //   params: { posterSeq: this.selected.posterSeq },
+      // });
+      this.$router.go(0);
     },
   },
   computed: {

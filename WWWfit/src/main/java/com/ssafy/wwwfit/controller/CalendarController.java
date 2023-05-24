@@ -53,7 +53,7 @@ public class CalendarController {
 		  // 반환해준 오늘 날짜를 토대로 User의 연속 개수 count! ( userService에서!  ? )
 		  userService.updatechallengedays(calendar.getUserNo(), today);
 		  int challengedays = userService.getchallengedays(calendar.getUserNo());
-		  if(challengedays != 0 && challengedays/4  == 0) {
+		  if(challengedays != 0 && challengedays%4  == 0) {
 			  userService.getExp(userService.getUser(calendar.getUserNo()), 5);
 			  String context = "[경험치 5] 연속";
 			  context += challengedays;

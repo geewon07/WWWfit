@@ -17,18 +17,27 @@ firebase.initializeApp({
 // messages.
 const messaging = firebase.messaging();
 // 백그라운드 상태에서 받은 알림 처리
+self.addEventListener("notificationclick", function (event) {
+  event.notification.close();
+  event.waitUntil(clients.openWindow("http://localhost:8080/"));
+});
+
 messaging.setBackgroundMessageHandler((payload) => {
   console.log(
     "[firebase-messaging-sw.js] Received background message ",
     payload,
     payload.data.content,
-    payload.data.title
+    payload.data.title,
+    payload.data.url
   );
   // Customize notification here
   const notificationTitle = payload.data.title;
   const notificationOptions = {
     body: payload.data.content,
     icon: "/firebase-logo.png",
+    data: {
+      url: payload.data.url,
+    },
   };
 
   return self.registration.showNotification(

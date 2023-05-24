@@ -94,12 +94,29 @@ export default {
       console.log("login attempt");
       this.$store.dispatch("UserIndex/loginUser", user);
     },
-  },
-  kakaoLogin() {
-    window.Kakao.Auth.login({
-      scope: "account_email",
-      success: this.getKakaoAccount,
-    });
+    // kakaoLogin() {
+    //   const params = {
+    //     redirectUri: "http://localhost:8080/regist",
+    //   };
+    //   window.kakao.Auth.authorize(params);
+    // },
+    // getKakaoAccount() {
+    //   window.Kakao.API.request({
+    //     url: "/v2/user/me",
+    //     success: (res) => {
+    //       const kakao_account = res.kakao_account;
+    //       const email = kakao_account.email;
+    //       console.log("email", email);
+
+    //       //로그인처리구현
+
+    //       alert("로그인 성공!");
+    //     },
+    //     fail: (error) => {
+    //       console.log(error);
+    //     },
+    //   });
+    // },
   },
 };
 </script>
