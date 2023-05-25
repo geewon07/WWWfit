@@ -7,6 +7,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 insert into users
 values(#{userNo},#{userId},#{password},#{name},#{email},#{img},#{userRank},#{experience},#{challengedays},#{token},#{regDate})
 </insert>
+<insert id="insert_kakao" parameterType="User" useGeneratedKeys="true" keyProperty="userNo">
+insert into users ( userId, password, name, email,userRank)
+values(#{userId},#{password},#{name},#{email},#{userRank})
+</insert>
 <select id="selectAll" resultType="User">
 select * from users;
 </select>
@@ -63,5 +67,10 @@ where userNo=#{userNo}
 </update>
 <select id="gettokens" resultType="java.lang.String">
 select token from users;
+</select>
+
+<select id="getUserId" parameterType="String" resultType="java.lang.Integer" >
+SELECT COUNT(*) FROM users 
+WHERE userId = #{userId}
 </select>
 </mapper>

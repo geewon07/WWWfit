@@ -2,6 +2,8 @@ package com.ssafy.wwwfit.model.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.ssafy.wwwfit.model.dto.SearchCondition;
 import com.ssafy.wwwfit.model.dto.User;
 
@@ -9,7 +11,7 @@ public interface UserService {
 	//회원 가입
 	//유저 생성시 같이 병행하는 것: 배지 소유목록 초기화, 뱃지 경과 초기화, 환경설정 초기화,
 	public int regist(User user);
-	
+	public int insert_kakao(User user);
 	//회원 조회
 	public List<User> getUsers();
 	
@@ -45,5 +47,15 @@ public interface UserService {
 	public int updateTokenFirebase(int userNo,String token);
 	
 	// 모든 유저의 토큰 가져오기
-		public List<String> gettokens();
+	public List<String> gettokens();
+		
+//	// 카카오 로그인
+//	public User kakaoLogin(String code);
+	
+	// access-token 발급받기
+	public String getKakaoAccessToken ( String code) ;
+	
+	public User createKakaoUser(String access_token);
+	
+	public int getUserId(String userId);
 }

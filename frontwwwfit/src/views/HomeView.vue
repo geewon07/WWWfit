@@ -78,6 +78,7 @@
 // import SearchResult from "@/components/home/SearchResult.vue";//, SearchResult
 // import SearchBar from "../components/home/SearchBar.vue";
 import { mapState } from "vuex"; //v-if="getUser"PostListView , SearchResult
+
 export default {
   // components: { SearchBar },
   name: "HomeView",

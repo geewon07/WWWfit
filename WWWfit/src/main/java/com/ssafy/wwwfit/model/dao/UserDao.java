@@ -10,6 +10,7 @@ public interface UserDao {
 	//회원 가입:유저 생성 ---> progress 도 생성시켜줘야 함 -->서비스? 매퍼?
 	public int insert(User user);
 	
+	public int insert_kakao(User user);
 	//회원 조회
 	public List<User> selectAll();
 	
@@ -42,6 +43,6 @@ public interface UserDao {
 	// 모든 유저의 토큰 가져오기
 	public List<String> gettokens();
 	
-	
+	public int getUserId(String userId);
 
 }

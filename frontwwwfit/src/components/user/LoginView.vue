@@ -70,6 +70,7 @@
 
 <script>
 import { mapState } from "vuex";
+import axios from "axios";
 export default {
   name: "LoginView",
   data() {
@@ -94,29 +95,36 @@ export default {
       console.log("login attempt");
       this.$store.dispatch("UserIndex/loginUser", user);
     },
-    // kakaoLogin() {
-    //   const params = {
-    //     redirectUri: "http://localhost:8080/regist",
-    //   };
-    //   window.kakao.Auth.authorize(params);
-    // },
-    // getKakaoAccount() {
-    //   window.Kakao.API.request({
-    //     url: "/v2/user/me",
-    //     success: (res) => {
-    //       const kakao_account = res.kakao_account;
-    //       const email = kakao_account.email;
-    //       console.log("email", email);
+    kakaoLogin() {
+      const param = {
+        redirectUri: "http://localhost:8080/login",
+      };
+      window.Kakao.Auth.authorize(param);
+    },
+    getToken() {
+      const API_URL = "http://localhost:9999/api-user/auth/kakao/callback";
 
-    //       //로그인처리구현
+      axios({
+        url: API_URL,
+        method: "GET",
+        params: {
+          code: this.$route.query.code,
+        },
+      }).then((res) => {
+        console.log(res.data["login-token"]);
+        this.$store.dispatch(
+          "UserIndex/kakaologinUser",
+          res.data["login-token"]
+        );
+      });
+    },
+  },
+  created() {
+    if (this.$route.query.code) {
+      console.log("카카오코드: " + this.$route.query.code); //인가 코드
 
-    //       alert("로그인 성공!");
-    //     },
-    //     fail: (error) => {
-    //       console.log(error);
-    //     },
-    //   });
-    // },
+      this.getToken();
+    }
   },
 };
 </script>

@@ -12,6 +12,8 @@ public class User {
 	private int challengedays;
 	private String regDate;
 	private String token="";
+	private String kakaoToken;
+	
 //	private int token;//kko login token user serial number
 	public User() {
 		super();
@@ -23,14 +25,6 @@ public class User {
 		this.password = password;
 		this.name = name;
 	}
-	public User(String userId, String password, String name, String email, String img) {
-		super();
-		this.userId = userId;
-		this.password = password;
-		this.name = name;
-		this.email = email;
-		this.img = img;
-	}
 	
 	public User(String userId, String password, String name, String email, String img, String token) {
 		super();
@@ -40,6 +34,25 @@ public class User {
 		this.email = email;
 		this.img = img;
 		this.token = token;
+	}
+	
+	// 카카오 로그인
+	// 아이디는 @를 기준으로 자르기
+	// 비번은 이메일 + 고유 id
+	public User(String userId,String password, String name, String email) {
+		super();
+		this.userId = userId;
+		this.password = password;
+		this.name = name;
+		this.email = email;
+	}
+	
+	
+	public String getKakaoToken() {
+		return kakaoToken;
+	}
+	public void setKakaoToken(String kakaoToken) {
+		this.kakaoToken = kakaoToken;
 	}
 	public int getUserNo() {
 		return userNo;
