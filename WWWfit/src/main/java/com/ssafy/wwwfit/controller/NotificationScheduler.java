@@ -27,7 +27,7 @@ public class NotificationScheduler {
         this.fcmService = fcmService;
     }
 
-    @Scheduled(cron = "0 30 10 * * MON-FRI") // 매일 2시 15분에 실행
+    @Scheduled(cron = "0 00 14 * * MON-FRI")
    public void sendNotification() throws FirebaseMessagingException {
         fcmService.sendNotification();
     }
