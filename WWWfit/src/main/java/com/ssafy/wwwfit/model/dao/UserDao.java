@@ -27,6 +27,8 @@ public interface UserDao {
 	//회원탈퇴:정보삭제
 	public int delete(int userNo);
 	
+	public String getUsername(int userNo);
+	
 	//회원 경험치 증가
 	
 	// 연속 개수 update

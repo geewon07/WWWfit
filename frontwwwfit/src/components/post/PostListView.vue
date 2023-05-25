@@ -9,13 +9,21 @@
           :img-alt="poster.title"
           img-top
         >
-          <b-card-img
+          <post-list-item
+            :poster="poster"
+            :userLiked="userLiked(poster.posterSeq)"
+            :loginUserInfo="loginUserInfo"
+          ></post-list-item>
+          <!-- <b-card-img
             @click="selectPoster(poster.posterSeq)"
             :style="{ objectFit: 'cover', objectPosition: 'top' }"
             :src="require(`@/assets/${poster.posterSrc}`)"
-          />
-          <!-- 난이도:{{ poster.difficulty }}  -->
-          <b-card-text>
+          /> -->
+
+          <!-- <b-card-text
+            class="small text-muted d-flex justify-content-between align-items-center"
+          >
+            <span>좋아요: {{ poster.likeCount }}</span>
             <b-button v-if="loginUserInfo" pill variant="outline-danger">
               <b-icon
                 v-show="userLiked(poster.posterSeq)"
@@ -28,13 +36,7 @@
                 @click="like(poster.posterSeq)"
               />
             </b-button>
-            <b-button v-show="loginUserInfo" pill variant="outline-secondary">
-              <b-icon icon="bookmark" @click="bookmark"></b-icon>
-            </b-button>
-          </b-card-text>
-          <b-card-text class="small text-muted">
-            좋아요:{{ poster.likeCount }}</b-card-text
-          >
+          </b-card-text> -->
         </b-card>
       </b-card-group>
     </div>
@@ -43,8 +45,12 @@
 
 <script>
 import { mapState } from "vuex";
+import PostListItem from "./PostListItem.vue";
 export default {
   name: "PostListView",
+  components: {
+    PostListItem,
+  },
   props: ["loginUserInfo", "select", "postList"],
   data() {
     return {
@@ -64,46 +70,48 @@ export default {
       if (this.userLikes == null) {
         return false;
       }
-      for (let liked of this.userLikes) {
-        if (liked.posterSeq == posterSeq) {
-          return true;
-        }
-      }
-      return false;
+      const likePosterSeq = this.userLikes.map((liked) => liked.posterSeq);
+      // for (let liked of this.userLikes) {
+      //   if (liked.posterSeq == posterSeq) {
+      //     return true;
+      //   }
+      // }
+      // return false;
+      return likePosterSeq.includes(posterSeq);
     },
-    like(posterSeq) {
-      let like = {
-        loginUser: this.loginUserInfo.userNo,
-        posterSeq: posterSeq,
-      };
-      this.$store.dispatch("PostIndex/likePoster", like).then(() => {
-        // Dispatch additional actions to refresh the data
-        // this.$store.dispatch("PostIndex/getPosters");
-        this.$store.dispatch(
-          "PostIndex/getUserLikes",
-          this.loginUserInfo.userNo
-        );
-        this.$forceUpdate();
-      });
-    },
-    unlike(posterSeq) {
-      let like = {
-        loginUser: this.loginUserInfo.userNo,
-        posterSeq: posterSeq,
-      };
+    // like(posterSeq) {
+    //   let like = {
+    //     loginUser: this.loginUserInfo.userNo,
+    //     posterSeq: posterSeq,
+    //   };
+    //   this.$store.dispatch("PostIndex/likePoster", like).then(() => {
+    //     // Dispatch additional actions to refresh the data
+    //     // this.$store.dispatch("PostIndex/getPosters");
+    //     this.$store.dispatch(
+    //       "PostIndex/getUserLikes",
+    //       this.loginUserInfo.userNo
+    //     );
+    //     this.$forceUpdate();
+    //   });
+    // },
+    // unlike(posterSeq) {
+    //   let like = {
+    //     loginUser: this.loginUserInfo.userNo,
+    //     posterSeq: posterSeq,
+    //   };
 
-      this.$store.dispatch("PostIndex/unlikePoster", like).then(() => {
-        // Dispatch additional actions to refresh the data
-        this.$forceUpdate();
-        // this.$store.dispatch("PostIndex/getPosters");
-        this.$store.dispatch(
-          "PostIndex/getUserLikes",
-          this.loginUserInfo.userNo
-        );
-        this.$forceUpdate();
-      });
-    },
-    bookmark() {},
+    //   this.$store.dispatch("PostIndex/unlikePoster", like).then(() => {
+    //     // Dispatch additional actions to refresh the data
+    //     this.$forceUpdate();
+    //     // this.$store.dispatch("PostIndex/getPosters");
+    //     this.$store.dispatch(
+    //       "PostIndex/getUserLikes",
+    //       this.loginUserInfo.userNo
+    //     );
+    //     this.$forceUpdate();
+    //   });
+    // },
+    // bookmark() {},
   },
   created() {
     this.$store.dispatch("PostIndex/getPosters");
@@ -114,7 +122,7 @@ export default {
   },
   computed: {
     ...mapState({
-      // postList: (state) => state.PostIndex.postList,
+      postList: (state) => state.PostIndex.postList,
       userLikes: (state) => state.PostIndex.userLikes,
       poster: (state) => state.PostIndex.poster,
       // loginUserInfo: (state) => state.UserIndex.loginUserInfo,

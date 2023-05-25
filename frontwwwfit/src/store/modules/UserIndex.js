@@ -96,7 +96,7 @@ const UserIndex = {
                   commit("LOGIN_USER", decoded);
                   commit("LOGIN_USER_INFO", decoded);
                   alert("로그인 성공");
-                  router.replace({ name: "home" });
+                  router.replace("/");
                 } else {
                   alert("로그인 실패, 입력을 다시 확인해주세요");
                 }

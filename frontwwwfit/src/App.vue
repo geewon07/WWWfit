@@ -17,6 +17,9 @@ export default {
   },
   created() {
     this.$store.dispatch("UserIndex/loginUserInfo");
+    if (this.loginUserInfo) {
+      this.$store.dispatch("PostIndex/getUserLikes", this.loginUserInfo.userNo);
+    }
   },
 };
 </script>

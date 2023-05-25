@@ -33,6 +33,7 @@
                       :id="`${index}`"
                       :title="video.snippet.title"
                       size="xl"
+                      @ok="doBookmark(video.id.videoId, video.snippet.title)"
                     >
                       <div class="row">
                         <div class="col">
@@ -104,11 +105,15 @@ export default {
         this.doBookmark(videoId);
       }
     },
-    doBookmark(videoId) {
+    doBookmark(videoId, title) {
       console.log("detail bookmark");
+      let desctext = this.description;
+      if (this.description == "") {
+        desctext = title;
+      }
       let bookmark = {
         bName: this.bName,
-        description: this.description.slice(0, 80),
+        description: desctext.slice(0, 80),
         posterSeq: videoId,
         userNo: this.loginUserInfo.userNo,
       };

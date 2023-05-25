@@ -176,7 +176,6 @@ public class UserServiceImpl implements UserService {
 		return uDao.gettokens();
 	}
 
-	@Override
 	public String getKakaoAccessToken (String code) {
         String access_Token = "";
 //        String email = "";

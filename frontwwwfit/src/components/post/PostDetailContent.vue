@@ -30,7 +30,7 @@
           :key="index"
         >
           <b-list-group-item
-            ><!-- 이 사이에 버튼 달고 자기 자신 거면 삭제 수정 가능하게-->
+            ><!-- 이 사이에 버튼 달고 자기 자신 거면추가?<button></button 삭제 수정 가능하게 수정 삭제 {{ rating.userNo }}무기명 고?-->
             <b-form-rating
               :value="rating.score"
               readonly
@@ -39,11 +39,8 @@
               precision="1"
             >
             </b-form-rating>
-            {{ rating.userNo }}|{{ rating.review }}|<span
-              id="date_font"
-              class="text-right"
-              >{{ rating.regDate }}</span
-            >
+            {{ rating.review }}
+            <div id="date_font" class="text-right">|{{ rating.regDate }}</div>
           </b-list-group-item>
         </b-list-group>
 
@@ -51,10 +48,15 @@
           <router-link :to="{ name: 'plist' }" class="card-link">
             목록으로
           </router-link>
-          <a href="#" class="card-link"></a>
+          <a
+            :href="`https://darebee.com/workouts/${address}`"
+            class="card-link"
+          >
+            DAREBEE
+          </a>
         </b-card-body>
 
-        <b-card-footer>
+        <b-card-footer v-if="this.loginUserInfo">
           <b-button
             variant="success"
             v-if="!todaydone"
@@ -106,17 +108,26 @@ export default {
       //   params: { posterSeq: this.selected.posterSeq },
       // });
       this.$router.go(0);
-
     },
   },
   computed: {
     // ...mapState("PostIndex", ["ratings"]),
+    address() {
+      let mod = this.selected.posterSrc.replace(".jpg", ".html");
+      console.log(mod);
+      return mod;
+    },
     contentfilter() {
       return this.ratings.filter(
         (item) => item.contentSeq === this.selected.posterSeq
       );
     },
   },
+  // data() {
+  //   return {
+  //     address: this.selected.posterSrc.replace(".jpg", ".html"),
+  //   };
+  // },
 };
 </script>
 

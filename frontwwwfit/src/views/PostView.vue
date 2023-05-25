@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>포스트 뷰!!</h2>
+    <!-- <h2>포스트 뷰!!</h2> -->
     <b-container>
       <b-row>
         <b-col>
@@ -38,6 +38,7 @@ import { mapState } from "vuex";
 export default {
   components: { PostListView },
   name: "PostView",
+  props: ["userLikes"],
   data() {
     return {
       select: null,
@@ -54,6 +55,13 @@ export default {
   },
   methods: {
     selectLike() {
+      if (this.loginUserInfo) {
+        this.$store.dispatch(
+          "PostIndex/getUserLikes",
+          this.loginUserInfo.userNo
+        );
+      }
+      this.$store.dispatch("PostIndex/getPosters");
       if (this.select != "likes") {
         this.select = "likes";
       } else if (this.select == "likes") {
@@ -75,7 +83,7 @@ export default {
       loginUserInfo: (state) => state.UserIndex.loginUserInfo,
       postList: (state) => state.PostIndex.postList,
       poster: (state) => state.PostIndex.poster,
-      userLikes: (state) => state.PostIndex.userLikes,
+      // userLikes: (state) => state.PostIndex.userLikes,
     }),
     // posterfilter() {
     //   if (this.select == null) {
