@@ -11,11 +11,10 @@
         img-height="480"
         style="text-shadow: 1px 1px 2px #333"
       >
-        <!-- Text slides with image     :img-src="require('@/assets/resize.jpg')"     v-model="slide"    @sliding-start="onSlideStart"
+        <!-- Text slides with image             caption="First slide"
+          text="Nulla vitae elit libero, a pharetra augue mollis interdum."  :img-src="require('@/assets/resize.jpg')"     v-model="slide"    @sliding-start="onSlideStart"
             @sliding-end="onSlideEnd"-->
         <b-carousel-slide
-          caption="First slide"
-          text="Nulla vitae elit libero, a pharetra augue mollis interdum."
           :img-src="require('@/assets/resize.jpg')"
         ></b-carousel-slide>
 
@@ -37,10 +36,10 @@
     <b-card title="Card Title" no-body>
       <!-- <search-bar :loginUserInfo="this.loginUserInfo"></search-bar> -->
       <b-card-header header-tag="nav">
-        <b-nav card-header pills>
+        <b-nav card-header pills class="d-flex align-items-center">
           <!-- <b-nav-item>'s with child routes. Note the trailing slash on the first <b-nav-item> -->
           <b-nav-item to="/" exact exact-active-class="active"
-            >동영상검색 결과</b-nav-item
+            >동영상 검색</b-nav-item
           >
           <b-nav-item
             to="/bookmark"

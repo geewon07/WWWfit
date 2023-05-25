@@ -1,5 +1,9 @@
 <template>
-  <div id="app" style="background-color: #eee">
+  <div
+    id="app"
+    style="background-color: #eee"
+    class="d-flex flex-column min-vh-100"
+  >
     <header-nav style="background-color: white"></header-nav>
     <router-view
       class="col-8 offset-2"
