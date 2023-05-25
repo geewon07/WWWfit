@@ -26,6 +26,9 @@ import com.ssafy.wwwfit.model.service.HavingBadgeService;
 import com.ssafy.wwwfit.model.service.UserService;
 import com.ssafy.wwwfit.util.JwtUtil;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+
 
 @RestController
 @RequestMapping("/api-user")
@@ -185,7 +188,7 @@ public class UserController {
 	}
 	
 	@GetMapping("auth/kakao/callback")
-	public User kakaoCallback(@RequestParam String code) {
+	public ResponseEntity<?> kakaoCallback(@RequestParam String code) {
 		System.out.println("카카오토큰 : "+code);
 		String access_Token = uService.getKakaoAccessToken(code);
 		User user = uService.createKakaoUser(access_Token);
@@ -199,8 +202,80 @@ public class UserController {
 			hService.registHavingBadge(user.getUserNo());
 		}
 		
-		return user;
+		return doLoginKakao(user);
 		
 	}
+	
+	public ResponseEntity<?> doLoginKakao(User user){
+		
+		Map<String,Object> result = new HashMap<String, Object>();
+		Integer userNo = uService.login(user.getUserId(), user.getPassword());
+		
+		Map<String, String> data = new HashMap<String, String>();
+		if(userNo==null) {
+			data.put("auth", "false");
+			try {
+				result.put("login-token", jwtUtil.createToken("login-token", data));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return new ResponseEntity<Map<String,Object>>(result,HttpStatus.OK);
+		}else {
+			String str = String.valueOf(userNo);
+			data.put("auth", "true");
+			data.put("userNo", str);
+			data.put("userId", user.getUserId());
+			data.put("userName",user.getName());
+			
+			try {
+				result.put("login-token", jwtUtil.createToken("login-token", data));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return new ResponseEntity<Map<String,Object>>(result,HttpStatus.OK);
+	}
+	
+	@PostMapping("/kakao_login")
+	public ResponseEntity<?> kakao_logintoken(@RequestBody HashMap<String, Object> payload) throws Exception{
+		String jwt_token = (String) payload.get("jwttoken");
+		String token = (String) payload.get("token");
+		Map<String,Object> result = new HashMap<String, Object>();
+		Claims claims = jwtUtil.valid2(jwt_token);
+		System.out.println(claims);
+		Map<String, Object> logintoken = (Map<String, Object>) claims.get("login-token");
+		int userNo = Integer.parseInt((String) logintoken.get("userNo"));
+		System.out.println(userNo);
+	
+		uService.updateTokenFirebase(userNo, token);
+		
+		Map<String, String> data = new HashMap<String, String>();
+		if(userNo == 0) {
+			System.out.println("reached");
+			data.put("auth", "false");
+			try {
+				result.put("login-token", jwtUtil.createToken("login-token", data));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return new ResponseEntity<Map<String,Object>>(result,HttpStatus.OK);
+		}else {
+			try {
+//				result.put("login-token", jwtUtil.createToken("login-token", str,userId,userName));
+				result.put("login-token", payload.get("jwttoken"));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return new ResponseEntity<Map<String,Object>>(result,HttpStatus.OK);
+	}
+	
+	
+	
 
 }

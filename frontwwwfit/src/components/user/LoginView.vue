@@ -111,11 +111,11 @@ export default {
           code: this.$route.query.code,
         },
       }).then((res) => {
-        let user = {
-          userId: res.data.userId,
-          password: res.data.password,
-        };
-        this.$store.dispatch("UserIndex/loginUser", user);
+        console.log(res.data["login-token"]);
+        this.$store.dispatch(
+          "UserIndex/kakaologinUser",
+          res.data["login-token"]
+        );
       });
     },
   },
