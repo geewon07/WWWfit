@@ -44,25 +44,27 @@ export default {
       console.log();
     },
     rate() {
+      console.log("rate");
       let rating = {
         userNo: this.loginUserInfo.userNo,
         review: this.comment,
         score: this.score,
         contentSeq: this.selected.posterSeq,
       };
-      console.log(rating);
+
+      console.log("여긴!");
       this.$store.dispatch("PostIndex/ratePoster", rating);
       this.$store.dispatch("PostIndex/getAVG", this.selected.posterSeq);
       // this.$router.push({
       //   name: "detail",
       //   params: { posterSeq: this.selected.posterSeq },
       // });
-      this.$router.go(0);
+      // this.$router.go(0);
     },
-  },
-  computed: {
-    // ...mapState("PostIndex/contentAVG"),
-    // ...mapState("PostIndex/"),
+    computed: {
+      // ...mapState("PostIndex/contentAVG"),
+      // ...mapState("PostIndex/"),
+    },
   },
 };
 </script>

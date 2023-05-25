@@ -22,7 +22,7 @@ import PostDetailContent from "@/components/post/PostDetailContent.vue";
 export default {
   components: { PostDetailContent },
   name: "PostDetailView",
-  props: ["loginUserInfo"],
+  // props: ["loginUserInfo"],
   created() {
     this.$store.dispatch(
       "PostIndex/selectPoster",
@@ -54,7 +54,7 @@ export default {
     ...mapState({
       getAverage: (state) => state.PostIndex.contentAVG,
       poster: (state) => state.PostIndex.poster,
-      // loginUserInfo: (state) => state.UserIndex.loginUserInfo,
+      loginUserInfo: (state) => state.UserIndex.loginUserInfo,
       ratings: (state) => state.PostIndex.ratings,
       todaydone: (state) => state.MypageIndex.todaydone,
     }),

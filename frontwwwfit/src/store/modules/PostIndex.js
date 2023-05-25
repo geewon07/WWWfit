@@ -105,7 +105,7 @@ const PostIndex = {
         },
       })
         .then((res) => {
-          console.log(res);
+          console.log(res + "unliked");
           commit;
         })
         .catch((err) => {
@@ -144,6 +144,7 @@ const PostIndex = {
     },
     ratePoster({ commit }, rating) {
       const API_URL = `${REST_API}rating/rating`;
+      console.log("하잉");
       axios({
         url: API_URL,
         method: "POST",

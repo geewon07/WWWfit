@@ -30,7 +30,7 @@
           :key="index"
         >
           <b-list-group-item
-            ><!-- 이 사이에 버튼 달고 자기 자신 거면 삭제 수정 가능하게-->
+            ><!-- 이 사이에 버튼 달고 자기 자신 거면추가?<button></button 삭제 수정 가능하게 수정 삭제 {{ rating.userNo }}무기명 고?-->
             <b-form-rating
               :value="rating.score"
               readonly
@@ -39,10 +39,8 @@
               precision="1"
             >
             </b-form-rating>
-            {{ rating.userNo }}무기명 고?|{{ rating.review }} 수정 삭제
-            추가?|<span id="date_font" class="text-right"
-              >{{ rating.regDate }}<button></button
-            ></span>
+            {{ rating.review }}
+            <div id="date_font" class="text-right">|{{ rating.regDate }}</div>
           </b-list-group-item>
         </b-list-group>
 

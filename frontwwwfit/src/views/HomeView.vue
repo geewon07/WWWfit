@@ -11,12 +11,12 @@
         img-height="480"
         style="text-shadow: 1px 1px 2px #333"
       >
-        <!-- Text slides with image          v-model="slide"    @sliding-start="onSlideStart"
+        <!-- Text slides with image     :img-src="require('@/assets/resize.jpg')"     v-model="slide"    @sliding-start="onSlideStart"
             @sliding-end="onSlideEnd"-->
         <b-carousel-slide
           caption="First slide"
           text="Nulla vitae elit libero, a pharetra augue mollis interdum."
-          :img-src="require('@/assets/WWWfit feat.png')"
+          :img-src="require('@/assets/resize.jpg')"
         ></b-carousel-slide>
 
         <!-- Slides with custom text -->
@@ -24,11 +24,11 @@
           <h1>Hello world!</h1>
         </b-carousel-slide>
 
-        <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
+        <b-carousel-slide :img-src="require('@/assets/resize.jpg')">
           <h1>Hello world!</h1>
         </b-carousel-slide>
 
-        <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
+        <b-carousel-slide :img-src="require('@/assets/resize.jpg')">
           <h1>Hello world!</h1>
         </b-carousel-slide>
       </b-carousel>
@@ -56,6 +56,7 @@
               size="lg"
               class="mr-lg-2"
               placeholder="Search"
+              @keydown.enter.prevent="search"
             ></b-form-input>
             <b-button size="lg" class="my-2 my-sm" @click.prevent="search"
               >Search</b-button

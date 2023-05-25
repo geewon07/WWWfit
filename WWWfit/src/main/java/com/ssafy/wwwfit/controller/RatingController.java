@@ -49,10 +49,12 @@ public class RatingController {
 	
 	@PostMapping("/rating")
 	public ResponseEntity<?> doRate(Rating rating){
+		System.out.println("!!!!!!!!!!!!!!!");
 		int result = rService.insert(rating);
 		if(result!=0) {
 			uService.getExp(uService.getUser(rating.getUserNo()), 5);
 		}
+		
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
 	

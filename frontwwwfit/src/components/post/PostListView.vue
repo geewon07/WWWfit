@@ -11,7 +11,8 @@
         >
           <post-list-item
             :poster="poster"
-            :userLikes="userLikes"
+            :userLiked="userLiked(poster.posterSeq)"
+            :loginUserInfo="loginUserInfo"
           ></post-list-item>
           <!-- <b-card-img
             @click="selectPoster(poster.posterSeq)"
@@ -69,46 +70,48 @@ export default {
       if (this.userLikes == null) {
         return false;
       }
-      for (let liked of this.userLikes) {
-        if (liked.posterSeq == posterSeq) {
-          return true;
-        }
-      }
-      return false;
+      const likePosterSeq = this.userLikes.map((liked) => liked.posterSeq);
+      // for (let liked of this.userLikes) {
+      //   if (liked.posterSeq == posterSeq) {
+      //     return true;
+      //   }
+      // }
+      // return false;
+      return likePosterSeq.includes(posterSeq);
     },
-    like(posterSeq) {
-      let like = {
-        loginUser: this.loginUserInfo.userNo,
-        posterSeq: posterSeq,
-      };
-      this.$store.dispatch("PostIndex/likePoster", like).then(() => {
-        // Dispatch additional actions to refresh the data
-        // this.$store.dispatch("PostIndex/getPosters");
-        this.$store.dispatch(
-          "PostIndex/getUserLikes",
-          this.loginUserInfo.userNo
-        );
-        this.$forceUpdate();
-      });
-    },
-    unlike(posterSeq) {
-      let like = {
-        loginUser: this.loginUserInfo.userNo,
-        posterSeq: posterSeq,
-      };
+    // like(posterSeq) {
+    //   let like = {
+    //     loginUser: this.loginUserInfo.userNo,
+    //     posterSeq: posterSeq,
+    //   };
+    //   this.$store.dispatch("PostIndex/likePoster", like).then(() => {
+    //     // Dispatch additional actions to refresh the data
+    //     // this.$store.dispatch("PostIndex/getPosters");
+    //     this.$store.dispatch(
+    //       "PostIndex/getUserLikes",
+    //       this.loginUserInfo.userNo
+    //     );
+    //     this.$forceUpdate();
+    //   });
+    // },
+    // unlike(posterSeq) {
+    //   let like = {
+    //     loginUser: this.loginUserInfo.userNo,
+    //     posterSeq: posterSeq,
+    //   };
 
-      this.$store.dispatch("PostIndex/unlikePoster", like).then(() => {
-        // Dispatch additional actions to refresh the data
-        this.$forceUpdate();
-        // this.$store.dispatch("PostIndex/getPosters");
-        this.$store.dispatch(
-          "PostIndex/getUserLikes",
-          this.loginUserInfo.userNo
-        );
-        this.$forceUpdate();
-      });
-    },
-    bookmark() {},
+    //   this.$store.dispatch("PostIndex/unlikePoster", like).then(() => {
+    //     // Dispatch additional actions to refresh the data
+    //     this.$forceUpdate();
+    //     // this.$store.dispatch("PostIndex/getPosters");
+    //     this.$store.dispatch(
+    //       "PostIndex/getUserLikes",
+    //       this.loginUserInfo.userNo
+    //     );
+    //     this.$forceUpdate();
+    //   });
+    // },
+    // bookmark() {},
   },
   created() {
     this.$store.dispatch("PostIndex/getPosters");
@@ -119,7 +122,7 @@ export default {
   },
   computed: {
     ...mapState({
-      // postList: (state) => state.PostIndex.postList,
+      postList: (state) => state.PostIndex.postList,
       userLikes: (state) => state.PostIndex.userLikes,
       poster: (state) => state.PostIndex.poster,
       // loginUserInfo: (state) => state.UserIndex.loginUserInfo,

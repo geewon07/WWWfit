@@ -6,7 +6,11 @@
       </b-navbar-brand>
       <b-collapse id="nav-collaps" is-nav>
         <b-navbar-nav>
-          <b-nav-item :to="{ name: 'post' }" :loginUserInfo="loginUserInfo">
+          <b-nav-item
+            :to="{ name: 'post' }"
+            :loginUserInfo="loginUserInfo"
+            :userLikes="userLikes"
+          >
             포스터
           </b-nav-item>
         </b-navbar-nav>
@@ -37,9 +41,15 @@ export default {
       // loginUser: {},
     };
   },
+  created() {
+    if (this.loginUserInfo) {
+      this.$store.dispatch("PostIndex/getUserLikes", this.loginUserInfo.userNo);
+    }
+  },
   computed: {
     ...mapState({
       loginUserInfo: (state) => state.UserIndex.loginUserInfo,
+      userLikes: (state) => state.PostIndex.userLikes,
     }),
   },
 
