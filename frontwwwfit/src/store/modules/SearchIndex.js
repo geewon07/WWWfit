@@ -24,13 +24,13 @@ const UserIndex = {
   },
   actions: {
     search({ commit }, payload) {
-      if (localStorage.getItem("searchresult") != null) {
-        commit(
-          "SEARCH_VIDEO",
-          JSON.parse(localStorage.getItem("searchresult"))
-        );
-        return;
-      }
+      // if (localStorage.getItem("searchresult") != null) {
+      //   commit(
+      //     "SEARCH_VIDEO",
+      //     JSON.parse(localStorage.getItem("searchresult"))
+      //   );
+      //   return;
+      // }
       console.log("called search");
       const URL = "https://www.googleapis.com/youtube/v3/search";
       const API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY; //process.env.VUE_APP_YOUTUBE_API_KEY;

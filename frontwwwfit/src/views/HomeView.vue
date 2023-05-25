@@ -69,6 +69,7 @@
 // import SearchResult from "@/components/home/SearchResult.vue";//, SearchResult
 // import SearchBar from "../components/home/SearchBar.vue";
 import { mapState } from "vuex"; //v-if="getUser"PostListView , SearchResult
+
 export default {
   // components: { SearchBar },
   name: "HomeView",
@@ -91,8 +92,13 @@ export default {
     // },
   },
   created() {
-    this.$store.dispatch("SearchIndex/getBookmarks", this.loginUserInfo.userNo);
-    this.$store.dispatch("SearchIndex/getFolders", this.loginUserInfo.userNo);
+    if (this.loginUserInfo) {
+      this.$store.dispatch(
+        "SearchIndex/getBookmarks",
+        this.loginUserInfo.userNo
+      );
+      this.$store.dispatch("SearchIndex/getFolders", this.loginUserInfo.userNo);
+    }
   },
   methods: {
     search() {

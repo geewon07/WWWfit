@@ -20,7 +20,7 @@ public class FCMService {
         
         for(int i=0;i<tokens.size();i++) {
         	String token = tokens.get(i);
-        	
+        	if(token != null) {
         	Message message = Message.builder()
                     .putData("title", "WWWfit2")
                     .putData("content", "운동하세요.")
@@ -29,6 +29,7 @@ public class FCMService {
                     .build();
 
             send(message);
+        	}
         }
     	
 //    	String token = "eVOOBW4b300N8CHOCzYhAn:APA91bEPdulIfWuIIXwAxx6eWx4Lvtw0s5AFYUAFbGWqbh-j2WGsFlNbtRBsBrgf_5sWEXNsyMZ9VX_2Dg51YeXKehKe2SdfJ_uO4dUNfG4PcdckqDwa9wKoijz7xksAOe-9PjmB2Gfv"; // 알림을 받을 대상의 토큰을 설정

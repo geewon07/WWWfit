@@ -39,5 +39,12 @@ public class JwtUtil {
 			Jwts.parser().setSigningKey("SSAFIT".getBytes("UTF-8")).parseClaimsJws(token);
 //		System.out.println(claims);
 	}
+	
+	public Claims valid2(String token)throws Exception{
+		Claims claims=
+			Jwts.parser().setSigningKey("SSAFIT".getBytes("UTF-8")).parseClaimsJws(token).getBody();
+//		System.out.println(claims);
+		return claims;
+	}
 
 }
