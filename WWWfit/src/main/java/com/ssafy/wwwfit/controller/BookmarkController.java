@@ -57,7 +57,7 @@ public class BookmarkController {
 		System.out.println(bookmark);
 		int result = bService.create(bookmark);
 		if(result !=0) {
-			uService.getExp(uService.getUser(bookmark.getUserNo()), 2);
+			uService.getExp(uService.getUser(bookmark.getUserNo()), 1);
 		}
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}
@@ -72,7 +72,7 @@ public class BookmarkController {
 	public ResponseEntity<?> delete(@PathVariable int bookmarkId){
 		int result = bService.delete(bookmarkId);
 		if(result!=0) {
-			uService.getExp(uService.getUser(bService.selectOne(bookmarkId).getUserNo()), -2);
+			uService.getExp(uService.getUser(bService.selectOne(bookmarkId).getUserNo()), -1);
 		}
 		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 	}

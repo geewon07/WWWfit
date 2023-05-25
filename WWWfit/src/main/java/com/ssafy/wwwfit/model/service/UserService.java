@@ -17,8 +17,6 @@ public interface UserService {
 	
 	public List<User> searchUser(SearchCondition condition);
 	
-//	public String getUsername(int userNo);
-	
 	public User getUser(int userNo);
 	// 로그인~~~  jwt
 	public Integer login(String userId, String password);
